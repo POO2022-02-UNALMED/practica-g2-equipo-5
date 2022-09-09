@@ -1,10 +1,11 @@
-from Conexion import Conexion
-from Usuario import Usuario
+from gestionAplicacion.Destinos.Conexion import Conexion
+
+from gestionAplicacion.Personas.Usuario import Usuario
 from tkinter import *
 from tkinter import messagebox, ttk
-from Ruta import *
-from ErrorAplicacion import *
-from Base import *
+from gestionAplicacion.Destinos.Ruta import *
+from .ErrorAplicacion import *
+from .Base import *
 class GenerarRuta(Base):
     CIUDADES = [
             "MEDELLÍN","BOGOTÁ","BUCARAMANGA","SANTA MARTA",
@@ -82,7 +83,7 @@ class GenerarRuta(Base):
             self.fr1,
             state="readonly",
             values= GenerarRuta.CIUDADES,
-            width=50
+            width=40
         )
         self.c1.place(relx=.2,rely=.25, anchor=W)
         lb2=Label(self.fr1, text="CIUDAD DESTINO", font=("Inter", 8))
@@ -91,12 +92,12 @@ class GenerarRuta(Base):
             self.fr1,
             state="readonly",
             values= GenerarRuta.CIUDADES,
-            width=50
+            width=40
         )
         self.c2.place(relx=.2,rely=.75, anchor=W)
 
         btCiudad = Button(self.fr1,text="ACEPTAR",bg="#000028", fg="white", font=("Inter", 8),command=ru)
-        btCiudad.place(relx=.85,rely=.5, anchor=CENTER)
+        btCiudad.place(relx=.83,rely=.5, anchor=W)
 
 
     def cancelar(self):

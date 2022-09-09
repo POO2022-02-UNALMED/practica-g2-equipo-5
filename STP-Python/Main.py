@@ -2,22 +2,22 @@ import os
 import tkinter as tk
 import tkinter as tk
 from tkinter import IntVar, messagebox as MessageBox
-from Conductor import Conductor
-from VehiculoCarga import VehiculoCarga
-from Mercancia import Mercancia
-from Producto import Producto
-from Ruta import Ruta
-from Usuario import Usuario
-from VehiculoPasajero import VehiculoPasajeros
-from Viaje import Viaje
-from GenerarRuta import *
-from EnviarMercancia import *
-from CrearViaje import *
+from gestionAplicacion.Operatividad.Mercancia import Mercancia
+from gestionAplicacion.Operatividad.Producto import Producto
+from gestionAplicacion.Destinos.Ruta import Ruta
+from gestionAplicacion.Personas.Usuario import Usuario
+
+from gestionAplicacion.Personas.Conductor import Conductor
+from gestionAplicacion.Vehiculos.VehiculoPasajero import VehiculoPasajeros
+from gestionAplicacion.Operatividad.Viaje import Viaje
+from UiMain.GenerarRuta import *
+from UiMain.EnviarMercancia import *
+from UiMain.CrearViaje import *
 from pickle import *
 import tkinter as tk
 from tkinter import ttk
-from GenerarBonificacion import *
-from Conexion import *
+from UiMain.GenerarBonificacion import *
+from gestionAplicacion.Destinos.Conexion import *
 
 #Usuario ------------------------------------------------------------------------------
 GUZ = Usuario("Jaime Alberto Guzman", "123456789", 20)
@@ -112,7 +112,7 @@ def ventInicio():
     P4 = tk.Frame(pantallaInicio, bg="white")
     P4.place(x=25, y=250, relwidth=.45, relheight=.45)
 
-    r = os.getcwd()+'/STP-Python/STP/Fotos/Logo.png'
+    r = os.getcwd()+'/Fotos/Logo.png'
     logo= tk.PhotoImage(file=r)
     fotoSistema = tk.Frame(P4)
     fotoSistema.place(relwidth=1, relheight=.8)
@@ -151,16 +151,16 @@ def ventInicio():
     frameDiego = tk.Frame(P6)
     frameDiego.place(relwidth=1, relheight=1)
 
-    imgD1 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/STP/Fotos/Diego/D1.png')
+    imgD1 = tk.PhotoImage(file=os.getcwd()+'/Fotos/Diego/D1.png')
     imgD1 = imgD1.subsample(1,1)
 
-    imgD2 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/STP/Fotos/Diego/D2.png')
+    imgD2 = tk.PhotoImage(file=os.getcwd()+'/Fotos/Diego/D2.png')
     imgD2 = imgD2.subsample(1,1)
 
-    imgD3 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/STP/Fotos/Diego/D3.png')
+    imgD3 = tk.PhotoImage(file=os.getcwd()+'/Fotos/Diego/D3.png')
     imgD3 = imgD3.subsample(1,1)
 
-    imgD4 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/STP/Fotos/Diego/D4.png')
+    imgD4 = tk.PhotoImage(file=os.getcwd()+'/Fotos/Diego/D4.png')
     imgD4 = imgD4.subsample(1,1)
 
     lab1 = tk.Label(frameDiego, image=imgD1).grid(row=0, column=0)
@@ -171,16 +171,16 @@ def ventInicio():
     #Frame Angel
     frameAngel = tk.Frame(P6, width=360, height=225)
 
-    imgAN1= tk.PhotoImage(file=os.getcwd()+'/STP-Python/STP/Fotos/Angel/A1.png')
+    imgAN1= tk.PhotoImage(file=os.getcwd()+'/Fotos/Angel/A1.png')
     imgAN1 = imgAN1.subsample(1,1)
 
-    imgAN2 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/STP/Fotos/Angel/A2.png')
+    imgAN2 = tk.PhotoImage(file=os.getcwd()+'/Fotos/Angel/A2.png')
     imgAN2 = imgAN2.subsample(1,1)
 
-    imgAN3 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/STP/Fotos/Angel/A3.png')
+    imgAN3 = tk.PhotoImage(file=os.getcwd()+'/Fotos/Angel/A3.png')
     imgAN3 = imgAN3.subsample(1,1)
 
-    imgAN4 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/STP/Fotos/Angel/A4.png')
+    imgAN4 = tk.PhotoImage(file=os.getcwd()+'/Fotos/Angel/A4.png')
     imgAN4 = imgAN4.subsample(1,1)
 
     lab10 = tk.Label(frameAngel, image=imgAN1).grid(row=0, column=0)
@@ -191,16 +191,16 @@ def ventInicio():
     #Frame Ana
     frameAna = tk.Frame(P6, width=360, height=225)
 
-    imgANA1 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/STP/Fotos/Ana/AN1.png')
+    imgANA1 = tk.PhotoImage(file=os.getcwd()+'/Fotos/Ana/AN1.png')
     imgANA1 = imgANA1.subsample(1,1)
 
-    imgANA2 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/STP/Fotos/Ana/AN2.png')
+    imgANA2 = tk.PhotoImage(file=os.getcwd()+'/Fotos/Ana/AN2.png')
     imgANA2 = imgANA2.subsample(1,1)
 
-    imgANA3 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/STP/Fotos/Ana/AN3.png')
+    imgANA3 = tk.PhotoImage(file=os.getcwd()+'/Fotos/Ana/AN3.png')
     imgANA3 = imgANA3.subsample(1,1)
 
-    imgANA4 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/STP/Fotos/Ana/AN4.png')
+    imgANA4 = tk.PhotoImage(file=os.getcwd()+'/Fotos/Ana/AN4.png')
     imgANA4 = imgANA4.subsample(1,1)
 
     lab10 = tk.Label(frameAna, image=imgANA1).grid(row=0, column=0)
@@ -211,16 +211,16 @@ def ventInicio():
     #Frame Alejo
     frameAL = tk.Frame(P6, width=360, height=225)
 
-    imgAL1 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/STP/Fotos/Alejo/A1.png')
+    imgAL1 = tk.PhotoImage(file=os.getcwd()+'/Fotos/Alejo/A1.png')
     imgAL1 = imgAL1.subsample(1,1)
 
-    imgAL2 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/STP/Fotos/Alejo/A2.png')
+    imgAL2 = tk.PhotoImage(file=os.getcwd()+'/Fotos/Alejo/A2.png')
     imgAL2 = imgAL2.subsample(1,1)
 
-    imgAL3 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/STP/Fotos/Alejo/A3.png')
+    imgAL3 = tk.PhotoImage(file=os.getcwd()+'/Fotos/Alejo/A3.png')
     imgAL3 = imgAL3.subsample(1,1)
 
-    imgAL4 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/STP/Fotos/Alejo/A4.png')
+    imgAL4 = tk.PhotoImage(file=os.getcwd()+'/Fotos/Alejo/A4.png')
     imgAL4 = imgAL4.subsample(1,1)
 
     lab10 = tk.Label(frameAL, image=imgAL1).grid(row=0, column=0)
@@ -231,16 +231,16 @@ def ventInicio():
     #Frame Andrés
     frameAND = tk.Frame(P6, width=360, height=225)
 
-    imgAND1 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/STP/Fotos/Andres/A1.png')
+    imgAND1 = tk.PhotoImage(file=os.getcwd()+'/Fotos/Andres/A1.png')
     imgAND1 = imgAND1.subsample(1,1)
 
-    imgAND2 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/STP/Fotos/Andres/A2.png')
+    imgAND2 = tk.PhotoImage(file=os.getcwd()+'/Fotos/Andres/A2.png')
     imgAND2 = imgAND2.subsample(1,1)
 
-    imgAND3 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/STP/Fotos/Andres/A3.png')
+    imgAND3 = tk.PhotoImage(file=os.getcwd()+'/Fotos/Andres/A3.png')
     imgAND3 = imgAND3.subsample(1,1)
 
-    imgAND4 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/STP/Fotos/Andres/A4.png')
+    imgAND4 = tk.PhotoImage(file=os.getcwd()+'/Fotos/Andres/A4.png')
     imgAND4 = imgAND4.subsample(1,1)
 
     lab10 = tk.Label(frameAND, image=imgAND1).grid(row=0, column=0)
