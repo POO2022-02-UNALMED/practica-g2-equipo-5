@@ -1,7 +1,6 @@
-package Personas;
-import Planeacion.Mercancia;
-import Planeacion.Facturacion;
-
+package gestionAplicacion.Personas;
+import gestionAplicacion.Planeacion.Mercancia;
+import gestionAplicacion.Planeacion.Facturacion;
 
 import java.util.ArrayList;
 

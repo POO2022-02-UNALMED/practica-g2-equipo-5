@@ -1,5 +1,5 @@
-package Planeacion;
-import Personas.Usuario;
+package gestionAplicacion.Planeacion;
+import gestionAplicacion.Personas.*;
 import java.util.ArrayList;
 
 public class Facturacion{

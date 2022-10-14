@@ -1,4 +1,4 @@
-package Personas;
+package gestionAplicacion.Personas;
 
 public abstract class Persona {
     private String nombre;

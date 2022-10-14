@@ -1,20 +1,18 @@
-package planeacion;
+package gestionAplicacion.Planeacion;
 
-import Destinos.Ciudad;
-import Personas.Conductor;
-import Personas.Usuario;
-import Destinos.Conexion;
+import gestionAplicacion.Destinos.*;
+import gestionAplicacion.Personas.*;
 
 import java.util.ArrayList;
 
 public class Viaje {
-	private Ciudad cDestino="";
-	private Ciudad cOrigen="";
+	private Ciudad cDestino;
+	private Ciudad cOrigen;
 	private ArrayList<Conexion> ruta;
 	private int nPasajeros=0;
 	private ArrayList<Usuario> pasajeros;
 	private ArrayList<Conductor> conductor;
-	private String fecha="";
+	private String fecha;
 	
 //Getters and setters
 	public Ciudad getcDestino() {
