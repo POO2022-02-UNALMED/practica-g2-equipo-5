@@ -1,6 +1,9 @@
 package gestionAplicacion.Destinos;
 
+import java.util.ArrayList;
+
 public class Conexion {
+	public static ArrayList<Conexion> conexiones = new ArrayList<Conexion>();
 	private Ciudad ciudadA;
 	private Ciudad ciudadB;
 	private double distancia;
@@ -13,6 +16,7 @@ public class Conexion {
 		this.distancia = distancia;
 		this.tiempo = tiempo;
 		this.precio = precio;
+		conexiones.add(this);
 	}
 
 	public Ciudad getCiudadA() {
@@ -54,6 +58,15 @@ public class Conexion {
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
+
+	public static ArrayList<Conexion> getConexiones() {
+		return conexiones;
+	}
+
+	public static void setConexiones(ArrayList<Conexion> conexiones) {
+		Conexion.conexiones = conexiones;
+	}
+	
 	
 	
 }
