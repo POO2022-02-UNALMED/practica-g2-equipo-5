@@ -7,6 +7,7 @@ import gestionAplicacion.Vehiculos.*;
 public class Conductor extends Persona {
 	private Vehiculo vehiculo;
 	private int experiencia;
+	private double precio;
 	public static ArrayList<Conductor> conductores;
 	
 	//constructores
@@ -17,9 +18,10 @@ public class Conductor extends Persona {
 		this.experiencia = experiencia;
 	}
 	public Conductor(String nombre, String documento,  String edad, 
-			int experiencia) {
+			int experiencia,double precio) {
 		super(nombre, documento, null, edad);
 		this.experiencia = experiencia;
+		this.precio = precio;
 		Conductor.conductores.add(this);
 	}
 
@@ -43,6 +45,12 @@ public class Conductor extends Persona {
 		this.experiencia = experiencia;
 	}
 	
+	public double getPrecio() {
+		return precio;
+	}
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
 	//metodos 
 	public void agregarVehiculo(Vehiculo v) {
 		this.vehiculo = v;
