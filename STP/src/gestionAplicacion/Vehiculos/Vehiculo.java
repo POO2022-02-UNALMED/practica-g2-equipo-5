@@ -10,12 +10,12 @@ public class Vehiculo {
 	private Conductor conductor;
 	private ArrayList<Conexion> ruta = new ArrayList<Conexion>();
 	private String placa;
-	private String modelo;
+	private int modelo;
 	private String marca;
 	private double precio;
 	
 	//constructores
-	public Vehiculo(Conductor conductor, ArrayList<Conexion> ruta, String placa, String modelo) {
+	public Vehiculo(Conductor conductor, ArrayList<Conexion> ruta, String placa, int modelo) {
 		super();
 		this.conductor = conductor;
 		this.ruta = ruta;
@@ -23,7 +23,7 @@ public class Vehiculo {
 		this.modelo = modelo;
 	}
 	
-	public Vehiculo(String marca,double precio,String modelo,String placa) {
+	public Vehiculo(String marca,double precio,int modelo,String placa) {
 		this.marca = marca;
 		this.precio = precio;
 		this.placa = placa;
@@ -49,10 +49,10 @@ public class Vehiculo {
 	public void setPlaca(String placa) {
 		this.placa = placa;
 	}
-	public String getModelo() {
+	public int getModelo() {
 		return modelo;
 	}
-	public void setModelo(String modelo) {
+	public void setModelo(int modelo) {
 		this.modelo = modelo;
 	}
 

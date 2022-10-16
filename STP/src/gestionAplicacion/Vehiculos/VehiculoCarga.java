@@ -10,11 +10,11 @@ public class VehiculoCarga extends Vehiculo{
 	private int capacidadMaxima;
 	public static ArrayList<VehiculoCarga> vehiculos = new ArrayList<VehiculoCarga>();
 	//constructores
-	public VehiculoCarga(Conductor conductor, ArrayList<Conexion> ruta, String placa, String modelo, int capacidadMaxima) {
+	public VehiculoCarga(Conductor conductor, ArrayList<Conexion> ruta, String placa, int modelo, int capacidadMaxima) {
 		super(conductor, ruta, placa, modelo);
 		this.capacidadMaxima = capacidadMaxima;
 	}
-	public VehiculoCarga(String marca,double precio,String modelo,String placa,int capacidadMaxima) {
+	public VehiculoCarga(String marca,double precio,int modelo,String placa,int capacidadMaxima) {
 		super(marca,precio,modelo,placa);
 		this.capacidadMaxima = capacidadMaxima;
 		vehiculos.add(this);
