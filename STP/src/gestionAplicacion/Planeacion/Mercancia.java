@@ -7,14 +7,14 @@ import java.util.ArrayList;
 
 public class Mercancia {
 	private Usuario usuario;
-	private ArrayList<Conexion> ruta;
+	private Ruta ruta;
 	private ArrayList<Producto> productos;
 	private VehiculoCarga vehiculo;
 	private Conductor conductor;
 	private String fecha;
-	
+
 	public Mercancia(Usuario usuario, ArrayList<Conexion> ruta, ArrayList<Producto> productos, VehiculoCarga vehiculo,
-			Conductor conductor, String fecha) {
+					 Conductor conductor, String fecha) {
 		super();
 		this.usuario = usuario;
 		this.ruta = ruta;
@@ -71,5 +71,12 @@ public class Mercancia {
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-	
+
+	public void agregarUsuario(Usuario usuario){
+		this.usuario = usuario;
+		usuario.agregarMercancia(this);
+	}
+	public agregarProductos(Producto producto){
+		this.productos.add(producto);
+	}
 }
