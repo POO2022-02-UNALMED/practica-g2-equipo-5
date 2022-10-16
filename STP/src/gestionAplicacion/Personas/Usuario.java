@@ -44,7 +44,10 @@ public void setFacturacion(ArrayList<Facturacion> facturacion) {
 }
 
 //Methods
-
+public void agregarMercancia(Mercancia mercancia){
+	this.mercancia.add(mercancia);
+	mercancia.setUsuario(this);
+}
 
 
 
