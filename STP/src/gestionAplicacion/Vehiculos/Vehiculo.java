@@ -8,9 +8,11 @@ import gestionAplicacion.Destinos.*;
 
 public class Vehiculo {
 	private Conductor conductor;
-	private ArrayList<Conexion> ruta;
+	private ArrayList<Conexion> ruta = new ArrayList<Conexion>();
 	private String placa;
 	private String modelo;
+	private String marca;
+	private double precio;
 	
 	//constructores
 	public Vehiculo(Conductor conductor, ArrayList<Conexion> ruta, String placa, String modelo) {
@@ -21,7 +23,9 @@ public class Vehiculo {
 		this.modelo = modelo;
 	}
 	
-	public Vehiculo(String placa,String modelo) {
+	public Vehiculo(String marca,double precio,String modelo,String placa) {
+		this.marca = marca;
+		this.precio = precio;
 		this.placa = placa;
 		this.modelo = modelo;
 	}
@@ -50,6 +54,22 @@ public class Vehiculo {
 	}
 	public void setModelo(String modelo) {
 		this.modelo = modelo;
+	}
+
+	public String getMarca() {
+		return marca;
+	}
+
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
+
+	public double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(double precio) {
+		this.precio = precio;
 	}
 	
 	

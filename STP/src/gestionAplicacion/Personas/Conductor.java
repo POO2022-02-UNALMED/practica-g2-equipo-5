@@ -8,7 +8,7 @@ public class Conductor extends Persona {
 	private Vehiculo vehiculo;
 	private int experiencia;
 	private double precio;
-	public static ArrayList<Conductor> conductores;
+	public static ArrayList<Conductor> conductores = new ArrayList<Conductor>();
 	
 	//constructores
 	public Conductor(String nombre, String documento, String direccion, String edad, Vehiculo vehiculo,

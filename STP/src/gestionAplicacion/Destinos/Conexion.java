@@ -7,10 +7,10 @@ public class Conexion {
 	private Ciudad ciudadA;
 	private Ciudad ciudadB;
 	private double distancia;
-	private Integer tiempo;
+	private int tiempo;
 	private double precio;
 	
-	public Conexion(Ciudad ciudadA, Ciudad ciudadB, double distancia, Integer tiempo, double precio) {
+	public Conexion(Ciudad ciudadA, Ciudad ciudadB, double distancia, int tiempo, double precio) {
 		this.ciudadA = ciudadA;
 		this.ciudadB = ciudadB;
 		this.distancia = distancia;
@@ -47,7 +47,7 @@ public class Conexion {
 		return tiempo;
 	}
 
-	public void setTiempo(Integer tiempo) {
+	public void setTiempo(int tiempo) {
 		this.tiempo = tiempo;
 	}
 
