@@ -14,6 +14,7 @@ public class Producto {
 		this.cOrigen = cOrigen;
 		this.cDestino = cDestino;
 	}
+	public Producto();
 
 	public String getTipo() {
 		return tipo;
