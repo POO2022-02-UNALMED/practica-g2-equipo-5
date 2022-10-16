@@ -131,7 +131,15 @@ public class Mercancia {
 		System.out.println("El peso total es de: " + pTotal);
 		System.out.println("Ahora, se mostrarán los vehiculos que pueden soportar ese peso");
 		
-		
+		ArrayList<VehiculoCarga> vPosibles = VehiculoCarga.validarCapacidad(pTotal);
+		int indV = 0;
+		for(VehiculoCarga vehiculo: vPosibles) {
+			System.out.println(indV + ". " + vehiculo.getMarca() + " " + vehiculo.getModelo());
+			indV++;
+		}
+		System.out.print("De la lista anterior, seleccione un vehiculo: ");
+		int vSeleccionado = scan.nextInt();
+		mercancia.setVehiculo(vPosibles.get(vSeleccionado));
 		
 
 	}
