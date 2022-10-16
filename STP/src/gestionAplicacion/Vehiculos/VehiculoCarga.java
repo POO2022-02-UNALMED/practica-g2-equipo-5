@@ -31,7 +31,15 @@ public class VehiculoCarga extends Vehiculo{
 	
 	
 	//metodos
-	
+	public static ArrayList<VehiculoCarga> validarCapacidad(int min){
+		ArrayList<VehiculoCarga> l = new ArrayList<VehiculoCarga>();
+		for(VehiculoCarga i:vehiculos) {
+			if(i.getCapacidadMaxima()>=min) {
+				l.add(i);
+			}
+		}
+		return l;
+	}
 	
 	
 }
