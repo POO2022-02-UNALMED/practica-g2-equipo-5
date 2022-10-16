@@ -1,19 +1,27 @@
 package gestionAplicacion.Vehiculos;
 import gestionAplicacion.Personas.*;
+
+import java.util.ArrayList;
+
 import gestionAplicacion.Destinos.*;
 
 
 public class Vehiculo {
 	private Conductor conductor;
-	private Conexion[] ruta;
+	private ArrayList<Conexion> ruta;
 	private String placa;
 	private String modelo;
 	
-	//constructor
-	public Vehiculo(Conductor conductor, Conexion[] ruta, String placa, String modelo) {
+	//constructores
+	public Vehiculo(Conductor conductor, ArrayList<Conexion> ruta, String placa, String modelo) {
 		super();
 		this.conductor = conductor;
 		this.ruta = ruta;
+		this.placa = placa;
+		this.modelo = modelo;
+	}
+	
+	public Vehiculo(String placa,String modelo) {
 		this.placa = placa;
 		this.modelo = modelo;
 	}
@@ -25,10 +33,10 @@ public class Vehiculo {
 	public void setConductor(Conductor conductor) {
 		this.conductor = conductor;
 	}
-	public Conexion[] getRuta() {
+	public ArrayList<Conexion> getRuta() {
 		return ruta;
 	}
-	public void setRuta(Conexion[] ruta) {
+	public void setRuta(ArrayList<Conexion> ruta) {
 		this.ruta = ruta;
 	}
 	public String getPlaca() {
