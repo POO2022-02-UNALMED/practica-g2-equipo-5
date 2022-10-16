@@ -57,4 +57,7 @@ public class Conductor extends Persona {
 		v.setConductor(this);
 	}
 	
+	public static ArrayList<Conductor> getConductores(){
+		return Conductor.conductores;
+	}
 }

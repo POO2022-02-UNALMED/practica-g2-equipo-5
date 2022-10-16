@@ -15,7 +15,7 @@ public class Mercancia {
 	private Facturacion factura;
 	private String fecha;
 
-	public Mercancia(Usuario usuario, ArrayList<Conexion> ruta, ArrayList<Producto> productos, VehiculoCarga vehiculo,
+	public Mercancia(Usuario usuario, Ruta ruta, ArrayList<Producto> productos, VehiculoCarga vehiculo,
 					 Conductor conductor, String fecha) {
 		super();
 		this.usuario = usuario;
@@ -101,7 +101,7 @@ public class Mercancia {
 		System.out.print("Ingrese el número de productos a enviar ");
 		nProductos = scan.nextInt();
 		
-		double pTotal = 0;
+		int pTotal = 0;
 		for(int i = 0; i < nProductos; i++) {
 			Producto P1 = new Producto();
 			
@@ -139,8 +139,32 @@ public class Mercancia {
 		}
 		System.out.print("De la lista anterior, seleccione un vehiculo: ");
 		int vSeleccionado = scan.nextInt();
-		mercancia.setVehiculo(vPosibles.get(vSeleccionado));
+		VehiculoCarga vSel = vPosibles.get(vSeleccionado);
+		mercancia.setVehiculo(vSel);
 		
-
+		
+		System.out.println();
+		System.out.println("Seleccione el conductor que desea de la siguiente lista: ");
+		ArrayList<Conductor> conductores = Conductor.validarConductor();
+		int indC = 0;
+		for(Conductor cond: conductores) {
+			System.out.println(indC + ". " + cond.getNombre() + ", " + cond.getEdad() +"años. "
+					+ cond.getExperiencia() + " años de experiencia");
+			indC++;
+		}
+		
+		System.out.print("Ingrese el número del conductor que seleccionó: ");
+		int indConductor = scan.nextInt();
+		Conductor condSeleccionado = conductores.get(indConductor); 
+		condSeleccionado.agregarVehiculo(vSel);
+		mercancia.setConductor(condSeleccionado);
+		
+		System.out.println();
+		System.out.print("Por último, digite la fecha que desea realiza el envio (dd/mm/aaaa): ");
+		String fecha = scan.nextLine();
+		mercancia.setFecha(fecha);
+		
+		System.out.println("\nFelicidades, ha completado con éxito su envio.");
+		return mercancia;
 	}
 }
