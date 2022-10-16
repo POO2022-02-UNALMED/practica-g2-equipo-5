@@ -13,7 +13,7 @@ public class VehiculoCarga extends Vehiculo{
 		super(conductor, ruta, placa, modelo);
 		this.capacidadMaxima = capacidadMaxima;
 	}
-	//public VehiculoCarga(Sring placa,String modelo, )
+	public VehiculoCarga(Sring placa,String modelo,int capacidadMaxima)
 	
 
 	
