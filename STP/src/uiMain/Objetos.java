@@ -1,5 +1,6 @@
 package uiMain;
 import gestionAplicacion.Destinos.*;
+import gestionAplicacion.Vehiculos.*;
 
 public class Objetos {
 	/* Se guardan todos los objetos necesarios */
@@ -28,4 +29,17 @@ public class Objetos {
 	Conexion PerCal = new Conexion(Per, Cal, 209, 192, 30000);
 	Conexion BogJos = new Conexion(Bog, Jos, 399, 426, 60000);
 
+	/* Conductores */
+	Conductor C1 = new Conductor("Angel", 10011020, 38, 15, 40000);
+	Conductor C2 = new Conductor("Ana", 1015215, 40, 20, 50000);
+	Conductor C1 = new Conductor("Alejandro", 152002, 51, 10, 30000);
+	Conductor C1 = new Conductor("Andres", 152020, 30, 8, 15000);
+	Conductor C1 = new Conductor("Juan", 1651561, 40, 10, 30000);
+
+	/* Vehiculos Pasajeros */
+	VehiculoPasajeros DOM = new VehiculoPasajeros();
+	VehiculoPasajeros DOM = new VehiculoPasajeros();
+	VehiculoPasajeros DOM = new VehiculoPasajeros();
+	VehiculoPasajeros DOM = new VehiculoPasajeros();
+	VehiculoPasajeros DOM = new VehiculoPasajeros();
 }
