@@ -129,6 +129,9 @@ public class Mercancia {
 		}
 		
 		System.out.println("El peso total es de: " + pTotal);
+		System.out.println("Ahora, se mostrarán los vehiculos que pueden soportar ese peso");
+		
+		
 		
 
 	}
