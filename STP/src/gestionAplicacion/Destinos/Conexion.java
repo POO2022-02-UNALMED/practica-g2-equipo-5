@@ -2,71 +2,34 @@ package gestionAplicacion.Destinos;
 
 import java.util.ArrayList;
 
-public class Conexion {
-	public static ArrayList<Conexion> conexiones = new ArrayList<Conexion>();
-	private Ciudad ciudadA;
-	private Ciudad ciudadB;
-	private double distancia;
-	private int tiempo;
-	private double precio;
+public enum Conexion {
 	
-	public Conexion(Ciudad ciudadA, Ciudad ciudadB, double distancia, int tiempo, double precio) {
+	
+	A("MEDELLÍN", "BOGOTÁ", 415, 495, 70000),
+	B("BOGOTÁ", "BUCARAMANGA", 424, 500, 75000),
+	C("BUCARAMANGA", "SANTA MARTA", 539, 562, 80000),
+	D("SANTA MARTA", "BARRANQUILLA", 104, 93, 35000),
+	E("BARRANQUILLA", "CARTAGENA", 119, 138, 40000),
+	F("CARTAGENA", "MEDELLÍN", 640, 730, 90000),
+	G("MEDELLÍN", "QUIBDÓ", 229, 367, 50000),
+	H("MEDELLÍN", "PEREIRA", 243, 324, 60000),
+	I("PEREIRA", "CALI", 209, 192, 30000),
+	J("BOGOTÁ", "SAN JOSÉ DEL GUAVIARE", 399, 426, 60000);
+
+	
+	public final String ciudadA;
+	public final String ciudadB;
+	public final double distancia;
+	public final int tiempo;
+	public final double precio;
+
+
+	private Conexion(String ciudadA, String ciudadB, double distancia, int tiempo, double precio) {
 		this.ciudadA = ciudadA;
 		this.ciudadB = ciudadB;
 		this.distancia = distancia;
 		this.tiempo = tiempo;
 		this.precio = precio;
-		conexiones.add(this);
 	}
-
-	public Ciudad getCiudadA() {
-		return ciudadA;
-	}
-
-	public void setCiudadA(Ciudad ciudadA) {
-		this.ciudadA = ciudadA;
-	}
-
-	public Ciudad getCiudadB() {
-		return ciudadB;
-	}
-
-	public void setCiudadB(Ciudad ciudadB) {
-		this.ciudadB = ciudadB;
-	}
-
-	public double getDistancia() {
-		return distancia;
-	}
-
-	public void setDistancia(double distancia) {
-		this.distancia = distancia;
-	}
-
-	public Integer getTiempo() {
-		return tiempo;
-	}
-
-	public void setTiempo(int tiempo) {
-		this.tiempo = tiempo;
-	}
-
-	public double getPrecio() {
-		return precio;
-	}
-
-	public void setPrecio(double precio) {
-		this.precio = precio;
-	}
-
-	public static ArrayList<Conexion> getConexiones() {
-		return conexiones;
-	}
-
-	public static void setConexiones(ArrayList<Conexion> conexiones) {
-		Conexion.conexiones = conexiones;
-	}
-	
-	
 	
 }
