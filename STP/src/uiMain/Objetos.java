@@ -17,18 +17,6 @@ public class Objetos {
 	Ciudad Jos = new Ciudad("SAN JOSÉ DEL GUAVIARE", "GUAVIARE");
 	Ciudad Qui = new Ciudad("QUIBDÓ", "CHOCÓ");
 	Ciudad Mar = new Ciudad("SANTA MARTA", "MAGDALENA");
-	
-	/* Conexiones */
-	Conexion MedBog = new Conexion(Med, Bog, 415, 495, 70000);
-	Conexion BogBuc = new Conexion(Bog, Buc, 424, 500, 75000);
-	Conexion BucMar = new Conexion(Buc, Mar, 539, 562, 80000);
-	Conexion MarBar = new Conexion(Mar, Bar, 104, 93, 35000);
-	Conexion BarCar = new Conexion(Bar, Car, 119, 138, 40000);
-	Conexion CarMed = new Conexion(Car, Med, 640, 730, 90000);
-	Conexion MedQui = new Conexion(Med, Qui, 229, 367, 50000);
-	Conexion MedPer = new Conexion(Med, Per, 243, 324, 60000);
-	Conexion PerCal = new Conexion(Per, Cal, 209, 192, 30000);
-	Conexion BogJos = new Conexion(Bog, Jos, 399, 426, 60000);
 
 	/* Conductores */
 	Conductor C1 = new Conductor("Angel", "10011020", "38", 15, 40000);
@@ -38,57 +26,21 @@ public class Objetos {
 	Conductor C5 = new Conductor("Juan", "1651561", "40", 10, 30000);
 
 	/* Vehiculos Pasajeros */
-	VehiculoPasajeros DOM = new VehiculoPasajeros(EnumVehiculos.DOMINAR400.getMarca(), 
-			EnumVehiculos.DOMINAR400.getPrecio(), EnumVehiculos.DOMINAR400.getModelo(),
-			EnumVehiculos.DOMINAR400.getPlaca(), 1);
-	
-	VehiculoPasajeros SR = new VehiculoPasajeros(EnumVehiculos.S1000RR.getMarca(), 
-			EnumVehiculos.S1000RR.getPrecio(), EnumVehiculos.S1000RR.getModelo(),
-			EnumVehiculos.S1000RR.getPlaca(), 1);
-			
-	VehiculoPasajeros ONIX = new VehiculoPasajeros(EnumVehiculos.ONIXTURBO.getMarca(), 
-			EnumVehiculos.ONIXTURBO.getPrecio(), EnumVehiculos.ONIXTURBO.getModelo(),
-			EnumVehiculos.ONIXTURBO.getPlaca(), 4);
-	
-	VehiculoPasajeros SAN = new VehiculoPasajeros(EnumVehiculos.SANDERO.getMarca(), 
-			EnumVehiculos.SANDERO.getPrecio(), EnumVehiculos.SANDERO.getModelo(),
-			EnumVehiculos.SANDERO.getPlaca(), 4);
-	
-	VehiculoPasajeros BER = new VehiculoPasajeros(EnumVehiculos.BERLINGO.getMarca(), 
-			EnumVehiculos.BERLINGO.getPrecio(), EnumVehiculos.BERLINGO.getModelo(),
-			EnumVehiculos.BERLINGO.getPlaca(), 6);
-	
-	VehiculoPasajeros TRANS = new VehiculoPasajeros(EnumVehiculos.TRANSPORTER.getMarca(), 
-			EnumVehiculos.TRANSPORTER.getPrecio(), EnumVehiculos.TRANSPORTER.getModelo(),
-			EnumVehiculos.TRANSPORTER.getPlaca(), 6);
-	
-	VehiculoPasajeros PARADISO = new VehiculoPasajeros(EnumVehiculos.PARADISO_1200_G7.getMarca(), 
-			EnumVehiculos.PARADISO_1200_G7.getPrecio(), EnumVehiculos.PARADISO_1200_G7.getModelo(),
-			EnumVehiculos.PARADISO_1200_G7.getPlaca(), 45);
-	
-	VehiculoPasajeros CITARO = new VehiculoPasajeros(EnumVehiculos.CITARO_K.getMarca(), 
-			EnumVehiculos.CITARO_K.getPrecio(), EnumVehiculos.CITARO_K.getModelo(),
-			EnumVehiculos.CITARO_K.getPlaca(), 40);
-	
+	VehiculoPasajeros DOM = new VehiculoPasajeros("BAJAJ DOMINAR 400", 50000, 2021, "AUX-87X", 1);
+	VehiculoPasajeros SR = new VehiculoPasajeros("BMW S1000RR", 150000, 2023, "AUX-88X", 1);
+	VehiculoPasajeros ONIX = new VehiculoPasajeros("CHEVROLET ONIX", 200000, 2020, "AUX-89X", 4);
+	VehiculoPasajeros SAN = new VehiculoPasajeros("RENAULT SANDERO", 170000, 2018, "AUX-90X", 4);
+	VehiculoPasajeros FOR = new VehiculoPasajeros("FORD F150", 350000, 2019, "AUX-91X", 6);
+	VehiculoPasajeros BER = new VehiculoPasajeros("CITRÖEN BERLINGO", 90000, 2016, "AUX-92X", 6);
+	VehiculoPasajeros TRANS = new VehiculoPasajeros("VOLKSWAGEN TRANSPORTER", 130000, 2015, "AUX-93X", 6);
+	VehiculoPasajeros PARADISO = new VehiculoPasajeros("MARCOPOLO PARADISO", 1500000, 2017, "AUX-94X", 45);
+	VehiculoPasajeros CITARO = new VehiculoPasajeros("MERCEDES-BENZ CITARO-K", 1500000, 2020, "AUX-95X", 40);
+
 	/* Vehiculos de carga */
-	VehiculoCarga DMAX = new VehiculoCarga(EnumVehiculos.DMAX.getMarca(), 
-			EnumVehiculos.DMAX.getPrecio(), EnumVehiculos.DMAX.getModelo(),
-			EnumVehiculos.DMAX.getPlaca(), 1000);
-	
-	VehiculoCarga DOMI = new VehiculoCarga(EnumVehiculos.DOMINAR400.getMarca(), 
-			EnumVehiculos.DOMINAR400.getPrecio(), EnumVehiculos.DOMINAR400.getModelo(),
-			EnumVehiculos.DOMINAR400.getPlaca(), 20);
-	
-	VehiculoCarga FRO = new VehiculoCarga(EnumVehiculos.FRONTIER_D22.getMarca(), 
-			EnumVehiculos.FRONTIER_D22.getPrecio(), EnumVehiculos.FRONTIER_D22.getModelo(),
-			EnumVehiculos.FRONTIER_D22.getPlaca(), 1000);
-	
-	VehiculoCarga AUM = new VehiculoCarga(EnumVehiculos.AUMARK_BJ_1039.getMarca(), 
-			EnumVehiculos.AUMARK_BJ_1039.getPrecio(), EnumVehiculos.AUMARK_BJ_1039.getModelo(),
-			EnumVehiculos.AUMARK_BJ_1039.getPlaca(), 4000);
-	
-	VehiculoCarga T = new VehiculoCarga(EnumVehiculos.T800.getMarca(), 
-			EnumVehiculos.T800.getPrecio(), EnumVehiculos.T800.getModelo(),
-			EnumVehiculos.T800.getPlaca(), 30000);
+	VehiculoCarga DOMI = new VehiculoCarga("BAJAJ DOMINAR 400", 12000, 2012, "AUX-96X", 20);
+	VehiculoCarga DMAX = new VehiculoCarga("CHEVROLET DMAX", 15000, 2012, "AUX-97X", 1000);
+	VehiculoCarga FRO = new VehiculoCarga("NISSAN FRONTIER D22", 15000, 2019, "AUX-98X", 1000);
+	VehiculoCarga AUM = new VehiculoCarga("FOTON AUMARK BJ 1039", 25000, 2017, "AUX-99X", 4000);
+	VehiculoCarga T = new VehiculoCarga("KENWORTH T800", 50000, 2012, "AUX-01X", 30000);
 	
 }
