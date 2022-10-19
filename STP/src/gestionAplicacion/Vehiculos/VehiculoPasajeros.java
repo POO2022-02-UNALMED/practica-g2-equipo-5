@@ -28,4 +28,19 @@ public class VehiculoPasajeros extends Vehiculo {
 		this.nAsientos = nAsientos;
 	}
 	
+	//metodos
+	public static ArrayList<VehiculoPasajeros> validarCapacidad(int con,int min){
+		
+		ArrayList<VehiculoPasajeros> l = new ArrayList<VehiculoPasajeros>();
+		for(VehiculoPasajeros i:vehiculos) {
+			if(con == 1 && i.getnAsientos()>=min) {
+				l.add(i);
+			}
+			if(con == 2 && i.getnAsientos()>min) {
+				l.add(i);
+			}
+		}
+		return l;
+	}
+	
 }
