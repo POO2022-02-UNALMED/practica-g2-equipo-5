@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Usuario extends Persona {
-	private ArrayList<Viaje> viaje;
-	private ArrayList<Mercancia> mercancia;
-	private ArrayList<Facturacion> facturacion;
-	private ArrayList<Ruta> ruta;
+	private ArrayList<Viaje> viaje = new ArrayList<Viaje>();
+	private ArrayList<Mercancia> mercancia = new ArrayList<Mercancia>();
+	private ArrayList<Facturacion> facturacion = new ArrayList<Facturacion>();
+	private ArrayList<Ruta> ruta = new ArrayList<Ruta>();
 	private static ArrayList<Usuario> user;
 	
 //Usuario hereda de persona
