@@ -1,4 +1,4 @@
-package gestionAplicacion.Planeacion.*;
+package gestionAplicacion.Planeacion;
 import gestionAplicacion.Personas.*;
 import java.util.ArrayList;
 
