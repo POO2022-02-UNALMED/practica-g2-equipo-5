@@ -96,11 +96,18 @@ public class Usuario extends Persona {
 	}
 
 	
-	
+/**************************************************
+ **************FUNCIONALIDAD FATURACION************
+ **************************************************/
 	
 public Facturacion generarFacturaViaje() {
 	
 }
+
+
+
+
+
 	/* Funcionalidad Enviar Mercancia*/
 	
 	public Mercancia enviarMercancia() {
