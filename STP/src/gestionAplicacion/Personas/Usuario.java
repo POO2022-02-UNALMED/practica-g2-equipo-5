@@ -5,26 +5,36 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Usuario extends Persona {
-	private ArrayList<Viaje> viaje;
-	private ArrayList<Mercancia> mercancia;
-	private ArrayList<Facturacion> facturacion;
-	private ArrayList<Ruta> ruta;
+	private ArrayList<Viaje> viaje = new ArrayList<Viaje>();
+	private ArrayList<Mercancia> mercancia = new ArrayList<Mercancia>();
+	private ArrayList<Facturacion> facturacion = new ArrayList<Facturacion>();
+	private ArrayList<Ruta> ruta = new ArrayList<Ruta>();
 	private static ArrayList<Usuario> user;
 	
 //Usuario hereda de persona
 	
 	
-	public Usuario(String nombre, String documento, String direccion, String edad, ArrayList<Viaje> viaje,
+	public Usuario(String nombre, String documento, String edad, ArrayList<Viaje> viaje,
 			ArrayList<Mercancia> mercancia, ArrayList<Facturacion> facturacion, ArrayList<Ruta>ruta) {
-		super(nombre, documento, direccion, edad);
+		super(nombre, documento, null, edad);
 		this.viaje = viaje;
 		this.mercancia = mercancia;
 		this.facturacion = facturacion;
 		this.ruta = ruta;
-	
+		Usuario.user.add(this);
 }
-
+	
+	public Usuario(String nombre, String edad) {
+		super(nombre, null, null, edad);
+	}
+	
+	public Usuario (String nombre, String documento, String edad) {
+		super(nombre, documento, null, edad);
+		Usuario.user.add(this);
+	}
 //Getters and setters
+	
+	
 public ArrayList<Viaje> getViaje() {
 	return viaje;
 }
@@ -82,9 +92,9 @@ public void agregarFacturacion(Facturacion facturacion) {
 	this.facturacion.add(facturacion);
 }
 
-public static void user(ArrayList<Usuario> user) {
-	user.addAll(user);
-}
+
+
+
 
 /********************************************************
  * **********funcionalidad Bonificacion*****************

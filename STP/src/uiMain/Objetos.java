@@ -43,4 +43,7 @@ public class Objetos {
 	VehiculoCarga AUM = new VehiculoCarga("FOTON AUMARK BJ 1039", 25000, 2017, "AUX-99X", 4000);
 	VehiculoCarga T = new VehiculoCarga("KENWORTH T800", 50000, 2012, "AUX-01X", 30000);
 	
+	/* Usuario */
+	Usuario Guz = new Usuario("Jaime Alberto Guzmán", "123456789", "20");
+	
 }
