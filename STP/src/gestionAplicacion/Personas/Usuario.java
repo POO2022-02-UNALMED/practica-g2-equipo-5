@@ -4,9 +4,11 @@ import gestionAplicacion.Destinos.Ciudad;
 import gestionAplicacion.Planeacion.*;
 import gestionAplicacion.Vehiculos.VehiculoCarga;
 import gestionAplicacion.Vehiculos.VehiculoPasajeros;
+
 import gestionAplicacion.Destinos.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Usuario extends Persona {
@@ -111,16 +113,7 @@ public class Usuario extends Persona {
 		 */
 
 		Scanner scan = new Scanner(System.in);
-		
-		/////ES BONIFICACION/////
-		System.out.println("-> Seleccione (1) si el envío de mercancía tiene bonificación, o (2) si no tiene bonificación."
-				+ "nTenga en cuenta que la bonificación solo se aplicará si el usuario anteriormente realizó 5 viajes o 5 envíos de mercacía.");
-		int esBonificacion = scan.nextInt();
-		if (esBonificacion==1) {
-			mercancia.setIsBonificacion(true);
-		////////////////////////
-			
-		
+
 		int nProductos;
 		System.out.print("-> Ingrese el número de productos a enviar ");
 		nProductos = scan.nextInt();
@@ -184,19 +177,9 @@ public class Usuario extends Persona {
 		Viaje viaje = new Viaje();
 		//falta lo de la ruta 
 		Scanner scan = new Scanner(System.in);
-		
-		/////ES BONIFICACION/////
-		System.out.println("-> Seleccione (1) si el viaje tiene bonificación, o (2) si no tiene bonificación."
-				+ "nTenga en cuenta que la bonificación solo se aplicará si el usuario anteriormente realizó 5 viajes o 5 envíos de mercacía.");
-		int esBonificacion = scan.nextInt();
-		if (esBonificacion==1) {
-			viaje.setIsBonificacion(true);
-		////////////////////////
-		
-		
 		System.out.print("-> Ingrese numero de pasajeros: ");
 		int nPasajeros= scan.nextInt();
-		
+
 		for (int i = 0; i < nPasajeros; i++) {
 			String nombre;
 			String edad;
@@ -351,6 +334,16 @@ public class Usuario extends Persona {
 	//Todavia está malo unu 
 	public Facturacion generarFacturacion(Viaje viaje) {
 		
+		
+		/////////////////////////////////////////////////
+		//////FACTURA PARA BONIFICACION DE VIAJE (HOLI ANA):
+		///////////////////////////////////////////////////
+		if (viaje.esBonificacion()) {
+			
+		}
+			
+			
+		//////////////////////////////////////////////////
 		Viaje instViaje = new Viaje();
 		Facturacion insFacturacion = new Facturacion();
 		
@@ -360,15 +353,6 @@ public class Usuario extends Persona {
 		Ciudad ori = instViaje.getcOrigen();
 		Ciudad dest = instViaje.getcDestino();
 		double pre = insFacturacion.getPrecio();
-		
-		///////////////////////////////////////////////////
-		//////FACTURA PARA BONIFICACION DE VIAJE //////////
-		///////////////////////////////////////////////////
-		if (viaje.getIsBonificacion()) {
-			pre=pre-pre*0.3;
-		}
-		//////////////////////////////////////////////////
-		
 		
 		System.out.println("-----------------------------------------------\n"
 				+ "-------------FACTURA DE VENTA VIAJE-------------\n"
@@ -394,29 +378,27 @@ public class Usuario extends Persona {
 	
 	public Facturacion generarFacturacion(Mercancia mercancia) {
 		
+		/////////////////////////////////////////////////
+		//////FACTURA PARA BONIFICACION DE MERCANCIA (HOLI ANA):
+		///////////////////////////////////////////////////
+		if (mercancia.esBonificacion()) {
+			
+		}else {};
+
+
+		//////////////////////////////////////////////////
+		
+		
 		Viaje inViaje = new Viaje();
-		ArrayList<Producto> prod = new ArrayList<Producto>();
-		Producto inpes = new Producto();
-		Conductor incon = new Conductor();
+		Facturacion inFact = new Facturacion();
 		
 		
 		String no = this.getNombre();
 		String Do = this.getDocumento();
 		Ciudad or = inViaje.getcOrigen();
 		Ciudad de = inViaje.getcDestino();
-		ArrayList <Producto> pr =  prod.getProductos();
-		Double pe = inpes.getPeso();
-		double con = incon.getPrecio();
+		ArrayList <Producto> pro = inFact.getProducto();
 		
-		
-		
-		///////////////////////////////////////////////////
-		//////FACTURA PARA BONIFICACION DE MERCANCIA //////
-		///////////////////////////////////////////////////
-		if (mercancia.getIsBonificacion()) {
-			pre=pre-pre*0.3;
-		}
-		//////////////////////////////////////////////////
 		
 		System.out.println("-------------------------------------------------\n"
 				+ "-----------FACTURA DE VENTA MERCANCIA------------\n"
@@ -425,9 +407,8 @@ public class Usuario extends Persona {
 		System.out.println("Documento: "+Do);
 		System.out.println("Origen: "+or);
 		System.out.println("Destino: "+de);
-		System.out.println("Productos: "+pr);
-		System.out.println("Peso: "+pe);
-		System.out.println("Conductor: "+con);
+		System.out.println("Productos: ");
+		System.out.println("k");
 		System.out.println("-------------------------------------------------");
 		System.out.println("TOTAL A PAGAR: ");
 		System.out.println("-------------------------------------------------\n"
@@ -439,7 +420,13 @@ public class Usuario extends Persona {
 		
 	}
 	
+	
 	//metodos generar rutas
+	/**
+	 * 
+	 * @param x. Minutos en formato double.
+	 * @return Devuelve un string en formato horas:minutos.
+	 */
 	public String formato(double x) {
 		double num = x/60;
 		double min = x%60;
@@ -452,7 +439,13 @@ public class Usuario extends Persona {
 		return s;
 		
 	}
+	
+	/**
+	 * Método menuCiudades muestra las ciudades de operacion
+	 * y hace el llamado de todos los métodos correspondientes para presentar un menú e interactuar con el usuario
+	 */
 	public void menuCiudades() {
+		Scanner sc = new Scanner(System.in);
 		String[] ciudades = {
 				"MEDELLÍN","BOGOTÁ","BUCARAMANGA","SANTA MARTA",
 				"BARRANQUILLA","CARTAGENA","QUIBDÓ","PEREIRA",
@@ -460,13 +453,29 @@ public class Usuario extends Persona {
 		int cont = 1;
 		System.out.println("Las ciudades de operación son: ");
 		for(String i:ciudades) {
-			System.out.println(cont+i);
+			System.out.println(cont+". "+i);
 			cont++;
 		}
 		
-		
-		
+		System.out.println("\nDigite un número para elegir la ciudad origen: ");
+		int origen = sc.nextInt();
+		System.out.println("Digite un número para elegir la ciudad destino: ");
+		int destino = sc.nextInt();
+		Conexion[] c = Conexion.values();
+		ArrayList<Conexion> b = new ArrayList<Conexion>();
+		Collections.addAll(b, c);
+		ArrayList<ArrayList<Conexion>> ru = rutas(ciudades[origen-1], ciudades[destino-1], b);
+		System.out.println("----------------------Rutas disponibles----------------------");
+		recorrerRutas(ru);
 	}
+	
+	/**
+	 * Metodo rutas obtiene todas las rutas posibles dentro de las conexiones establecidas.
+	 * @param a. Ciudad origen.
+	 * @param b. Ciudad destino.
+	 * @param todas. Lista de todas las conexiones que se tienen
+	 * @return Devuelve las rutas posibles dado una ciudad origen y una ciudad destino.
+	 */
 	public  ArrayList<ArrayList<Conexion>> rutas(String a,String b,ArrayList<Conexion> todas){
 		ArrayList<ArrayList<Conexion>> res = new ArrayList<ArrayList<Conexion>>();
 		ArrayList<Conexion> ruta  = new ArrayList<Conexion>();
@@ -488,6 +497,14 @@ public class Usuario extends Persona {
 	}
 	
 	
+	/**
+	 * Método rutas es recursivo y se utiliza para actualizar las rutas. 
+	 * @param act. Es la conexion o nodo para el cual se quieren obtener conexiones.
+	 * @param b. Ciudad destino.
+	 * @param ruta. Es la ruta que actual.
+	 * @param res. Lista de rutas
+	 * @param todas. Lista de todas las conexiones.
+	 */
 	
 	void rutas(String act,String b, ArrayList<Conexion> ruta,ArrayList<ArrayList<Conexion>> res,ArrayList<Conexion> todas){
 		if(act==b) {
@@ -515,6 +532,15 @@ public class Usuario extends Persona {
 		
 	}
 	
+	/**
+	 * 
+	 * Método suma recorre una lista de conexiones
+	 * dependiendo del parametro c obtiene los totales para distancia, tiempo y precio.
+	 * @param c. Indica si se quiere obtener precio,tiempo o distancia
+	 * @param ruta. Es una lista con las conexiones pretenecientes a la ruta.
+	 * @return devuelve la suma correspondiente, dependiendo del parámetro c elegido.
+	 */
+	
 	public double suma(String c,ArrayList<Conexion> ruta) {
 		double suma = 0;
 		switch (c){
@@ -541,6 +567,11 @@ public class Usuario extends Persona {
 		return suma;
 	}
 	
+	/**
+	 * 
+	 * @param ruta. Lista de conexiones.
+	 * @return develve un string que contiene todas las ciudades en el orden en que se van a recorrer.
+	 */
 	public String ciudadesRuta(ArrayList<Conexion> ruta){
 		String res = "";
 		res+=ruta.get(0).ciudadA;
@@ -551,6 +582,11 @@ public class Usuario extends Persona {
 		
 	}
 	
+	/**
+	 * Método pintar muestra el detalle de una ruta.
+	 * @param r. Enumerador para mostrar una ruta en pantalla.
+	 * @param ruta. Lista de conexiones correspondientes a la ruta para la cual se muestran todos sus detalles en pantalla.
+	 */
 	public void pintar(int r,ArrayList<Conexion> ruta) {
 		
 		String s = String.format(
@@ -569,16 +605,29 @@ public class Usuario extends Persona {
 		System.out.println(s);
 	}
 	
+	/**
+	 * Método recorrerRutas pinta en pantalla todas las rutas posibles para que el usuario elija una.
+	 * @param rutas. Lista de todas las rutas posibles.
+	 */
 	public void recorrerRutas(ArrayList<ArrayList<Conexion>> rutas) {
+		Scanner sc = new Scanner(System.in);
 		int en = 1;
 		for(ArrayList<Conexion> i:rutas) {
 			pintar(en,i);
 			en++;
 		}
 		
-	}
-
-	
+		System.out.println("ingrese el número de la ruta a tomar");
+		int numRuta = sc.nextInt();
+		numRuta--;
+		
+		ArrayList<Conexion> ruta = rutas.get(numRuta);
+		double precio = Math.round(suma("p",ruta));
+		double distancia = Math.round(suma("d",ruta));
+		String tiempo = formato(suma("t",ruta));
+		Ruta rutaUsuario = new Ruta(ruta,precio,distancia,tiempo);
+		
+	}	
 	
 	
 }
