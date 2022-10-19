@@ -1,6 +1,6 @@
 package gestionAplicacion.Personas;
 
-import gestionAplicacion.Destinos.Ciudad;
+
 
 import gestionAplicacion.Planeacion.*;
 import gestionAplicacion.Vehiculos.VehiculoCarga;
