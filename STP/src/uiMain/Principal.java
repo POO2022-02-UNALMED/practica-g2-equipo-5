@@ -1,7 +1,10 @@
 package uiMain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
+
+import gestionAplicacion.Destinos.Conexion;
 import gestionAplicacion.Personas.*;
 import gestionAplicacion.Vehiculos.*;
 import gestionAplicacion.Planeacion.*;
@@ -9,6 +12,44 @@ import baseDatos.Deserializador;
 import baseDatos.Serializador;
 
 public class Principal {
+	
+	/**
+	 * 
+	 * @author angel 
+	 */
+	
+	
+	/*funcionalidad generar ruta*/
+	
+	
+	/**
+	 * Método menuCiudades muestra las ciudades de operacion
+	 * y hace el llamado de todos los métodos correspondientes para presentar un menú e interactuar con el usuario
+	 */
+	public static void menuGenerarRuta(Usuario usuario) {
+		Scanner sc = new Scanner(System.in);
+		String[] ciudades = {
+				"MEDELLÍN","BOGOTÁ","BUCARAMANGA","SANTA MARTA",
+				"BARRANQUILLA","CARTAGENA","QUIBDÓ","PEREIRA",
+				"SAN JOSÉ DEL GUAVIARE","CALI"};
+		int cont = 1;
+		System.out.println("Las ciudades de operación son: ");
+		for(String i:ciudades) {
+			System.out.println(cont+". "+i);
+			cont++;
+		}
+		
+		System.out.print("\n-> Digite un número para elegir la ciudad origen: ");
+		int origen = sc.nextInt();
+		System.out.print("-> Digite un número para elegir la ciudad destino: ");
+		int destino = sc.nextInt();
+		Conexion[] c = Conexion.values();
+		ArrayList<Conexion> b = new ArrayList<Conexion>();
+		Collections.addAll(b, c);
+		ArrayList<ArrayList<Conexion>> ru = usuario.rutas(ciudades[origen-1], ciudades[destino-1], b);
+		System.out.println("----------------------Rutas disponibles----------------------");
+		usuario.recorrerRutas(ru);
+	}
 
 	/* Funcionalidad Crear Viaje */
 	public static void crearViaje(Usuario usuario) {
@@ -209,8 +250,8 @@ public class Principal {
 		/* Usuario */
 		String ub = System.getProperty("user.dir") + "/src/baseDatos/temp/" + "Guzman.txt";
 		
-		Usuario Guz = Deserializador.deserializador(null)
-		Guz = new Usuario("Jaime Alberto Guzmán", "123456789", "20");
+		Usuario Guz = Deserializador.deserializador(ub);
+		Guz = (Guz.getNombre()==null)?new Usuario("Jaime Alberto Guzmán", "123456789", "20"):Guz;
 		Guz.agregarMercancia(new Mercancia());
 		Guz.agregarViaje(new Viaje());
 		Guz.agregarFacturacion(new Facturacion());
@@ -255,7 +296,9 @@ public class Principal {
 
 			switch (entrada) {
 			case 1:
+				
 				System.out.println("\nSELECCIONÓ LA OPCIÓN DE CREAR RUTA");
+				menuGenerarRuta(Guz);
 				break;
 			case 2:
 				System.out.println("\nSELECCIONÓ LA OPCIÓN DE CREAR VIAJE");

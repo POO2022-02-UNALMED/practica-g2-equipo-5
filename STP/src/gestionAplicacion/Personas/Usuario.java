@@ -19,13 +19,13 @@ public class Usuario extends Persona  implements Serializable{
 	private ArrayList<Viaje> viaje = new ArrayList<Viaje>();
 	private ArrayList<Mercancia> mercancia = new ArrayList<Mercancia>();
 	private ArrayList<Facturacion> facturacion = new ArrayList<Facturacion>();
-	private ArrayList<Ruta> ruta = new ArrayList<Ruta>();
+	private Ruta ruta;
 	private static ArrayList<Usuario> user = new ArrayList<Usuario>();
 
 //Usuario hereda de persona
 
 	public Usuario(String nombre, String documento, String edad, ArrayList<Viaje> viaje, ArrayList<Mercancia> mercancia,
-			ArrayList<Facturacion> facturacion, ArrayList<Ruta> ruta) {
+			ArrayList<Facturacion> facturacion, Ruta ruta) {
 		super(nombre, documento, null, edad);
 		this.viaje = viaje;
 		this.mercancia = mercancia;
@@ -72,11 +72,11 @@ public class Usuario extends Persona  implements Serializable{
 		this.facturacion = facturacion;
 	}
 
-	public ArrayList<Ruta> getRuta() {
+	public Ruta getRuta() {
 		return ruta;
 	}
 
-	public void setRuta(ArrayList<Ruta> ruta) {
+	public void setRuta(Ruta ruta) {
 		this.ruta = ruta;
 	}
 
@@ -104,9 +104,6 @@ public class Usuario extends Persona  implements Serializable{
 		this.facturacion.add(facturacion);
 	}
 
-	public void agregarRuta(Ruta ruta) {
-		this.ruta.add(ruta);
-	}
 
 	// Funcionalidad Crear Viaje
 	
@@ -267,35 +264,7 @@ public class Usuario extends Persona  implements Serializable{
 		
 	}
 	
-	/**
-	 * Método menuCiudades muestra las ciudades de operacion
-	 * y hace el llamado de todos los métodos correspondientes para presentar un menú e interactuar con el usuario
-	 */
-	public void menuCiudades() {
-		Scanner sc = new Scanner(System.in);
-		String[] ciudades = {
-				"MEDELLÍN","BOGOTÁ","BUCARAMANGA","SANTA MARTA",
-				"BARRANQUILLA","CARTAGENA","QUIBDÓ","PEREIRA",
-				"SAN JOSÉ DEL GUAVIARE","CALI"};
-		int cont = 1;
-		System.out.println("Las ciudades de operación son: ");
-		for(String i:ciudades) {
-			System.out.println(cont+". "+i);
-			cont++;
-		}
-		
-		System.out.print("\n-> Digite un número para elegir la ciudad origen: ");
-		int origen = sc.nextInt();
-		System.out.print("-> Digite un número para elegir la ciudad destino: ");
-		int destino = sc.nextInt();
-		Conexion[] c = Conexion.values();
-		ArrayList<Conexion> b = new ArrayList<Conexion>();
-		Collections.addAll(b, c);
-		ArrayList<ArrayList<Conexion>> ru = rutas(ciudades[origen-1], ciudades[destino-1], b);
-		System.out.println("----------------------Rutas disponibles----------------------");
-		recorrerRutas(ru);
-	}
-	
+
 	/**
 	 * Metodo rutas obtiene todas las rutas posibles dentro de las conexiones establecidas.
 	 * @param a. Ciudad origen.
@@ -453,6 +422,7 @@ public class Usuario extends Persona  implements Serializable{
 		double distancia = Math.round(suma("d",ruta));
 		String tiempo = formato(suma("t",ruta));
 		Ruta rutaUsuario = new Ruta(ruta,precio,distancia,tiempo);
+		this.ruta = rutaUsuario;
 		
 	}	
 	
