@@ -22,10 +22,19 @@ public class Usuario extends Persona {
 		this.facturacion = facturacion;
 		this.ruta = ruta;
 		Usuario.user.add(this);
-	
 }
-
+	
+	public Usuario(String nombre, String edad) {
+		super(nombre, null, null, edad);
+	}
+	
+	public Usuario (String nombre, String documento, String edad) {
+		super(nombre, documento, null, edad);
+		Usuario.user.add(this);
+	}
 //Getters and setters
+	
+	
 public ArrayList<Viaje> getViaje() {
 	return viaje;
 }
