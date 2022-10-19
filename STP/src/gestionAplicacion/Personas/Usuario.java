@@ -14,13 +14,14 @@ public class Usuario extends Persona {
 //Usuario hereda de persona
 	
 	
-	public Usuario(String nombre, String documento, String direccion, String edad, ArrayList<Viaje> viaje,
+	public Usuario(String nombre, String documento, String edad, ArrayList<Viaje> viaje,
 			ArrayList<Mercancia> mercancia, ArrayList<Facturacion> facturacion, ArrayList<Ruta>ruta) {
-		super(nombre, documento, direccion, edad);
+		super(nombre, documento, null, edad);
 		this.viaje = viaje;
 		this.mercancia = mercancia;
 		this.facturacion = facturacion;
 		this.ruta = ruta;
+		Usuario.user.add(this);
 	
 }
 
@@ -82,9 +83,9 @@ public void agregarFacturacion(Facturacion facturacion) {
 	this.facturacion.add(facturacion);
 }
 
-public static void user(ArrayList<Usuario> user) {
-	user.addAll(user);
-}
+
+
+
 
 /********************************************************
  * **********funcionalidad Bonificacion*****************
