@@ -15,15 +15,14 @@ public class Principal {
 				+ " |____/            |_|           |_|    ");
 		System.out.println("  SISTEMA DE TRANSPORTE PERSONALIZADO");
 		System.out.println("-------------------------------------------");
-		System.out.print("\n-> INGRESE SU NOMBRE: ");
+		System.out.print("\n-> Ingrese su nombre: ");
 		String nombre = scan.nextLine();
-		
-		System.out.println("- Bienvenido " + nombre +" - ");
 		
 		int entrada;
 		do {
 			System.out.println("\n-------------------------------------------");
-			System.out.println("- FUNCIONALIDADES -");
+			System.out.println("-> BIENVENIDO " + nombre +" <- ");
+			System.out.println("-> FUNCIONALIDADES <-");
 			System.out.println("\n1. GENERAR RUTA");
 			System.out.println("2. CREAR VIAJE");
 			System.out.println("3. ENVIAR MERCANCIA");
@@ -31,7 +30,7 @@ public class Principal {
 			System.out.println("5. GENERAR FACTURA");
 			System.out.println("6. SALIR");
 			System.out.println("-------------------------------------------");
-			System.out.print("\n-> SELECCIONE UNA OPCION: ");
+			System.out.print("\n-> Seleccione una opción: ");
 			entrada = scan.nextInt();
 			System.out.println("-------------------------------------------");
 			
