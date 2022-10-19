@@ -126,24 +126,68 @@ try{
 	
 */
 
-public Facturacion Bonificacion() {
-	
+public void Bonificacion() {
 	Scanner input = new Scanner(System.in);
 	
-	System.out.println("Usted ha seleccionado la opción Bonificaciones.\nA continuacion, por favor ingrese el nombre del usuario: ");
-	int nombreUsuario = input.nextInt();
+	//FORMA 2 DE BONIFICAR: CANTIDAD VIAJES Y MERCANCIA SALEN DE LOS DATOS TRAIDOS DE LA SERIALIZACION, por implementar
+	int cantidadViajes = this.getViaje().size();
+	int cantidadMercancia = this.getMercancia().size();
+	//Facturacion factura;
+	
+	System.out.println("Usted ha seleccionado la opción Bonificaciones. "
+			+ "\nPor favor seleccione si desea aplicar su bonificacion a: "
+			+ "\n\n1. Viaje"
+			+ "\n2. Mercancia");
+	int opcionBonificacion=input.nextInt();
+	
+	System.out.println("Ha seleccionado la opcion: "+opcionBonificacion);
+	//OPCION VIAJE
+	if(opcionBonificacion==1) {
+		//////FORMA 2 DE BONIFICAR: Si se repite 3 o mas veces un viaje en el valor serializado
+		//FORMA 1: si tiene mas de 5 viajes, se le regala el 30% para repetir el viaje
+		if (cantidadViajes>=5) {
+			Viaje viaje = new Viaje();
+			//////////viaje.crearViaje();???????
+			
+			System.out.println("El usuario cuenta con la siguiente bonificacion:"
+					+ "\nEl usuario puede repetir su ultimo viaje, en direccion: "
+					+ viaje.getcOrigen()+"-"+ viaje.getcDestino() + "\npara el cual se le otorgara un descueto del 30%."
+							+ "\nSi desea comprar el viaje con el descuendo aplicado, por favor escriba (1); de lo contrario, escriba (2)");
+			int tomaBonificacion = input.nextInt();
+			if(tomaBonificacion==1) {
+				
+				
+				//Facturacion facturacion2 = new Facturacion(null, null, 0, 0, 0, 0);
+				//facturacion2.generarFacturacion(viaje);
+			}else if (tomaBonificacion==2) {
+				System.out.println("Gracias por confiar en STP. Vuelva pronto!");
+				break;
+			}
+				
+		//OPCION MERCANCIA
+		}else if( opcionBonificacion==2){
+			if (cantidadMercancia>=5) {
+		
+				Mercancia mercancia = new Mercancia();
+			
+				System.out.println("El usuario cuenta con la siguiente bonificacion:"
+					+ "\nEl usuario puede enviar 2 productos de manera gratuita.  "//enviarMercancia con productos -2
+					+ "\nSi desea enviar los productos con el descuendo aplicado, por favor escriba (1); de lo contrario, escriba (2)");
+				int tomaBonificacion = input.nextInt();
+				if(tomaBonificacion==1) {
+					mercancia.enviarMercancia(); //-2 productos
+				
+			}else if (tomaBonificacion==2) {
+				System.out.println("Gracias por confiar en STP. Vuelva pronto!");
+				break;
+			}
+		
+	}
+		
 	//con la clave nombre de usuario, buscar en el hashMap
 	//imprimir las opciones recorriendo el las ciudades en el hashmap
-	
-	int cantidadViajes = this.getViaje().length;
-	int cantidadMercancia = this.getMercancia().length;
 
-	if (cantidadViajes>=5) {
-		System.out.println("");
-		//inputDeUsuario = 
-	}else if(cantidadMercancia>=5){
-		System.out.println("");
-	}
+	//return factura;
 }
 
 
