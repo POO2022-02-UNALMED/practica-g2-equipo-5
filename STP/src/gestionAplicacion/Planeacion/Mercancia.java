@@ -101,7 +101,6 @@ public class Mercancia {
 		
 		ArrayList<Ruta> rutas = this.getRuta();
 		mercancia.setRuta(rutas.get(-1));
-		ArrayList<Ciudad> listCiudades = ruta.listCiudades();
 		
 		Scanner scan = new Scanner(System.in);
 
@@ -162,6 +161,7 @@ public class Mercancia {
 		mercancia.setFecha(fecha);
 		
 		System.out.println("\nFelicidades, ha completado con éxito su envio.");
+		scan.close();
 		return mercancia;
 	}
 }
