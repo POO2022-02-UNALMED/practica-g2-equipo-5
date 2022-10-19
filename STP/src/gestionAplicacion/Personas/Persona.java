@@ -12,7 +12,9 @@ public abstract class Persona {
         this.direccion = direccion;
         this.edad = edad;
     }
-
+    public Persona() {
+    	super();
+    }
     
     public String getNombre() {
         return nombre;

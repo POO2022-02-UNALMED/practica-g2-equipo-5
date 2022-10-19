@@ -42,6 +42,9 @@ public class Usuario extends Persona  implements Serializable{
 		super(nombre, documento, null, edad);
 		Usuario.user.add(this);
 	}
+	public Usuario() {
+		super();
+	}
 	
 //Getters and setters
 
