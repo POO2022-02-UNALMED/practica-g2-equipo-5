@@ -4,6 +4,7 @@ import gestionAplicacion.Destinos.Ciudad;
 import gestionAplicacion.Planeacion.*;
 import gestionAplicacion.Vehiculos.VehiculoCarga;
 import gestionAplicacion.Vehiculos.VehiculoPasajeros;
+import gestionAplicacion.Destinos.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -417,8 +418,145 @@ public class Usuario extends Persona {
 		
 	}
 	
+	//metodos generar rutas
+	public String formato(double x) {
+		double num = x/60;
+		double min = x%60;
+		double horas = num - num%1;
+		
+		
+		String s = String.format(
+				"%d horas y %d minutos",
+				Math.round(horas),Math.round(min));
+		return s;
+		
+	}
+	public void menuCiudades() {
+		String[] ciudades = {
+				"MEDELLÍN","BOGOTÁ","BUCARAMANGA","SANTA MARTA",
+				"BARRANQUILLA","CARTAGENA","QUIBDÓ","PEREIRA",
+				"SAN JOSÉ DEL GUAVIARE","CALI"};
+		int cont = 1;
+		System.out.println("Las ciudades de operación son: ");
+		for(String i:ciudades) {
+			System.out.println(cont+i);
+			cont++;
+		}
+		
+		
+		
+	}
+	public  ArrayList<ArrayList<Conexion>> rutas(String a,String b,ArrayList<Conexion> todas){
+		ArrayList<ArrayList<Conexion>> res = new ArrayList<ArrayList<Conexion>>();
+		ArrayList<Conexion> ruta  = new ArrayList<Conexion>();
+		ArrayList<Conexion> aux  = new ArrayList<Conexion>();
+		todas.stream().filter(
+				x->x.ciudadA==a
+				)
+				.forEach(
+						item->
+							aux.add(item)
+				);
+		
+		for(Conexion i:aux) {
+			ArrayList<Conexion> cop  = (ArrayList<Conexion>)ruta.clone();
+			cop.add(i);
+			rutas(i.ciudadB,b,cop,res,todas);
+		}
+		return res;
+	}
 	
 	
+	
+	
+	void rutas(String act,String b, ArrayList<Conexion> ruta,ArrayList<ArrayList<Conexion>> res,ArrayList<Conexion> todas){
+		if(act==b) {
+			res.add(ruta);
+		}
+		else {
+			ArrayList<Conexion> aux  = new ArrayList<Conexion>();
+			todas.stream().filter(
+					x->x.ciudadA==act
+					)
+					.forEach(
+							item->
+								aux.add(item)
+					);
+			
+			for(Conexion i:aux) {
+				ArrayList<Conexion> cop  = (ArrayList<Conexion>)ruta.clone();
+				if(!cop.contains(i)) {
+					cop.add(i);
+					rutas(i.ciudadB,b,cop,res,todas);
+				}
+				
+			}
+		}
+		
+	}
+	
+	public double suma(String c,ArrayList<Conexion> ruta) {
+		double suma = 0;
+		switch (c){
+	        case "d":{
+	        	suma = ruta.stream()
+	        		      .mapToDouble(i->i.distancia)
+	        		      .sum();
+	            break;
+	        }
+	
+	        case "t":{
+	        	suma = ruta.stream()
+	        		      .mapToDouble(i->i.tiempo)
+	        		      .sum();
+	            break;
+	        }
+	        case "p":{
+	        	suma = ruta.stream()
+	        		      .mapToDouble(i->i.precio)
+	        		      .sum();
+	            break;
+	        }
+		}
+		return suma;
+	}
+	
+	public String ciudadesRuta(ArrayList<Conexion> ruta){
+		String res = "";
+		res+=ruta.get(0).ciudadA;
+		for(Conexion i:ruta) {
+			res+="-"+i.ciudadB;
+		}
+		return res;
+		
+	}
+	
+	public void pintar(int r,ArrayList<Conexion> ruta) {
+		
+		String s = String.format(
+				"%d. Las ciudades a recorrer son:\n%s\n"
+				+ "Detalles del recorrido:\n"
+				+ "Precio: $%d\n"
+				+ "Distancia: %d km\n"
+				+ "Tiempo: %s\n"
+				+ "----------------\n\n",
+				r,
+				ciudadesRuta(ruta),
+				Math.round(suma("p",ruta)),
+				Math.round(suma("d",ruta)),
+				formato(suma("t",ruta))
+				);
+		System.out.println(s);
+	}
+	
+	public void recorrerRutas(ArrayList<ArrayList<Conexion>> rutas) {
+		int en = 1;
+		for(ArrayList<Conexion> i:rutas) {
+			pintar(en,i);
+			en++;
+		}
+		
+	}
 
 	
 	
