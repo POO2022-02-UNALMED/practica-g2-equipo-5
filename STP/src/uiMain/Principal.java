@@ -5,6 +5,7 @@ import java.util.Scanner;
 import gestionAplicacion.Personas.*;
 import gestionAplicacion.Vehiculos.*;
 import gestionAplicacion.Planeacion.*;
+import baseDatos.Deserializador;
 import baseDatos.Serializador;
 
 public class Principal {
@@ -206,7 +207,10 @@ public class Principal {
 		VehiculoCarga T = new VehiculoCarga("KENWORTH T800", 50000, 2012, "AUX-01X", 30000);
 
 		/* Usuario */
-		Usuario Guz = new Usuario("Jaime Alberto Guzmán", "123456789", "20");
+		String ub = System.getProperty("user.dir") + "/src/baseDatos/temp/" + "Guzman.txt";
+		
+		Usuario Guz = Deserializador.deserializador(null)
+		Guz = new Usuario("Jaime Alberto Guzmán", "123456789", "20");
 		Guz.agregarMercancia(new Mercancia());
 		Guz.agregarViaje(new Viaje());
 		Guz.agregarFacturacion(new Facturacion());
