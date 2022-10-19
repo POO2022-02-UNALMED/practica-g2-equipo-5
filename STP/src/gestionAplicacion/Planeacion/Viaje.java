@@ -8,10 +8,10 @@ import java.util.ArrayList;
 public class Viaje {
 	private Ciudad cDestino;
 	private Ciudad cOrigen;
-	private ArrayList<Conexion> ruta;
+	private ArrayList<Conexion> ruta = new ArrayList<Conexion> ();
 	private int nPasajeros=0;
-	private ArrayList<Usuario> pasajeros;
-	private ArrayList<Conductor> conductor;
+	private ArrayList<Usuario> pasajeros = new ArrayList<Usuario>();
+	private ArrayList<Conductor> conductor = new ArrayList<Conductor>();
 	private String fecha;
 	
 //Getters and setters
