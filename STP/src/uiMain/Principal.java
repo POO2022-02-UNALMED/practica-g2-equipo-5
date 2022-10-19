@@ -1,6 +1,9 @@
 package uiMain;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import gestionAplicacion.Personas.Usuario;
 
 public class Principal {
 
@@ -15,13 +18,25 @@ public class Principal {
 				+ " |____/            |_|           |_|    ");
 		System.out.println("  SISTEMA DE TRANSPORTE PERSONALIZADO");
 		System.out.println("-------------------------------------------");
-		System.out.print("\n-> Ingrese su nombre: ");
-		String nombre = scan.nextLine();
+		
+		System.out.println("LISTA DE USUARIOS");
+		ArrayList<Usuario> usuarios = Usuario.getUsuarios();
+		int indU = 0;
+		for(Usuario usuario: usuarios) {
+			System.out.println(indU + ". " + usuario.getNombre() + "\n  C.C " + usuario.getDocumento()
+			+ "\n  " + usuario.getEdad() + " años de edad");
+			indU++;
+		}
+		
+		System.out.print("-> Seleccione un usuario de la lista anterior: ");
+		int indEntrada = scan.nextInt();
+		Usuario pUsuario = usuarios.get(indEntrada);
+		
 		
 		int entrada;
 		do {
 			System.out.println("\n-------------------------------------------");
-			System.out.println("-> BIENVENIDO " + nombre +" <- ");
+			System.out.println("-> BIENVENIDO " + pUsuario.getNombre() +" <- ");
 			System.out.println("-> FUNCIONALIDADES <-");
 			System.out.println("\n1. GENERAR RUTA");
 			System.out.println("2. CREAR VIAJE");
