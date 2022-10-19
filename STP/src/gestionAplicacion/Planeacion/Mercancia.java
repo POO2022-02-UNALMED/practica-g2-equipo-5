@@ -87,12 +87,20 @@ public class Mercancia {
 	public void agregarProducto(Producto producto) {
 		productos.add(producto);
 	}
+	
+	public void agregarUsuario(Usuario usuario) {
+		this.usuario = usuario;
+		usuario.agregarMercancia(this);
+	}
 
 	/* Funcionalidad */
-	public Mercancia enviarMercancia(Ruta ruta){
+	public Mercancia enviarMercancia(){
 		Mercancia mercancia = new Mercancia();
 		
-		mercancia.setRuta(ruta);
+		mercancia.agregarUsuario(this);
+		
+		ArrayList<Ruta> rutas = this.getRuta();
+		mercancia.setRuta(rutas.get(-1));
 		ArrayList<Ciudad> listCiudades = ruta.listCiudades();
 		
 		Scanner scan = new Scanner(System.in);
@@ -114,17 +122,6 @@ public class Mercancia {
 			pTotal += peso;
 			P1.setPeso(peso);
 			
-			System.out.println("Ahora de la siguiente lista seleccione la ciudad de destino");
-			int ind = 0;
-			for(Ciudad ciudad: listCiudades) {
-				System.out.println(ind+". "+ ciudad.getNombre()+", "+ciudad.getDepartamento());
-				ind++;
-			}
-			System.out.print("Seleccione el número de la ciudad: ");
-			int nCiudad = scan.nextInt();
-			
-			P1.setcDestino(listCiudades.get(nCiudad));
-			
 			mercancia.agregarProducto(P1);
 		}
 		
@@ -145,7 +142,7 @@ public class Mercancia {
 		
 		System.out.println();
 		System.out.println("Seleccione el conductor que desea de la siguiente lista: ");
-		ArrayList<Conductor> conductores = Conductor.validarConductor();
+		ArrayList<Conductor> conductores = Conductor.getConductores();
 		int indC = 0;
 		for(Conductor cond: conductores) {
 			System.out.println(indC + ". " + cond.getNombre() + ", " + cond.getEdad() +"años. "
