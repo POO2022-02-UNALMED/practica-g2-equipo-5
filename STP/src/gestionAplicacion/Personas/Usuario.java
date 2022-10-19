@@ -1,5 +1,6 @@
 package gestionAplicacion.Personas;
 import gestionAplicacion.Planeacion.Mercancia;
+import gestionAplicacion.Planeacion.Viaje;
 import gestionAplicacion.Planeacion.Facturacion;
 
 import java.util.ArrayList;
@@ -10,12 +11,14 @@ public class Usuario extends Persona {
 	private ArrayList<Facturacion> facturacion;
 	
 //Usuario hereda de persona
-public Usuario(String nombre, String documento, String direccion, String edad) {
-	super();
-	this.nombre=nombre;
-	this.documento=documento;
-	this.direccion=direccion;
-	this.edad=edad;
+	
+	
+	public Usuario(String nombre, String documento, String direccion, String edad, ArrayList<Viaje> viaje,
+			ArrayList<Mercancia> mercancia, ArrayList<Facturacion> facturacion) {
+		super(nombre, documento, direccion, edad);
+		this.viaje = viaje;
+		this.mercancia = mercancia;
+		this.facturacion = facturacion;
 }
 
 //Getters and setters
@@ -44,9 +47,19 @@ public void setFacturacion(ArrayList<Facturacion> facturacion) {
 }
 
 //Methods
+
+public void agregarViaje (Viaje viaje ) {
+	this.viaje.add(viaje);
+	
+}
 public void agregarMercancia(Mercancia mercancia){
 	this.mercancia.add(mercancia);
-	mercancia.setUsuario(this);
+	
+}
+
+
+public void agregarFacturacion(Facturacion facturacion) {
+	this.facturacion.add(facturacion);
 }
 
 
