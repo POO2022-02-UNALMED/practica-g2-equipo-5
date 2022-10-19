@@ -1,7 +1,5 @@
 package gestionAplicacion.Personas;
-import gestionAplicacion.Planeacion.Mercancia;
-import gestionAplicacion.Planeacion.Viaje;
-import gestionAplicacion.Planeacion.Facturacion;
+import gestionAplicacion.Planeacion.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -10,16 +8,20 @@ public class Usuario extends Persona {
 	private ArrayList<Viaje> viaje;
 	private ArrayList<Mercancia> mercancia;
 	private ArrayList<Facturacion> facturacion;
+	private ArrayList<Ruta> ruta;
+	private static ArrayList<Usuario> user;
 	
 //Usuario hereda de persona
 	
 	
 	public Usuario(String nombre, String documento, String direccion, String edad, ArrayList<Viaje> viaje,
-			ArrayList<Mercancia> mercancia, ArrayList<Facturacion> facturacion) {
+			ArrayList<Mercancia> mercancia, ArrayList<Facturacion> facturacion, ArrayList<Ruta>ruta) {
 		super(nombre, documento, direccion, edad);
 		this.viaje = viaje;
 		this.mercancia = mercancia;
 		this.facturacion = facturacion;
+		this.ruta = ruta;
+	
 }
 
 //Getters and setters
@@ -47,6 +49,23 @@ public void setFacturacion(ArrayList<Facturacion> facturacion) {
 	this.facturacion = facturacion;
 }
 
+
+public ArrayList<Ruta> getRuta() {
+	return ruta;
+}
+
+public void setRuta(ArrayList<Ruta> ruta) {
+	this.ruta = ruta;
+}
+
+public static ArrayList<Usuario> getUser() {
+	return user;
+}
+
+public static void setUser(ArrayList<Usuario> user) {
+	Usuario.user = user;
+}
+
 //Methods
 
 public void agregarViaje (Viaje viaje ) {
@@ -61,6 +80,10 @@ public void agregarMercancia(Mercancia mercancia){
 
 public void agregarFacturacion(Facturacion facturacion) {
 	this.facturacion.add(facturacion);
+}
+
+public static void user(ArrayList<Usuario> user) {
+	user.addAll(user);
 }
 
 /********************************************************
@@ -122,6 +145,8 @@ public Facturacion Bonificacion() {
 		System.out.println("");
 	}
 }
+
+
 
 
 
