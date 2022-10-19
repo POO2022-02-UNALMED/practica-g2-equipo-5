@@ -95,6 +95,12 @@ public class Usuario extends Persona {
 		this.ruta.add(ruta);
 	}
 
+	
+	
+	
+public Facturacion generarFacturaViaje() {
+	
+}
 	/* Funcionalidad Enviar Mercancia*/
 	
 	public Mercancia enviarMercancia() {
