@@ -2,12 +2,8 @@ package uiMain;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import gestionAplicacion.Destinos.Ciudad;
-import gestionAplicacion.Personas.Conductor;
-import gestionAplicacion.Personas.Usuario;
-import gestionAplicacion.Vehiculos.VehiculoCarga;
-import gestionAplicacion.Vehiculos.VehiculoPasajeros;
+import gestionAplicacion.Personas.*;
+import gestionAplicacion.Vehiculos.*;
 import gestionAplicacion.Planeacion.*;
 
 public class Principal {
@@ -177,22 +173,12 @@ public class Principal {
 
 	private static void salirDelSistema(Usuario usuario) {
 		System.out.println("Muchas gracias por usar STP, vuelva pronto");
-		Serializador.serializar(usuario);
+		//Serializador.serializar(usuario);
 		System.exit(0);
 	}
 
 	public static void main(String[] args) {
-		Ciudad Med = new Ciudad("MEDELLÍN", "ANTIOQUIA");
-		Ciudad Bog = new Ciudad("BOGOTÁ", "CUNDINAMARCA");
-		Ciudad Bar = new Ciudad("BARRANQUILLA", "ATLÁNTICO");
-		Ciudad Car = new Ciudad("CARTAGENA", "BOLIVAR");
-		Ciudad Per = new Ciudad("PEREIRA", "RISARALDA");
-		Ciudad Cal = new Ciudad("CALI", "VALLE DEL CAUCA");
-		Ciudad Buc = new Ciudad("BUCARAMANGA", "SANTANDER");
-		Ciudad Jos = new Ciudad("SAN JOSÉ DEL GUAVIARE", "GUAVIARE");
-		Ciudad Qui = new Ciudad("QUIBDÓ", "CHOCÓ");
-		Ciudad Mar = new Ciudad("SANTA MARTA", "MAGDALENA");
-
+		
 		/* Conductores */
 		Conductor C1 = new Conductor("Angel", "10011020", "38", 15, 40000);
 		Conductor C2 = new Conductor("Ana", "1015215", "40", 20, 50000);
