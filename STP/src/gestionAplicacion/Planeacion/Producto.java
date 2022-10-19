@@ -1,5 +1,4 @@
 package gestionAplicacion.Planeacion;
-import gestionAplicacion.Destinos.*;
 
 public class Producto {
 	private String tipo;
