@@ -97,10 +97,40 @@ public class Usuario extends Persona {
 
 	
 /**************************************************
- **************FUNCIONALIDAD FATURACION************
+ *************FUNCIONALIDAD FATURACION*************
  **************************************************/
 	
-public Facturacion generarFacturaViaje() {
+public void generarFacturacion(Viaje viaje) {
+	
+	String n =this.getNombre();
+	String d = this.getDocumento();
+	ArrayList<Viaje> via = getViaje();	
+	ArrayList<Facturacion> factu = getFacturacion();
+	ArrayList<Ruta> ru = getRuta();
+	
+	
+	System.out.print("-------------------------------------------\n"
+                	+"-----------FACTURA DE VENTA VIAJE----------\n"
+                 	+"-------------------------------------------\n"
+                 	+ "Nombre: "+n
+                 	+ "Documento: "+d
+                 	+ "");
+	System.out.print("");
+
+	
+	
+	
+}
+
+public Facturacion generarFacturacion(Mercancia mercancia) {
+	
+	String n =this.getNombre();
+	String d = this.getDocumento();
+	ArrayList<Viaje> via = getViaje();	
+	ArrayList<Facturacion> factu = getFacturacion();
+	ArrayList<Ruta> ru = getRuta();
+	
+	
 	
 }
 
