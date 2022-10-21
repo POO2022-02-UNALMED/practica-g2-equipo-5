@@ -351,16 +351,18 @@ public class Usuario extends Persona {
 	
 	/**************FUNCIONALIDAD FACTURACION*****************/
 	
+	
+	//Todavia está malo unu 
 	public Facturacion generarFacturacion(Viaje viaje) {
 		Viaje instViaje = new Viaje();
+		Facturacion insFacturacion = new Facturacion();
 		
 		String nom = this.getNombre();
 		String doc = this.getDocumento();
 		String fech = instViaje.getFecha();
 		Ciudad ori = instViaje.getcOrigen();
 		Ciudad dest = instViaje.getcDestino();
-		ArrayList<Viaje> via = this.getViaje();
-		ArrayList<Facturacion> factu = this.getFacturacion();
+		double pre = insFacturacion.getPrecio();
 		
 		System.out.println("-----------------------------------------------\n"
 				+ "-------------FACTURA DE VENTA VIAJE-------------\n"
@@ -371,12 +373,12 @@ public class Usuario extends Persona {
 		System.out.println("Origen: "+ori);
 		System.out.println("Destino: "+dest);
 		System.out.println("------------------------------------------------");
-		System.out.println("TOTAL  PAGAR: "+factu);
+		System.out.println("TOTAL A PAGAR: "+pre);
 		System.out.println("------------------------------------------------\n"
 				+ "              Los atendió %($)/#($              \n"
 				+ "------------------------------------------------\n"
 				+ "************************************************\n"
-				+ "      GRACIAS POR PREFERIR NUESTRO SERVICIO     \n"
+				+ "             GRACIAS POR PREFERIRNOS            \n"
 				+ "************************************************\n");
 		
 		
@@ -384,14 +386,36 @@ public class Usuario extends Persona {
 		
 		}
 	
-	public Facturacion generarFacturacionMercancia() {
+	public Facturacion generarFacturacion(Mercancia mercancia) {
+		Viaje inViaje = new Viaje();
+		Facturacion inFact = new Facturacion();
+		
+		
 		String no = this.getNombre();
 		String Do = this.getDocumento();
-		Ciudad or = this.getcOrigen();
-		Ciudad de = this.getcDestino();
-		double con = this.getPrecio();
-		double rut = this.getRuta();
-		ArrayList
+		Ciudad or = inViaje.getcOrigen();
+		Ciudad de = inViaje.getcDestino();
+		ArrayList <Producto> pro = inFact.getProducto();
+		
+		
+		System.out.println("-------------------------------------------------\n"
+				+ "-----------FACTURA DE VENTA MERCANCIA------------\n"
+				+ "-------------------------------------------------\n");
+		System.out.println("Nombre: "+no);
+		System.out.println("Documento: "+Do);
+		System.out.println("Origen: "+or);
+		System.out.println("Destino: "+de);
+		System.out.println("Productos: ");
+		System.out.println("k");
+		System.out.println("-------------------------------------------------");
+		System.out.println("TOTAL A PAGAR: ");
+		System.out.println("-------------------------------------------------\n"
+				+ "            Los atendió $(#(/=(=(=()/            \n"
+				+ "-------------------------------------------------\n"
+				+ "*************************************************\n"
+				+ "              GRACIAS POR PREFERIRNOS            \n"
+				+ "*************************************************\n");
+		
 	}
 	
 	
