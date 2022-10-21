@@ -312,13 +312,13 @@ public class Usuario extends Persona {
 			if (opcionBonificacion == 1) { // OPCION VIAJE
 				System.out.println("\nA continuacion por favor cree el nuevo viaje con reduccion del 30% en el precio");
 				Viaje viajeBonificado = crearViaje();
-				
 				generarFacturacion(viajeBonificado);
+				
 				
 			
 			} else if (opcionBonificacion == 2) { //OPCION BONIFICACION
 				System.out.println("\nA continuacion por favor genere el envio de mercancia con reduccion del 30% en el costo del vehiculo");
-				Mercancia mercanciaBonificado = new Mercancia();
+				Mercancia mercanciaBonificado = enviarMercancia();
 				generarFacturacion(mercanciaBonificado);
 			}
 			
