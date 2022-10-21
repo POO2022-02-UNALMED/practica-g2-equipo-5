@@ -1,1 +1,0 @@
-En este package vienen las clases VehiculoCarga, VehiculoPasajeros y la de enumeracion

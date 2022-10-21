@@ -1,1 +1,0 @@
-En este package vienen las clases Persona, Usuario y Conductor

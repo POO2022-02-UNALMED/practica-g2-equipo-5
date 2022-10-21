@@ -3,8 +3,8 @@ import gestionAplicacion.Personas.*;
 import java.util.ArrayList;
 
 public class Facturacion{
-    private ArrayList<Usuario> usuario = new ArrayList<Usuario>();
-    private ArrayList<Producto> productos = new ArrayList<Producto>();
+    private ArrayList<Usuario> usuario;
+    private ArrayList<Producto> productos;
     private double distancia;
     private double peso;
     private double precio;
@@ -19,7 +19,7 @@ public class Facturacion{
         this.tiempo = tiempo;
     }
 
-    public Facturacion generarFacturacion(Viaje viaje){
+    public Facturacion generarFacturacion(Viaje viaje, Mercancia mercancia){
         
         Facturacion x = null;
         int valorTotal = 0;
@@ -37,7 +37,11 @@ public class Facturacion{
     }
     
     
-
+/*  public Facturacion generarFacturacion(Mercancia mercancia){
+        Mercancia x = null;
+        return x
+    }
+*/
     
     
     //GET Y SET
