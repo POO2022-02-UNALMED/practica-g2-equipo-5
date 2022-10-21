@@ -1,5 +1,6 @@
 package gestionAplicacion.Personas;
 
+import gestionAplicacion.Destinos.Ciudad;
 import gestionAplicacion.Planeacion.*;
 import gestionAplicacion.Vehiculos.VehiculoCarga;
 
@@ -258,4 +259,56 @@ public class Usuario extends Persona {
 			}
 		}
 	}
+	
+	/**************FUNCIONALIDAD FACTURACION*****************/
+	
+	public Facturacion generarFacturacion(Viaje viaje) {
+		Viaje instViaje = new Viaje();
+		
+		String nom = this.getNombre();
+		String doc = this.getDocumento();
+		String fech = instViaje.getFecha();
+		Ciudad ori = instViaje.getcOrigen();
+		Ciudad dest = instViaje.getcDestino();
+		ArrayList<Viaje> via = this.getViaje();
+		ArrayList<Facturacion> factu = this.getFacturacion();
+		
+		System.out.println("-----------------------------------------------\n"
+				+ "-------------FACTURA DE VENTA VIAJE-------------\n"
+				+ "------------------------------------------------\n");
+		System.out.println("Nombre: "+nom);
+		System.out.println("Documento: "+doc);
+		System.out.println("Fecha: "+fech);
+		System.out.println("Origen: "+ori);
+		System.out.println("Destino: "+dest);
+		System.out.println("------------------------------------------------");
+		System.out.println("TOTAL  PAGAR: "+factu);
+		System.out.println("------------------------------------------------\n"
+				+ "              Los atendió %($)/#($              \n"
+				+ "------------------------------------------------\n"
+				+ "************************************************\n"
+				+ "      GRACIAS POR PREFERIR NUESTRO SERVICIO     \n"
+				+ "************************************************\n");
+		
+		
+		
+		
+		}
+	
+	public Facturacion generarFacturacionMercancia() {
+		String no = this.getNombre();
+		String Do = this.getDocumento();
+		Ciudad or = this.getcOrigen();
+		Ciudad de = this.getcDestino();
+		double con = this.getPrecio();
+		double rut = this.getRuta();
+		ArrayList
+	}
+	
+	
+	
+	
+	
+	
+	
 }
