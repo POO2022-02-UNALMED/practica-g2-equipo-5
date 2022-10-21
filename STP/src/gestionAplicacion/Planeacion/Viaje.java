@@ -12,10 +12,15 @@ public class Viaje {
 	private Ciudad cDestino;
 	private Ciudad cOrigen;
 	private Ruta ruta;
-	private int nPasajeros = 0;
+	private int nPasajeros = 1;
 	private ArrayList<Usuario> pasajeros;
 	private ArrayList<Conductor> conductor;
 	private VehiculoPasajeros vehiculo;
+	
+//	private ArrayList<Conexion> ruta = new ArrayList<Conexion> ();
+//	private int nPasajeros=0;
+//	private ArrayList<Usuario> pasajeros = new ArrayList<Usuario>();
+//	private ArrayList<Conductor> conductor = new ArrayList<Conductor>();
 	private String fecha;
 
 //Getters and setters
@@ -88,35 +93,30 @@ public class Viaje {
 		Viaje viaje = new Viaje();
 		//falta lo de la ruta 
 		Scanner scan = new Scanner(System.in);
-		System.out.println("Ingrese numero de pasajeros");
+		System.out.print("-> Ingrese numero de pasajeros: ");
 		nPasajeros = scan.nextInt();
 
 		for (int i = 0; i < nPasajeros; i++) {
 			String nombre;
-			String documento;
-			String direccion;
 			String edad;
-			System.out.println("Ingrese nombre de acompañante");
+			System.out.print("-> Ingrese nombre de acompañante: ");
 			nombre = scan.next();
-			System.out.println("Ingrese documento de la persona");
-			documento = scan.next();
-			System.out.println("Ingrese direccion de la persona");
-			direccion = scan.next();
-			System.out.println("Ingrese edad de la persona");
+			System.out.print("-> Ingrese edad de la persona: ");
 			edad = scan.next();
-			Usuario pasajero = new Usuario(nombre, documento, direccion, edad, null, null, null);
-			pasajeros.add(pasajero);
+			Usuario pasajero = new Usuario(nombre, edad);
+			this.pasajeros.add(pasajero);
+			nPasajeros++;
 
 		}
 		
 		Integer numConductores;
-		if (viaje.ruta.getDistancia() >= 250) {
+		if (viaje.ruta.getDistancia() >= 1000) {
 			numConductores = 2;
 		} else {
 			numConductores = 1;
 		}
 		
-		System.out.println("Ahora, se mostrarán los vehiculos que pueden transportar esta cantidad de pasajeros");
+		System.out.println("Ahora, se mostrarán los vehiculos que pueden transportar esta cantidad de pasajeros ");
 
 		ArrayList<VehiculoPasajeros> vehiculosPosibles = VehiculoPasajeros.validarCapacidad(numConductores, nPasajeros);
 		int indVehiculo = 0;
@@ -124,7 +124,7 @@ public class Viaje {
 			System.out.println(indVehiculo + ". " + vehiculo.getMarca() + " " + vehiculo.getModelo());
 			indVehiculo++;
 		}
-		System.out.print("De la lista anterior, seleccione un vehiculo: ");
+		System.out.print("-> De la lista anterior, seleccione un vehiculo: ");
 		int vSeleccionado = scan.nextInt();
 		VehiculoPasajeros vSel = vehiculosPosibles.get(vSeleccionado);
 		viaje.setVehiculo(vSel);
@@ -139,19 +139,19 @@ public class Viaje {
 				indC++;
 			}
 
-			System.out.print("Ingrese el número del primer conductor que seleccionó: ");
+			System.out.print("-> Ingrese el número del primer conductor que seleccionó: ");
 			int indConductor1 = scan.nextInt();
 			Conductor condSeleccionado1 = conductores.get(indConductor1);
 			condSeleccionado1.agregarVehiculo(vSel);
 			viaje.conductor.add(condSeleccionado1);
 			
-			System.out.print("Ingrese el número del segundo conductor que seleccionó: ");
+			System.out.print("-> Ingrese el número del segundo conductor que seleccionó: ");
 			int indConductor2 = scan.nextInt();
 			Conductor condSeleccionado2 = conductores.get(indConductor2);
 			condSeleccionado2.agregarVehiculo(vSel);
 			viaje.conductor.add(condSeleccionado2);
 		} else {
-			System.out.println("Seleccione los conductores que desea de la siguiente lista: ");
+			System.out.println("Seleccione el conductores que desea de la siguiente lista: ");
 			ArrayList<Conductor> conductores = Conductor.getConductores();
 			int indC = 0;
 			for (Conductor cond : conductores) {
@@ -160,19 +160,19 @@ public class Viaje {
 				indC++;
 			}
 			
-			System.out.println("Escoja conductor");
+			System.out.println("-> Escoja conductor");
 			int indConductor = scan.nextInt();
 			Conductor condSeleccionado = conductores.get(indConductor);
 			condSeleccionado.agregarVehiculo(vSel);
 			viaje.conductor.add(condSeleccionado);
 			
-			System.out.print("Por último, digite la fecha que desea realiza el envio (dd/mm/aaaa): ");
+			System.out.print("Por último, digite la fecha que desea realiza el viaje (dd/mm/aaaa): ");
 			String fecha = scan.nextLine();
 			viaje.setFecha(fecha);
 			
 			System.out.println("\nFelicidades, ha completado La creacion de su Viaje, que lo disfrute");
 		}
-
+		scan.close();
 		return viaje;
 	}
 
