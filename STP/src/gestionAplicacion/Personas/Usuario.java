@@ -333,8 +333,8 @@ public class Usuario extends Persona {
 	public Facturacion generarFacturacion(Viaje viaje) {
 		
 		
-		/////////////////////////////////////////////////
-		//////FACTURA PARA BONIFICACION DE VIAJE (HOLI ANA):
+		///////////////////////////////////////////////////
+		//////FACTURA PARA BONIFICACION DE VIAJE //////////
 		///////////////////////////////////////////////////
 		if (viaje.esBonificacion()) {
 			
@@ -376,8 +376,8 @@ public class Usuario extends Persona {
 	
 	public Facturacion generarFacturacion(Mercancia mercancia) {
 		
-		/////////////////////////////////////////////////
-		//////FACTURA PARA BONIFICACION DE MERCANCIA (HOLI ANA):
+		///////////////////////////////////////////////////
+		//////FACTURA PARA BONIFICACION DE MERCANCIA //////
 		///////////////////////////////////////////////////
 		if (mercancia.esBonificacion()) {
 			
@@ -388,14 +388,13 @@ public class Usuario extends Persona {
 		
 		
 		Viaje inViaje = new Viaje();
-		Facturacion inFact = new Facturacion();
 		
 		
 		String no = this.getNombre();
 		String Do = this.getDocumento();
 		Ciudad or = inViaje.getcOrigen();
 		Ciudad de = inViaje.getcDestino();
-		ArrayList <Producto> pro = inFact.getProducto();
+		
 		
 		
 		System.out.println("-------------------------------------------------\n"
@@ -406,7 +405,8 @@ public class Usuario extends Persona {
 		System.out.println("Origen: "+or);
 		System.out.println("Destino: "+de);
 		System.out.println("Productos: ");
-		System.out.println("k");
+		System.out.println("Peso: ");
+		System.out.println("Conductor: ");
 		System.out.println("-------------------------------------------------");
 		System.out.println("TOTAL A PAGAR: ");
 		System.out.println("-------------------------------------------------\n"
