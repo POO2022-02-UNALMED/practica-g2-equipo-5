@@ -294,7 +294,7 @@ public class Usuario extends Persona {
 		System.out.println("Usted ha seleccionado la opción Bonificaciones, la cual consta de lo siguiente: "
 				+ "\nCada que el usuario realice 5 viajes o 5 envios de mercancia, tendra la opcion de obtener un descuento "
 				+ "del 30% en su siguiente viaje o un descuento en el precio del conductor para su siguiente envio de mercancia"
-				+ " o envio de mercancia. En este momento, el usuario ");
+				+ ". En este momento, el usuario ");
 		if (cantidadViajes%5==0 || cantidadMercancia%5==0) {
 			System.out.println("puede obtener la bonificacion.");
 		}else {
@@ -376,7 +376,7 @@ public class Usuario extends Persona {
 	public Facturacion generarFacturacion(Mercancia mercancia) {
 		
 		/////////////////////////////////////////////////
-		//////FACTURA PARA BONIFICACION DE VIAJE (HOLI ANA):
+		//////FACTURA PARA BONIFICACION DE MERCANCIA (HOLI ANA):
 		///////////////////////////////////////////////////
 		if (mercancia.esBonificacion()) {
 			
