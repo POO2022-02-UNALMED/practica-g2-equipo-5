@@ -286,66 +286,42 @@ public class Usuario extends Persona {
 
 	public void Bonificacion() {
 		Scanner input = new Scanner(System.in);
-
-		// FORMA 2 DE BONIFICAR: CANTIDAD VIAJES Y MERCANCIA SALEN DE LOS DATOS TRAIDOS
-		// DE LA SERIALIZACION, por implementar
+		//Facturacion bonificacion;
+		
 		int cantidadViajes = this.getViaje().size();
 		int cantidadMercancia = this.getMercancia().size();
-		// Facturacion factura;
 
-		System.out.println("Usted ha seleccionado la opción Bonificaciones. "
-				+ "\nPor favor seleccione si desea aplicar su bonificacion a: " + "\n\n1. Viaje" + "\n2. Mercancia");
-		int opcionBonificacion = input.nextInt();
-
-		System.out.println("Ha seleccionado la opcion: " + opcionBonificacion);
-		// OPCION VIAJE
-		if (opcionBonificacion == 1) {
-			////// FORMA 2 DE BONIFICAR: Si se repite 3 o mas veces un viaje en el valor
-			////// serializado
-			// FORMA 1: si tiene mas de 5 viajes, se le regala el 30% para repetir el viaje
-			if (cantidadViajes >= 5) {
-				Viaje viaje = new Viaje();
-				////////// viaje.crearViaje();???????
-
-				System.out.println("El usuario cuenta con la siguiente bonificacion:"
-						+ "\nEl usuario puede repetir su ultimo viaje, en direccion: " + viaje.getcOrigen() + "-"
-						+ viaje.getcDestino() + "\npara el cual se le otorgara un descueto del 30%."
-						+ "\nSi desea comprar el viaje con el descuendo aplicado, por favor escriba (1); de lo contrario, escriba (2)");
-				int tomaBonificacion = input.nextInt();
-				if (tomaBonificacion == 1) {
-
-					// Facturacion facturacion2 = new Facturacion(null, null, 0, 0, 0, 0);
-					// facturacion2.generarFacturacion(viaje);
-				} else if (tomaBonificacion == 2) {
-					System.out.println("Gracias por confiar en STP. Vuelva pronto!");
-					break;
-				}
-
-				// OPCION MERCANCIA
-			} else if (opcionBonificacion == 2) {
-				if (cantidadMercancia >= 5) {
-
-					Mercancia mercancia = new Mercancia();
-
-					System.out.println("El usuario cuenta con la siguiente bonificacion:"
-							+ "\nEl usuario puede enviar 2 productos de manera gratuita.  "// enviarMercancia con
-																							// productos -2
-							+ "\nSi desea enviar los productos con el descuendo aplicado, por favor escriba (1); de lo contrario, escriba (2)");
-					int tomaBonificacion = input.nextInt();
-					if (tomaBonificacion == 1) {
-						mercancia.enviarMercancia(); // -2 productos
-
-					} else if (tomaBonificacion == 2) {
-						System.out.println("Gracias por confiar en STP. Vuelva pronto!");
-						break;
-					}
-				}
-
-				// con la clave nombre de usuario, buscar en el hashMap
-				// imprimir las opciones recorriendo el las ciudades en el hashmap
-
-				// return factura;
+		System.out.println("Usted ha seleccionado la opción Bonificaciones, la cual consta de lo siguiente: "
+				+ "\nCada que el usuario realice 5 viajes o 5 envios de mercancia, tendra la opcion de obtener un descuento "
+				+ "del 30% en su siguiente viaje o un descuento en el precio del conductor para su siguiente envio de mercancia"
+				+ " o envio de mercancia. En este momento, el usuario ");
+		if (cantidadViajes%5==0 || cantidadMercancia%5==0) {
+			System.out.println("puede obtener la bonificacion.");
+		}else {
+			System.out.println("no puede obtener la bonificacion debido a que hasta el momento cuenta con "+cantidadViajes+" viajes, y "+cantidadMercancia+" envios de mercancia.");
+		}
+		
+		if (cantidadViajes%5==0 || cantidadMercancia%5==0) {
+			System.out.println("\n\nA continuacion, por favor seleccione si desea aplicar el descuento para un nuevo viaje o un envio de mercancia."
+					+ "\n1. Nuevo viaje."
+					+ "\n2. Envio de mercancia.");
+			int opcionBonificacion = input.nextInt();
+			
+			System.out.println("Ha seleccionado la opcion: " + opcionBonificacion +"");
+			
+			if (opcionBonificacion == 1) { // OPCION VIAJE
+				System.out.println("\nA continuacion por favor cree el nuevo viaje con reduccion del 30% en el precio");
+				Viaje viajeBonificado = crearViaje();
+				
+				generarFacturacion(viajeBonificado);
+				
+			
+			} else if (opcionBonificacion == 2) { //OPCION BONIFICACION
+				System.out.println("\nA continuacion por favor genere el envio de mercancia con reduccion del 30% en el costo del vehiculo");
+				Mercancia mercanciaBonificado = new Mercancia();
+				generarFacturacion(mercanciaBonificado);
 			}
+			
 		}
 	}
 	
@@ -354,6 +330,17 @@ public class Usuario extends Persona {
 	
 	//Todavia está malo unu 
 	public Facturacion generarFacturacion(Viaje viaje) {
+		
+		
+		/////////////////////////////////////////////////
+		//////FACTURA PARA BONIFICACION DE VIAJE (HOLI ANA):
+		///////////////////////////////////////////////////
+		if (viaje.esBonificacion()) {
+			
+		}
+			
+			
+		//////////////////////////////////////////////////
 		Viaje instViaje = new Viaje();
 		Facturacion insFacturacion = new Facturacion();
 		
@@ -387,6 +374,18 @@ public class Usuario extends Persona {
 		}
 	
 	public Facturacion generarFacturacion(Mercancia mercancia) {
+		
+		/////////////////////////////////////////////////
+		//////FACTURA PARA BONIFICACION DE VIAJE (HOLI ANA):
+		///////////////////////////////////////////////////
+		if (mercancia.esBonificacion()) {
+			
+		}else {};
+
+
+		//////////////////////////////////////////////////
+		
+		
 		Viaje inViaje = new Viaje();
 		Facturacion inFact = new Facturacion();
 		
