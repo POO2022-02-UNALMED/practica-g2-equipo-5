@@ -14,6 +14,8 @@ public class Mercancia {
 	private Conductor conductor;
 	private Facturacion factura;
 	private String fecha;
+	private boolean isBonificacion;
+	
 
 	public Mercancia(Usuario usuario, Ruta ruta, ArrayList<Producto> productos, VehiculoCarga vehiculo,
 					 Conductor conductor, String fecha) {
@@ -26,6 +28,14 @@ public class Mercancia {
 		this.fecha = fecha;
 	}
 	public Mercancia() {
+	}
+	
+
+	public boolean getIsBonificacion() {
+		return isBonificacion;
+	}
+	public void setIsBonificacion(boolean isBonificacion) {
+		this.isBonificacion= isBonificacion;
 	}
 
 	public Usuario getUsuario() {

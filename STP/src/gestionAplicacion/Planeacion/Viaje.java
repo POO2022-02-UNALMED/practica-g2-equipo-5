@@ -16,9 +16,17 @@ public class Viaje {
 	private ArrayList<Conductor> conductor = new ArrayList<Conductor>();
 	private String fecha;
 	private VehiculoPasajeros vehiculo;
+	private boolean isBonificacion;
 	
 
 	//Getters and setters
+	public boolean getIsBonificacion() {
+		return isBonificacion;
+	}
+	public void setIsBonificacion(boolean isBonificacion) {
+		this.isBonificacion= isBonificacion;
+	}
+	
 	public Ciudad getcDestino() {
 		return cDestino;
 	}

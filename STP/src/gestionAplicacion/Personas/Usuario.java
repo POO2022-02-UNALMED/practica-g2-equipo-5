@@ -111,7 +111,16 @@ public class Usuario extends Persona {
 		 */
 
 		Scanner scan = new Scanner(System.in);
-
+		
+		/////ES BONIFICACION/////
+		System.out.println("-> Seleccione (1) si el envío de mercancía tiene bonificación, o (2) si no tiene bonificación."
+				+ "nTenga en cuenta que la bonificación solo se aplicará si el usuario anteriormente realizó 5 viajes o 5 envíos de mercacía.");
+		int esBonificacion = scan.nextInt();
+		if (esBonificacion==1) {
+			mercancia.setIsBonificacion(true);
+		////////////////////////
+			
+		
 		int nProductos;
 		System.out.print("-> Ingrese el número de productos a enviar ");
 		nProductos = scan.nextInt();
@@ -175,9 +184,19 @@ public class Usuario extends Persona {
 		Viaje viaje = new Viaje();
 		//falta lo de la ruta 
 		Scanner scan = new Scanner(System.in);
+		
+		/////ES BONIFICACION/////
+		System.out.println("-> Seleccione (1) si el viaje tiene bonificación, o (2) si no tiene bonificación."
+				+ "nTenga en cuenta que la bonificación solo se aplicará si el usuario anteriormente realizó 5 viajes o 5 envíos de mercacía.");
+		int esBonificacion = scan.nextInt();
+		if (esBonificacion==1) {
+			viaje.setIsBonificacion(true);
+		////////////////////////
+		
+		
 		System.out.print("-> Ingrese numero de pasajeros: ");
 		int nPasajeros= scan.nextInt();
-
+		
 		for (int i = 0; i < nPasajeros; i++) {
 			String nombre;
 			String edad;
@@ -333,15 +352,9 @@ public class Usuario extends Persona {
 	public Facturacion generarFacturacion(Viaje viaje) {
 		
 		
-		///////////////////////////////////////////////////
-		//////FACTURA PARA BONIFICACION DE VIAJE //////////
-		///////////////////////////////////////////////////
-		if (viaje.esBonificacion()) {
-			
-		}
-			
-			
-		//////////////////////////////////////////////////
+		
+		
+		
 		Viaje instViaje = new Viaje();
 		Facturacion insFacturacion = new Facturacion();
 		
@@ -351,6 +364,15 @@ public class Usuario extends Persona {
 		Ciudad ori = instViaje.getcOrigen();
 		Ciudad dest = instViaje.getcDestino();
 		double pre = insFacturacion.getPrecio();
+		
+		///////////////////////////////////////////////////
+		//////FACTURA PARA BONIFICACION DE VIAJE //////////
+		///////////////////////////////////////////////////
+		if (viaje.getIsBonificacion()) {
+			pre=pre-pre*0.3;
+		}
+		//////////////////////////////////////////////////
+		
 		
 		System.out.println("-----------------------------------------------\n"
 				+ "-------------FACTURA DE VENTA VIAJE-------------\n"
@@ -376,15 +398,7 @@ public class Usuario extends Persona {
 	
 	public Facturacion generarFacturacion(Mercancia mercancia) {
 		
-		///////////////////////////////////////////////////
-		//////FACTURA PARA BONIFICACION DE MERCANCIA //////
-		///////////////////////////////////////////////////
-		if (mercancia.esBonificacion()) {
-			
-		}else {};
-
-
-		//////////////////////////////////////////////////
+		
 		
 		
 		Viaje inViaje = new Viaje();
@@ -396,6 +410,13 @@ public class Usuario extends Persona {
 		Ciudad de = inViaje.getcDestino();
 		
 		
+		///////////////////////////////////////////////////
+		//////FACTURA PARA BONIFICACION DE MERCANCIA //////
+		///////////////////////////////////////////////////
+		if (mercancia.getIsBonificacion()) {
+			pre=pre-pre*0.3;
+		}
+		//////////////////////////////////////////////////
 		
 		System.out.println("-------------------------------------------------\n"
 				+ "-----------FACTURA DE VENTA MERCANCIA------------\n"
