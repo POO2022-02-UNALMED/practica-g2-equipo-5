@@ -3,14 +3,89 @@ package uiMain;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import baseDatos.Serializador;
 import gestionAplicacion.Destinos.Ciudad;
 import gestionAplicacion.Personas.Conductor;
 import gestionAplicacion.Personas.Usuario;
-import gestionAplicacion.Planeacion.Ruta;
 import gestionAplicacion.Vehiculos.VehiculoCarga;
 import gestionAplicacion.Vehiculos.VehiculoPasajeros;
+import gestionAplicacion.Planeacion.*;
 
 public class Principal {
+	
+	/* Funcionalidad Enviar Mercancia */
+	public static void enviarMercancia(Usuario user) {
+		Mercancia mercancia = new Mercancia();
+
+		mercancia.agregarUsuario(user);
+
+		ArrayList<Ruta> rutas = user.getRuta(); int ultIndex = rutas.size();
+		ultIndex--; mercancia.setRuta(rutas.get(ultIndex));
+
+		Scanner scan = new Scanner(System.in);
+
+		int nProductos;
+		System.out.print("-> Ingrese el número de productos a enviar: ");
+		nProductos = scan.nextInt();
+
+		int pTotal = 0;
+		for (int i = 0; i < nProductos; i++) {
+
+			System.out.print("-> Ingrese el producto a enviar: ");
+			String tipo = scan.next();
+
+			System.out.print("-> Ingrese el peso en kg: ");
+			double peso = scan.nextDouble();
+			pTotal += peso;
+
+			mercancia.agregarProducto(new Producto(tipo, peso));
+		}
+
+		System.out.println("El peso total es de: " + pTotal + " kg");
+		System.out.println("\nAhora, se mostrarán los vehiculos que pueden soportar ese peso");
+
+		ArrayList<VehiculoCarga> vPosibles = VehiculoCarga.validarCapacidad(pTotal);
+		int indV = 0;
+		for (VehiculoCarga vehiculo : vPosibles) {
+			System.out.println(indV + ". " + vehiculo.getMarca() + " " + vehiculo.getModelo());
+			indV++;
+		}
+		System.out.print("\n-> De la lista anterior, seleccione un vehiculo: ");
+		int vSeleccionado = scan.nextInt();
+		VehiculoCarga vSel = vPosibles.get(vSeleccionado);
+		mercancia.setVehiculo(vSel);
+
+		System.out.println();
+		System.out.println("Seleccione el conductor que desea de la siguiente lista");
+		ArrayList<Conductor> conductores = Conductor.getConductores();
+		int indC = 0;
+		for (Conductor cond : conductores) {
+			System.out.println(indC + ". " + cond.getNombre() + ", " + cond.getEdad() + " años. "
+					+ cond.getExperiencia() + " años de experiencia");
+			indC++;
+		}
+
+		System.out.print("\n-> Ingrese el número del conductor que seleccionó: ");
+		int indConductor = scan.nextInt();
+		Conductor condSeleccionado = conductores.get(indConductor);
+		condSeleccionado.agregarVehiculo(vSel);
+		mercancia.setConductor(condSeleccionado);
+
+		System.out.println();
+		System.out.print("-> Por último, digite la fecha que desea realiza el envio (dd/mm/aaaa): ");
+		String fecha = scan.next();
+		mercancia.setFecha(fecha);
+
+		System.out.println("\nFelicidades, ha completado con éxito su envio.");
+		scan.close();
+		user.agregarMercancia(mercancia);
+	}
+	
+	private static void salirDelSistema(Usuario usuario) {
+		System.out.println("Muchas gracias por usar STP, vuelva pronto");
+		Serializador.serializar(usuario);
+		System.exit(0);
+	}
 
 	public static void main(String[] args) {
 		Ciudad Med = new Ciudad("MEDELLÍN", "ANTIOQUIA");
@@ -51,6 +126,9 @@ public class Principal {
 		
 		/* Usuario */
 		Usuario Guz = new Usuario("Jaime Alberto Guzmán", "123456789", "20");
+		Guz.agregarMercancia(new Mercancia());
+		Guz.agregarViaje(new Viaje());
+		Guz.agregarFacturacion(new Facturacion());
 		
 		Scanner scan = new Scanner(System.in);
 		System.out.println("-------------------------------------------");
@@ -94,13 +172,14 @@ public class Principal {
 			switch(entrada) {
 			case 1:
 				System.out.println("\nSELECCIONÓ LA OPCIÓN DE CREAR RUTA");
+				pUsuario.menuCiudades();
 				break;
 			case 2:
 				System.out.println("\nSELECCIONÓ LA OPCIÓN DE CREAR VIAJE");
 				break;
 			case 3:
 				System.out.println("\nSELECCIONÓ LA OPCIÓN DE ENVIAR MERCANCIA");
-				pUsuario.agregarMercancia(pUsuario.enviarMercancia());
+				enviarMercancia(pUsuario);
 				break;
 			case 4:
 				System.out.println("\nSELECCIONÓ LA OPCIÓN DE VER BONIFICACIONES");
@@ -109,7 +188,7 @@ public class Principal {
 				System.out.println("\nSELECCIONÓ LA OPCIÓN DE VER FACTURA");
 				break;
 			case 6:
-				System.out.println("\nSALISTE DEL SISTEMA. MUCHAS GRACIAS POR USAR STP");
+				salirDelSistema(pUsuario);
 			}
 				
 		} while(entrada != 6);

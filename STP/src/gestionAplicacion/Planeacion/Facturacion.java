@@ -18,6 +18,7 @@ public class Facturacion{
         this.precio = precio;
         this.tiempo = tiempo;
     }
+    public Facturacion() {}
     
     //GET Y SET
     

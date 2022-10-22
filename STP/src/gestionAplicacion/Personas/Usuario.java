@@ -1,17 +1,22 @@
 package gestionAplicacion.Personas;
 
 import gestionAplicacion.Destinos.Ciudad;
+
 import gestionAplicacion.Planeacion.*;
 import gestionAplicacion.Vehiculos.VehiculoCarga;
 import gestionAplicacion.Vehiculos.VehiculoPasajeros;
 
 import gestionAplicacion.Destinos.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-public class Usuario extends Persona {
+import baseDatos.Deserializador;
+
+public class Usuario extends Persona  implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Viaje> viaje = new ArrayList<Viaje>();
 	private ArrayList<Mercancia> mercancia = new ArrayList<Mercancia>();
 	private ArrayList<Facturacion> facturacion = new ArrayList<Facturacion>();
@@ -37,6 +42,7 @@ public class Usuario extends Persona {
 	public Usuario(String nombre, String documento, String edad) {
 		super(nombre, documento, null, edad);
 		Usuario.user.add(this);
+		Deserializador.deserializar(this);
 	}
 //Getters and setters
 
@@ -98,77 +104,6 @@ public class Usuario extends Persona {
 
 	public void agregarRuta(Ruta ruta) {
 		this.ruta.add(ruta);
-	}
-
-	/* Funcionalidad Enviar Mercancia*/
-	
-	public Mercancia enviarMercancia() {
-		Mercancia mercancia = new Mercancia();
-
-		mercancia.agregarUsuario(this);
-
-		/*
-		 * ArrayList<Ruta> rutas = this.getRuta(); int ultIndex = rutas.size();
-		 * ultIndex--; mercancia.setRuta(rutas.get(ultIndex));
-		 */
-
-		Scanner scan = new Scanner(System.in);
-
-		int nProductos;
-		System.out.print("-> Ingrese el número de productos a enviar ");
-		nProductos = scan.nextInt();
-
-		int pTotal = 0;
-		for (int i = 0; i < nProductos; i++) {
-
-			System.out.print("-> Ingrese el producto a enviar: ");
-			String tipo = scan.next();
-
-			System.out.print("-> Ingrese el peso en kg: ");
-			double peso = scan.nextDouble();
-			pTotal += peso;
-
-			mercancia.agregarProducto(new Producto(tipo, peso));
-		}
-
-		System.out.println("El peso total es de: " + pTotal + " kg");
-		System.out.println("\nAhora, se mostrarán los vehiculos que pueden soportar ese peso");
-
-		ArrayList<VehiculoCarga> vPosibles = VehiculoCarga.validarCapacidad(pTotal);
-		int indV = 0;
-		for (VehiculoCarga vehiculo : vPosibles) {
-			System.out.println(indV + ". " + vehiculo.getMarca() + " " + vehiculo.getModelo());
-			indV++;
-		}
-		System.out.print("\n-> De la lista anterior, seleccione un vehiculo: ");
-		int vSeleccionado = scan.nextInt();
-		VehiculoCarga vSel = vPosibles.get(vSeleccionado);
-		mercancia.setVehiculo(vSel);
-
-		System.out.println();
-		System.out.println("Seleccione el conductor que desea de la siguiente lista");
-		ArrayList<Conductor> conductores = Conductor.getConductores();
-		int indC = 0;
-		for (Conductor cond : conductores) {
-			System.out.println(indC + ". " + cond.getNombre() + ", " + cond.getEdad() + " años. "
-					+ cond.getExperiencia() + " años de experiencia");
-			indC++;
-		}
-
-		System.out.print("\n-> Ingrese el número del conductor que seleccionó: ");
-		int indConductor = scan.nextInt();
-		Conductor condSeleccionado = conductores.get(indConductor);
-		condSeleccionado.agregarVehiculo(vSel);
-		mercancia.setConductor(condSeleccionado);
-
-		System.out.println();
-		System.out.print("-> Por último, digite la fecha que desea realiza el envio (dd/mm/aaaa): ");
-		String fecha = scan.next();
-		mercancia.setFecha(fecha);
-
-		System.out.println("\nFelicidades, ha completado con éxito su envio.");
-		scan.close();
-		return mercancia;
 	}
 
 	// Funcionalidad Crear Viaje
@@ -259,34 +194,8 @@ public class Usuario extends Persona {
 		return viaje;
 	}
 	
-	/********************************************************
-	 * **********funcionalidad Bonificacion*****************
-	 *****************************************************/
-
-	/*
-	 * Serializacion: (class Usuario implements Serializable)
-	 * 
-	 * --Usuario.viaje --Usuario.mercancia --Usuario.facturacion try{
-	 * ObjectOutputStream guardaViajes = new ObjectOutputStream(new
-	 * FileOutputStream("C:/Users/Desktop/proyectoPoo/viajePersona.txt"));
-	 * guardaViajes.writeObject(Instancia_usuario. //Objeto que se serializa//);
-	 * guardaViajes.close();
-	 * 
-	 * ObjectInputStream recuperaViajes=new ObjectInputstream(New
-	 * FileInputStream("C:/Users/Desktop/proyectoPoo/viajePersona.txt"))
-	 * ArrayList<Viaje> viajesRecuperados = (ArrayList<Viaje>)
-	 * recuperaViajes.readObject(); viajesRecuperados.close();
-	 * 
-	 * 
-	 * }catch(Exception e){ if (viajesRecuperados.length<5){ sout
-	 * ("No hay bonificacion") } } int x = viajesRecuperados.length; int
-	 * numeroBonificaciones=0; for (int i ==1; x<i, i++){ if (x>=5){
-	 * numeroBonificaciones+=1; x-=5; } }
-	 * 
-	 * ArrayList<String> ciudadesBonificacion = viajesRecuperados
-	 * 
-	 */
-
+	/* Funcionalidad Bonificación */
+	
 	public void Bonificacion() {
 		Scanner input = new Scanner(System.in);
 		//Facturacion bonificacion;
@@ -457,9 +366,9 @@ public class Usuario extends Persona {
 			cont++;
 		}
 		
-		System.out.println("\nDigite un número para elegir la ciudad origen: ");
+		System.out.print("\n-> Digite un número para elegir la ciudad origen: ");
 		int origen = sc.nextInt();
-		System.out.println("Digite un número para elegir la ciudad destino: ");
+		System.out.print("-> Digite un número para elegir la ciudad destino: ");
 		int destino = sc.nextInt();
 		Conexion[] c = Conexion.values();
 		ArrayList<Conexion> b = new ArrayList<Conexion>();
@@ -617,7 +526,7 @@ public class Usuario extends Persona {
 			en++;
 		}
 		
-		System.out.println("ingrese el número de la ruta a tomar");
+		System.out.println("Ingrese el número de la ruta a tomar");
 		int numRuta = sc.nextInt();
 		numRuta--;
 		
@@ -628,6 +537,5 @@ public class Usuario extends Persona {
 		Ruta rutaUsuario = new Ruta(ruta,precio,distancia,tiempo);
 		
 	}	
-	
 	
 }
