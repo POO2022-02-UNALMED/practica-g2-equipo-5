@@ -351,10 +351,6 @@ public class Usuario extends Persona {
 	//Todavia está malo unu 
 	public Facturacion generarFacturacion(Viaje viaje) {
 		
-		
-		
-		
-		
 		Viaje instViaje = new Viaje();
 		Facturacion insFacturacion = new Facturacion();
 		
@@ -398,16 +394,20 @@ public class Usuario extends Persona {
 	
 	public Facturacion generarFacturacion(Mercancia mercancia) {
 		
-		
-		
-		
 		Viaje inViaje = new Viaje();
+		ArrayList<Producto> prod = new ArrayList<Producto>();
+		Producto inpes = new Producto();
+		Conductor incon = new Conductor();
 		
 		
 		String no = this.getNombre();
 		String Do = this.getDocumento();
 		Ciudad or = inViaje.getcOrigen();
 		Ciudad de = inViaje.getcDestino();
+		ArrayList <Producto> pr =  prod.getProductos();
+		Double pe = inpes.getPeso();
+		double con = incon.getPrecio();
+		
 		
 		
 		///////////////////////////////////////////////////
@@ -425,9 +425,9 @@ public class Usuario extends Persona {
 		System.out.println("Documento: "+Do);
 		System.out.println("Origen: "+or);
 		System.out.println("Destino: "+de);
-		System.out.println("Productos: ");
-		System.out.println("Peso: ");
-		System.out.println("Conductor: ");
+		System.out.println("Productos: "+pr);
+		System.out.println("Peso: "+pe);
+		System.out.println("Conductor: "+con);
 		System.out.println("-------------------------------------------------");
 		System.out.println("TOTAL A PAGAR: ");
 		System.out.println("-------------------------------------------------\n"
@@ -486,7 +486,6 @@ public class Usuario extends Persona {
 		}
 		return res;
 	}
-	
 	
 	
 	
