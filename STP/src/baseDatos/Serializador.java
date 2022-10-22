@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 import gestionAplicacion.Personas.Usuario;
 
 public class Serializador {
-	private static File rutaTemp = new File("src\\baseDatos\\temo");
+	private static File rutaTemp = new File("/STP/src/baseDatos/temp");
 
 	public static void serializar(Usuario usuario) {
 		FileOutputStream fos;

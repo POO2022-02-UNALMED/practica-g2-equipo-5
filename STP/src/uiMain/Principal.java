@@ -12,6 +12,98 @@ import gestionAplicacion.Vehiculos.VehiculoPasajeros;
 import gestionAplicacion.Planeacion.*;
 
 public class Principal {
+	/* Funcionalidad Crear Viaje */
+	
+	public static void crearViaje(Usuario usuario) {
+		
+		Viaje viaje = new Viaje();
+		
+		ArrayList<Ruta> rutas = usuario.getRuta(); int ultIndex = rutas.size();
+		ultIndex--;
+		Ruta ruta = rutas.get(ultIndex);
+		
+		Scanner scan = new Scanner(System.in);
+		System.out.print("-> Ingrese numero de pasajeros: ");
+		int nPasajeros= scan.nextInt();
+
+		for (int i = 0; i < nPasajeros; i++) {
+			String nombre;
+			String edad;
+			System.out.print("-> Ingrese nombre de acompañante: ");
+			nombre = scan.next();
+			System.out.print("-> Ingrese edad de la persona: ");
+			edad = scan.next();
+			Usuario pasajero = new Usuario(nombre, edad);
+			viaje.agregarPasajeros(pasajero);
+			viaje.aumentarNPasajeros();
+		}
+		
+		Integer numConductores;
+		if (ruta.getDistancia() >= 1000) {
+			numConductores = 2;
+		} else {
+			numConductores = 1;
+		}
+		
+		System.out.println("Ahora, se mostrarán los vehiculos que pueden transportar esta cantidad de pasajeros ");
+
+		ArrayList<VehiculoPasajeros> vehiculosPosibles = VehiculoPasajeros.validarCapacidad(numConductores, nPasajeros);
+		int indVehiculo = 0;
+		for (VehiculoPasajeros vehiculo : vehiculosPosibles) {
+			System.out.println(indVehiculo + ". " + vehiculo.getMarca() + " " + vehiculo.getModelo());
+			indVehiculo++;
+		}
+		System.out.print("-> De la lista anterior, seleccione un vehiculo: ");
+		int vSeleccionado = scan.nextInt();
+		VehiculoPasajeros vSel = vehiculosPosibles.get(vSeleccionado);
+		viaje.setVehiculo(vSel);
+
+		if (numConductores == 2) {
+			System.out.println("Seleccione los conductores que desea de la siguiente lista: ");
+			ArrayList<Conductor> conductores = Conductor.getConductores();
+			int indC = 0;
+			for (Conductor cond : conductores) {
+				System.out.println(indC + ". " + cond.getNombre() + ", " + cond.getEdad() + "años. "
+						+ cond.getExperiencia() + " años de experiencia");
+				indC++;
+			}
+
+			System.out.print("-> Ingrese el número del primer conductor que seleccionó: ");
+			int indConductor1 = scan.nextInt();
+			Conductor condSeleccionado1 = conductores.get(indConductor1);
+			condSeleccionado1.agregarVehiculo(vSel);
+			viaje.agregarconductor(condSeleccionado1);
+			
+			System.out.print("-> Ingrese el número del segundo conductor que seleccionó: ");
+			int indConductor2 = scan.nextInt();
+			Conductor condSeleccionado2 = conductores.get(indConductor2);
+			condSeleccionado2.agregarVehiculo(vSel);
+			viaje.agregarconductor(condSeleccionado2);
+		} else {
+			System.out.println("Seleccione el conductores que desea de la siguiente lista: ");
+			ArrayList<Conductor> conductores = Conductor.getConductores();
+			int indC = 0;
+			for (Conductor cond : conductores) {
+				System.out.println(indC + ". " + cond.getNombre() + ", " + cond.getEdad() + "años. "
+						+ cond.getExperiencia() + " años de experiencia");
+				indC++;
+			}
+			
+			System.out.println("-> Escoja conductor");
+			int indConductor = scan.nextInt();
+			Conductor condSeleccionado = conductores.get(indConductor);
+			condSeleccionado.agregarVehiculo(vSel);
+			viaje.agregarconductor(condSeleccionado);
+			
+			System.out.print("Por último, digite la fecha que desea realiza el viaje (dd/mm/aaaa): ");
+			String fecha = scan.nextLine();
+			viaje.setFecha(fecha);
+			
+			System.out.println("\nFelicidades, ha completado La creacion de su Viaje, que lo disfrute");
+		}
+		scan.close();
+		usuario.agregarViaje(viaje);
+	}
 	
 	/* Funcionalidad Enviar Mercancia */
 	public static void enviarMercancia(Usuario user) {
@@ -176,6 +268,7 @@ public class Principal {
 				break;
 			case 2:
 				System.out.println("\nSELECCIONÓ LA OPCIÓN DE CREAR VIAJE");
+				crearViaje(pUsuario);
 				break;
 			case 3:
 				System.out.println("\nSELECCIONÓ LA OPCIÓN DE ENVIAR MERCANCIA");
