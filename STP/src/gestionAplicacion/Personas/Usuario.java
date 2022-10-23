@@ -109,48 +109,67 @@ public class Usuario extends Persona  implements Serializable{
 	
 	
 	/**************FUNCIONALIDAD FACTURACION*****************/
-	
-	
-	//Todavia está malo unu 
-	public Facturacion generarFacturacion(Viaje viaje) {
 		
-		
-		/////////////////////////////////////////////////
-		//////FACTURA PARA BONIFICACION DE VIAJE (HOLI ANA):
-		///////////////////////////////////////////////////
-		if (viaje.esBonificacion()) {
 			
+		public Facturacion generarFacturacion(Viaje viaje, Usuario user) {
+			
+			
+			
+			boolean salir = false;
+			Scanner entra = new Scanner(System.in);
+			int seleccion = 1;
+			while(salir){
+			System.out.println("1. Seleccione para conocer la factura de viaje");
+			System.out.println("2. Seleccione para conocer la factura de mercancia");
+			System.out.println("3. Salir");
+			
+			System.out.println("Escriba una de las opciones: ");
+			seleccion = entra.nextInt();
+			
+			switch (seleccion) {
+			
+			case 1:
+	            System.out.println("Has seleccionado la opcion 1");
+	            break;
+	        case 2:
+	            System.out.println("Has seleccionado la opcion 2");
+	            break;
+	        case 3:
+	        	salir = true;
+			
+	        default:
+	            System.out.println("Solo números entre 1 y 3");
+			}
 		}
 			
+			if(seleccion == 1) {
+				
+				public void Viaj(Usuario user, Viaje viaje) {
+					System.out.println("-------------------------------------------");
+					System.out.println("SISTEMA DE TRANSPORTE PERSONALIZADO");
+					System.out.println("-------------------------------------------");
+					System.out.println("Nombre :" + user.getNombre());
+					System.out.println("Documento: " + user.getDocumento());
+					System.out.println("Lista de acompañantes: ");
+					for(Usuario prod : viaje.getPasajeros()) {
+						System.out.println("- " + prod.getNombre() + ", " + prod.getEdad() + " años.");
+					}
+					System.out.println("\n Ciudad de origen: " + viaje.getRuta().getRuta().get(0));
+					System.out.println("Ciudad de destino: " + viaje.getRuta().getRuta().get(-1));
+					System.out.println("Distancia: " + viaje.getRuta().getDistancia());
+					System.out.println("Precio: " + viaje.getRuta().getPrecio() + "COP");
+					
+					System.out.println("-------------------------------------------");
+					System.out.println("Gracias por confiar en nostros. STP.");
+					System.out.println("-------------------------------------------");
+				}
+				
+				
+			}
 			
-		//////////////////////////////////////////////////
-		Viaje instViaje = new Viaje();
-		Facturacion insFacturacion = new Facturacion();
-		
-		String nom = this.getNombre();
-		String doc = this.getDocumento();
-		String fech = instViaje.getFecha();
-		Ciudad ori = instViaje.getcOrigen();
-		Ciudad dest = instViaje.getcDestino();
-		double pre = insFacturacion.getPrecio();
-		
-		System.out.println("-----------------------------------------------\n"
-				+ "-------------FACTURA DE VENTA VIAJE-------------\n"
-				+ "------------------------------------------------\n");
-		System.out.println("Nombre: "+nom);
-		System.out.println("Documento: "+doc);
-		System.out.println("Fecha: "+fech);
-		System.out.println("Origen: "+ori);
-		System.out.println("Destino: "+dest);
-		System.out.println("------------------------------------------------");
-		System.out.println("TOTAL A PAGAR: "+pre);
-		System.out.println("------------------------------------------------\n"
-				+ "              Los atendió %($)/#($              \n"
-				+ "------------------------------------------------\n"
-				+ "************************************************\n"
-				+ "             GRACIAS POR PREFERIRNOS            \n"
-				+ "************************************************\n");
-		
+			else if (viaje.esBonificacion()) {
+				
+			}
 		
 		
 		
@@ -272,25 +291,7 @@ public class Usuario extends Persona  implements Serializable{
 		System.out.println("-------------------------------------------");
 	}
 	
-	public void Viaj(Usuario user, Viaje viaje) {
-		System.out.println("-------------------------------------------");
-		System.out.println("SISTEMA DE TRANSPORTE PERSONALIZADO");
-		System.out.println("-------------------------------------------");
-		System.out.println("Nombre :" + user.getNombre());
-		System.out.println("Documento: " + user.getDocumento());
-		System.out.println("Lista de acompañantes: ");
-		for(Usuario prod : viaje.getPasajeros()) {
-			System.out.println("- " + prod.getNombre() + ", " + prod.getEdad() + " años.");
-		}
-		System.out.println("\n Ciudad de origen: " + viaje.getRuta().getRuta().get(0));
-		System.out.println("Ciudad de destino: " + viaje.getRuta().getRuta().get(-1));
-		System.out.println("Distancia: " + viaje.getRuta().getDistancia());
-		System.out.println("Precio: " + viaje.getRuta().getPrecio() + "COP");
-		
-		System.out.println("-------------------------------------------");
-		System.out.println("Gracias por confiar en nostros. STP.");
-		System.out.println("-------------------------------------------");
-	}
+	
 	
 	//metodos generar rutas
 	/**
