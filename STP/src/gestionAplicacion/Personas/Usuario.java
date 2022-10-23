@@ -222,7 +222,7 @@ public class Usuario extends Persona{
 
 		double precBon;
 		System.out.println("Precio: " + viaje.getRuta().getPrecio() + "COP");
-		if(viaje.getIsBonificacion() == false) {
+		if(!viaje.getIsBonificacion()) {
 			System.out.println("\nEn este viaje cuentas con una bonificación del 30%");
 			double precio = viaje.getRuta().getPrecio();
 			double des = (precio * 30)/100;

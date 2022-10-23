@@ -1,17 +1,72 @@
 package uiMain;
 
+import gestionAplicacion.Destinos.Conexion;
 import gestionAplicacion.Personas.Usuario;
 import gestionAplicacion.Planeacion.Mercancia;
 import gestionAplicacion.Planeacion.Producto;
 import gestionAplicacion.Planeacion.Viaje;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class prueba {
-	public void mercBon(Usuario user, Mercancia merc) {
+
+
+
+	/* Funcionalidad Facturación */
+	public static void generarFactura(Usuario usuario){
+		Scanner in = new Scanner(System.in);
+		System.out.println("1. Mercancia");
+		System.out.println("1. Viaje");
+		System.out.print("De la anterior lista, seleccine la opción de la cuál desea conocer su factura: ");
+		int vEntrada = in.nextInt();
+
+		switch (vEntrada){
+			case 1:
+				ArrayList<Mercancia> envios = usuario.getMercancia();
+				int indMer = 1;
+				for (Mercancia merc : envios){
+					ArrayList<Conexion> ruta = merc.getRuta().getRuta();
+					System.out.println(indMer + ". Origen: " + ruta.get(0) + ". Destino: " + ruta.get(-1));
+					indMer++;
+				}
+				System.out.print("De la lista anterior, seleccione un envio: ");
+				int selec = in.nextInt();
+				Mercancia mercSeleccionada = envios.get(selec);
+
+				if(selec % 5 == 0){
+					usuario.mercBon(mercSeleccionada);
+				}
+				else{
+					usuario.merc(mercSeleccionada);
+				}
+			case 2:
+				ArrayList<Viaje> viajes = usuario.getViaje();
+				int indV = 1;
+				for(Viaje viaje : viajes){
+					ArrayList<Conexion> ruta = viaje.getRuta().getRuta();
+					System.out.println(indV + ". Origen: " + ruta.get(0) + ". Destino: " + ruta.get(-1));
+					indV++;
+				}
+				System.out.print("De la lista anterior, seleccione un viaje: ");
+				int selec2 = in.nextInt();
+				Viaje vSeleccionado = viajes.get(selec2);
+
+				if(selec % 5 == 0){
+					usuario.viajBon(vSeleccionado);
+				}
+				else{
+					usuario.viaje(vSeleccionado);
+				}
+		}
+
+	}
+	public void mercBon(Mercancia merc) {
 		System.out.println("-------------------------------------------");
 		System.out.println("SISTEMA DE TRANSPORTE PERSONALIZADO");
 		System.out.println("-------------------------------------------");
-		System.out.println("Nombre :" + user.getNombre());
-		System.out.println("Documento: " + user.getDocumento());
+		System.out.println("Nombre :" + this.getNombre());
+		System.out.println("Documento: " + this.getDocumento());
 		System.out.println("Lista de productos: ");
 		for(Producto prod : merc.getProductos()) {
 			System.out.println("- " + prod.getTipo() + ", " + prod.getPeso() + " kg.");
@@ -41,12 +96,12 @@ public class prueba {
 		System.out.println("-------------------------------------------");
 	}
 	
-	public void merc(Usuario user, Mercancia merc) {
+	public void merc(Mercancia merc) {
 		System.out.println("-------------------------------------------");
 		System.out.println("SISTEMA DE TRANSPORTE PERSONALIZADO");
 		System.out.println("-------------------------------------------");
-		System.out.println("Nombre :" + user.getNombre());
-		System.out.println("Documento: " + user.getDocumento());
+		System.out.println("Nombre :" + this.getNombre());
+		System.out.println("Documento: " + this.getDocumento());
 		System.out.println("Lista de productos: ");
 		for(Producto prod : merc.getProductos()) {
 			System.out.println("- " + prod.getTipo() + ", " + prod.getPeso() + " kg.");
@@ -60,12 +115,12 @@ public class prueba {
 		System.out.println("-------------------------------------------");
 	}
 	
-	public void ViajBon(Usuario user, Viaje viaje) {
+	public void ViajBon(Viaje viaje) {
 		System.out.println("-------------------------------------------");
 		System.out.println("SISTEMA DE TRANSPORTE PERSONALIZADO");
 		System.out.println("-------------------------------------------");
-		System.out.println("Nombre :" + user.getNombre());
-		System.out.println("Documento: " + user.getDocumento());
+		System.out.println("Nombre :" + this.getNombre());
+		System.out.println("Documento: " + this.getDocumento());
 		System.out.println("Lista de acompañantes: ");
 		for(Usuario prod : viaje.getPasajeros()) {
 			System.out.println("- " + prod.getNombre() + ", " + prod.getEdad() + " años.");
@@ -95,12 +150,12 @@ public class prueba {
 		System.out.println("-------------------------------------------");
 	}
 	
-	public void Viaj(Usuario user, Viaje viaje) {
+	public void Viaj(Viaje viaje) {
 		System.out.println("-------------------------------------------");
 		System.out.println("SISTEMA DE TRANSPORTE PERSONALIZADO");
 		System.out.println("-------------------------------------------");
-		System.out.println("Nombre :" + user.getNombre());
-		System.out.println("Documento: " + user.getDocumento());
+		System.out.println("Nombre :" + this.getNombre());
+		System.out.println("Documento: " + this.getDocumento());
 		System.out.println("Lista de acompañantes: ");
 		for(Usuario prod : viaje.getPasajeros()) {
 			System.out.println("- " + prod.getNombre() + ", " + prod.getEdad() + " años.");
