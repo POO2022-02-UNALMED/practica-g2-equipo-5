@@ -109,112 +109,44 @@ public class Usuario extends Persona{
 			
 		public Facturacion generarFacturacion(Viaje viaje, Usuario user) {
 			
+			int opcion;
 			
-			
-			boolean salir = false;
-			Scanner entra = new Scanner(System.in);
-			int seleccion = 1;
-			while(salir){
-			System.out.println("1. Seleccione para conocer la factura de viaje");
-			System.out.println("2. Seleccione para conocer la factura de mercancia");
-			System.out.println("3. Salir");
-			
-			System.out.println("Escriba una de las opciones: ");
-			seleccion = entra.nextInt();
-			
-			switch (seleccion) {
-			
-			case 1:
-	            System.out.println("Has seleccionado la opcion 1");
-	            break;
-	        case 2:
-	            System.out.println("Has seleccionado la opcion 2");
-	            break;
-	        case 3:
-	        	salir = true;
-			
-	        default:
-	            System.out.println("Solo números entre 1 y 3");
-			}
-		}
-			
-			if(seleccion == 1) {
+			do {
+				Scanner snc = new Scanner (System.in);
+				System.out.println("1. Conocer la factura del viaje");
+				System.out.println("2. Conocer la factura de mercancia");
+				System.out.println("3. Salir");
+				opcion = snc.nextInt();
 				
-				public void Viaj(Usuario user, Viaje viaje) {
-					System.out.println("-------------------------------------------");
-					System.out.println("SISTEMA DE TRANSPORTE PERSONALIZADO");
-					System.out.println("-------------------------------------------");
-					System.out.println("Nombre :" + user.getNombre());
-					System.out.println("Documento: " + user.getDocumento());
-					System.out.println("Lista de acompañantes: ");
-					for(Usuario prod : viaje.getPasajeros()) {
-						System.out.println("- " + prod.getNombre() + ", " + prod.getEdad() + " años.");
-					}
-					System.out.println("\n Ciudad de origen: " + viaje.getRuta().getRuta().get(0));
-					System.out.println("Ciudad de destino: " + viaje.getRuta().getRuta().get(-1));
-					System.out.println("Distancia: " + viaje.getRuta().getDistancia());
-					System.out.println("Precio: " + viaje.getRuta().getPrecio() + "COP");
+				if (opcion == 1) {
 					
-					System.out.println("-------------------------------------------");
-					System.out.println("Gracias por confiar en nostros. STP.");
-					System.out.println("-------------------------------------------");
+					System.out.println(Viaj(Usuario user, Viaje viaje));
+					
+				}      else if (viaje.getIsBonificacion()) {	
+						
+						System.out.println(ViajBon(Usuario user, Viaje viaje));
+						}
+				
+				
+				else if(opcion == 2) {
+					
+					System.out.println(merc(Usuario user, Mercancia merc));
+					
+				}      else if (getIsBonificacion()) {
+					
+					    System.out.prinln(mercBon(Usuario user, Mercancia merc));
+					    }
+				
+				else if (opcion == 3) {
+					
+					System.exit(0);
+					
+					
 				}
-				
-				
-			}
+							
+			} while (opcion <= 3);
 			
-			else if (viaje.esBonificacion()) {
-				
-			}
-		
-		
-		
 		}
-	
-	public Facturacion generarFacturacion(Mercancia mercancia) {
-		
-		/////////////////////////////////////////////////
-		//////FACTURA PARA BONIFICACION DE MERCANCIA (HOLI ANA):
-		///////////////////////////////////////////////////
-		if (mercancia.esBonificacion()) {
-			
-		}else {};
-
-
-		//////////////////////////////////////////////////
-		
-		
-		Viaje inViaje = new Viaje();
-		Facturacion inFact = new Facturacion();
-		
-		
-		String no = this.getNombre();
-		String Do = this.getDocumento();
-		Ciudad or = inViaje.getcOrigen();
-		Ciudad de = inViaje.getcDestino();
-		ArrayList <Producto> pro = inFact.getProducto();
-		
-		
-		System.out.println("-------------------------------------------------\n"
-				+ "-----------FACTURA DE VENTA MERCANCIA------------\n"
-				+ "-------------------------------------------------\n");
-		System.out.println("Nombre: "+no);
-		System.out.println("Documento: "+Do);
-		System.out.println("Origen: "+or);
-		System.out.println("Destino: "+de);
-		System.out.println("Productos: ");
-		System.out.println("k");
-		System.out.println("-------------------------------------------------");
-		System.out.println("TOTAL A PAGAR: ");
-		System.out.println("-------------------------------------------------\n"
-				+ "            Los atendió $(#(/=(=(=()/            \n"
-				+ "-------------------------------------------------\n"
-				+ "*************************************************\n"
-				+ "              GRACIAS POR PREFERIRNOS            \n"
-				+ "*************************************************\n");
-		
-	}
-
 
 	public void mercBon(Usuario user, Mercancia merc) {
 		System.out.println("-------------------------------------------");
