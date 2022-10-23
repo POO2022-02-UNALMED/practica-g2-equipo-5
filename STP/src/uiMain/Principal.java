@@ -13,19 +13,8 @@ import baseDatos.Serializador;
 
 public class Principal {
 	
-	/**
-	 * 
-	 * @author angel 
-	 */
+	/* Funcionalidad Generar Ruta */
 	
-	
-	/*funcionalidad generar ruta*/
-	
-	
-	/**
-	 * Método menuCiudades muestra las ciudades de operacion
-	 * y hace el llamado de todos los métodos correspondientes para presentar un menú e interactuar con el usuario
-	 */
 	public static void menuGenerarRuta(Usuario usuario) {
 		Scanner sc = new Scanner(System.in);
 		String[] ciudades = {
@@ -207,7 +196,46 @@ public class Principal {
 		scan.close();
 		user.agregarMercancia(mercancia);
 	}
+	
+	/* Funcionalidad Bonificación */
+	public static void Bonificacion(Usuario usuario) {
+		Scanner input = new Scanner(System.in);
+		//Facturacion bonificacion;
+		
+		int cantidadViajes = usuario.getViaje().size();
+		int cantidadMercancia = usuario.getMercancia().size();
 
+		System.out.println("Usted ha seleccionado la opción Bonificaciones, la cual consta de lo siguiente: "
+				+ "\n - Cada que el usuario realice 5 viajes o 5 envios de mercancia, tendra la opcion de obtener un descuento "
+				+ "del 30% en su siguiente viaje o un descuento en el precio del conductor para su siguiente envio de mercancia."
+				+ "\nEn este momento, el usuario ");
+		
+		if (cantidadViajes%5==0 || cantidadMercancia%5==0) {
+			System.out.println("puede obtener la bonificacion.");
+		}else {
+			System.out.println("no puede obtener la bonificacion debido a que hasta el momento cuenta con "+cantidadViajes+" viajes, y "+cantidadMercancia+" envios de mercancia.");
+		}
+		
+		if (cantidadViajes%5==0 || cantidadMercancia%5==0) {
+			System.out.println("\n\nDesea aplicar el descuento para un nuevo viaje o un envio de mercancia."
+					+ "\n1. Nuevo viaje."
+					+ "\n2. Envio de mercancia.");
+			int opcionBonificacion = input.nextInt();
+			
+			System.out.println("Ha seleccionado la opcion: " + opcionBonificacion +"");
+			
+			if (opcionBonificacion == 1) { // OPCION VIAJE
+				System.out.println("\nA continuacion por favor cree el nuevo viaje con reduccion del 30% en el precio");
+				crearViaje(usuario);
+			
+			} else if (opcionBonificacion == 2) { //OPCION BONIFICACION
+				System.out.println("\nA continuacion por favor genere el envio de mercancia con reduccion del 30% en el costo del vehiculo");
+				enviarMercancia(usuario);
+			}
+			
+		}
+	}
+	
 	private static void salirDelSistema(Usuario usuario) {
 		System.out.println("Muchas gracias por usar STP, vuelva pronto");
 		Serializador.serializador(usuario);
@@ -304,6 +332,7 @@ public class Principal {
 				break;
 			case 4:
 				System.out.println("\nSELECCIONÓ LA OPCIÓN DE VER BONIFICACIONES");
+				Bonificacion(pUsuario);
 				break;
 			case 5:
 				System.out.println("\nSELECCIONÓ LA OPCIÓN DE VER FACTURA");

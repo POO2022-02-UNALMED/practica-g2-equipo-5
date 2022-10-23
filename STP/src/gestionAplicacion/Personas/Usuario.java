@@ -108,50 +108,6 @@ public class Usuario extends Persona  implements Serializable{
 	// Funcionalidad Crear Viaje
 	
 	
-	
-	/* Funcionalidad Bonificación */
-	
-	public void Bonificacion() {
-		Scanner input = new Scanner(System.in);
-		//Facturacion bonificacion;
-		
-		int cantidadViajes = this.getViaje().size();
-		int cantidadMercancia = this.getMercancia().size();
-
-		System.out.println("Usted ha seleccionado la opción Bonificaciones, la cual consta de lo siguiente: "
-				+ "\nCada que el usuario realice 5 viajes o 5 envios de mercancia, tendra la opcion de obtener un descuento "
-				+ "del 30% en su siguiente viaje o un descuento en el precio del conductor para su siguiente envio de mercancia."
-				+ "\nEn este momento, el usuario ");
-		if (cantidadViajes%5==0 || cantidadMercancia%5==0) {
-			System.out.println("puede obtener la bonificacion.");
-		}else {
-			System.out.println("no puede obtener la bonificacion debido a que hasta el momento cuenta con "+cantidadViajes+" viajes, y "+cantidadMercancia+" envios de mercancia.");
-		}
-		
-		if (cantidadViajes%5==0 || cantidadMercancia%5==0) {
-			System.out.println("\n\nDesea aplicar el descuento para un nuevo viaje o un envio de mercancia."
-					+ "\n1. Nuevo viaje."
-					+ "\n2. Envio de mercancia.");
-			int opcionBonificacion = input.nextInt();
-			
-			System.out.println("Ha seleccionado la opcion: " + opcionBonificacion +"");
-			
-			if (opcionBonificacion == 1) { // OPCION VIAJE
-				System.out.println("\nA continuacion por favor cree el nuevo viaje con reduccion del 30% en el precio");
-				Viaje viajeBonificado = crearViaje();
-				generarFacturacion(viajeBonificado);
-				
-				
-			
-			} else if (opcionBonificacion == 2) { //OPCION BONIFICACION
-				System.out.println("\nA continuacion por favor genere el envio de mercancia con reduccion del 30% en el costo del vehiculo");
-				Mercancia mercanciaBonificado = enviarMercancia();
-				generarFacturacion(mercanciaBonificado);
-			}
-			
-		}
-	}
-	
 	/**************FUNCIONALIDAD FACTURACION*****************/
 	
 	
