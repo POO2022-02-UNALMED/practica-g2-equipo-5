@@ -3,7 +3,6 @@ package uiMain;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import baseDatos.Serializador;
 import gestionAplicacion.Destinos.Ciudad;
 import gestionAplicacion.Personas.Conductor;
 import gestionAplicacion.Personas.Usuario;
@@ -12,19 +11,20 @@ import gestionAplicacion.Vehiculos.VehiculoPasajeros;
 import gestionAplicacion.Planeacion.*;
 
 public class Principal {
+
 	/* Funcionalidad Crear Viaje */
-	
 	public static void crearViaje(Usuario usuario) {
-		
+
 		Viaje viaje = new Viaje();
-		
-		ArrayList<Ruta> rutas = usuario.getRuta(); int ultIndex = rutas.size();
+
+		ArrayList<Ruta> rutas = usuario.getRuta();
+		int ultIndex = rutas.size();
 		ultIndex--;
 		Ruta ruta = rutas.get(ultIndex);
-		
+
 		Scanner scan = new Scanner(System.in);
 		System.out.print("-> Ingrese numero de pasajeros: ");
-		int nPasajeros= scan.nextInt();
+		int nPasajeros = scan.nextInt();
 
 		for (int i = 0; i < nPasajeros; i++) {
 			String nombre;
@@ -37,14 +37,14 @@ public class Principal {
 			viaje.agregarPasajeros(pasajero);
 			viaje.aumentarNPasajeros();
 		}
-		
+
 		Integer numConductores;
 		if (ruta.getDistancia() >= 1000) {
 			numConductores = 2;
 		} else {
 			numConductores = 1;
 		}
-		
+
 		System.out.println("Ahora, se mostrarán los vehiculos que pueden transportar esta cantidad de pasajeros ");
 
 		ArrayList<VehiculoPasajeros> vehiculosPosibles = VehiculoPasajeros.validarCapacidad(numConductores, nPasajeros);
@@ -73,7 +73,7 @@ public class Principal {
 			Conductor condSeleccionado1 = conductores.get(indConductor1);
 			condSeleccionado1.agregarVehiculo(vSel);
 			viaje.agregarconductor(condSeleccionado1);
-			
+
 			System.out.print("-> Ingrese el número del segundo conductor que seleccionó: ");
 			int indConductor2 = scan.nextInt();
 			Conductor condSeleccionado2 = conductores.get(indConductor2);
@@ -88,31 +88,33 @@ public class Principal {
 						+ cond.getExperiencia() + " años de experiencia");
 				indC++;
 			}
-			
+
 			System.out.println("-> Escoja conductor");
 			int indConductor = scan.nextInt();
 			Conductor condSeleccionado = conductores.get(indConductor);
 			condSeleccionado.agregarVehiculo(vSel);
 			viaje.agregarconductor(condSeleccionado);
-			
+
 			System.out.print("Por último, digite la fecha que desea realiza el viaje (dd/mm/aaaa): ");
 			String fecha = scan.nextLine();
 			viaje.setFecha(fecha);
-			
+
 			System.out.println("\nFelicidades, ha completado La creacion de su Viaje, que lo disfrute");
 		}
 		scan.close();
 		usuario.agregarViaje(viaje);
 	}
-	
+
 	/* Funcionalidad Enviar Mercancia */
 	public static void enviarMercancia(Usuario user) {
 		Mercancia mercancia = new Mercancia();
 
 		mercancia.agregarUsuario(user);
 
-		ArrayList<Ruta> rutas = user.getRuta(); int ultIndex = rutas.size();
-		ultIndex--; mercancia.setRuta(rutas.get(ultIndex));
+		ArrayList<Ruta> rutas = user.getRuta();
+		int ultIndex = rutas.size();
+		ultIndex--;
+		mercancia.setRuta(rutas.get(ultIndex));
 
 		Scanner scan = new Scanner(System.in);
 
@@ -172,7 +174,7 @@ public class Principal {
 		scan.close();
 		user.agregarMercancia(mercancia);
 	}
-	
+
 	private static void salirDelSistema(Usuario usuario) {
 		System.out.println("Muchas gracias por usar STP, vuelva pronto");
 		Serializador.serializar(usuario);
@@ -215,40 +217,38 @@ public class Principal {
 		VehiculoCarga FRO = new VehiculoCarga("NISSAN FRONTIER D22", 15000, 2019, "AUX-98X", 1000);
 		VehiculoCarga AUM = new VehiculoCarga("FOTON AUMARK BJ 1039", 25000, 2017, "AUX-99X", 4000);
 		VehiculoCarga T = new VehiculoCarga("KENWORTH T800", 50000, 2012, "AUX-01X", 30000);
-		
+
 		/* Usuario */
 		Usuario Guz = new Usuario("Jaime Alberto Guzmán", "123456789", "20");
 		Guz.agregarMercancia(new Mercancia());
 		Guz.agregarViaje(new Viaje());
 		Guz.agregarFacturacion(new Facturacion());
-		
+
 		Scanner scan = new Scanner(System.in);
 		System.out.println("-------------------------------------------");
-		System.out.println("  ____            _____           ____  \n"
-				+ " / ___|          |_   _|         |  _ \\ \n"
-				+ " \\___ \\   _____    | |    _____  | |_) |\n"
-				+ "  ___) | |_____|   | |   |_____| |  __/ \n"
+		System.out.println("  ____            _____           ____  \n" + " / ___|          |_   _|         |  _ \\ \n"
+				+ " \\___ \\   _____    | |    _____  | |_) |\n" + "  ___) | |_____|   | |   |_____| |  __/ \n"
 				+ " |____/            |_|           |_|    ");
 		System.out.println("  SISTEMA DE TRANSPORTE PERSONALIZADO");
 		System.out.println("-------------------------------------------");
-		
+
 		System.out.println("\nLISTA DE USUARIOS");
 		ArrayList<Usuario> usuarios = Usuario.getUser();
 		int indU = 0;
-		for(Usuario usuario: usuarios) {
-			System.out.println(indU + ". " + usuario.getNombre() + ", CC " + usuario.getDocumento()
-			+ ", " + usuario.getEdad() + " años de edad");
+		for (Usuario usuario : usuarios) {
+			System.out.println(indU + ". " + usuario.getNombre() + ", CC " + usuario.getDocumento() + ", "
+					+ usuario.getEdad() + " años de edad");
 			indU++;
 		}
-		
+
 		System.out.print("\n-> Seleccione un usuario de la lista anterior: ");
 		int indEntrada = scan.nextInt();
 		Usuario pUsuario = usuarios.get(indEntrada);
-		
+
 		int entrada;
 		do {
 			System.out.println("\n-------------------------------------------");
-			System.out.println("-> BIENVENIDO " + pUsuario.getNombre() +" <- ");
+			System.out.println("-> BIENVENIDO " + pUsuario.getNombre() + " <- ");
 			System.out.println("-> FUNCIONALIDADES <-");
 			System.out.println("\n1. GENERAR RUTA");
 			System.out.println("2. CREAR VIAJE");
@@ -260,8 +260,8 @@ public class Principal {
 			System.out.print("\n-> Seleccione una opción: ");
 			entrada = scan.nextInt();
 			System.out.println("-------------------------------------------");
-			
-			switch(entrada) {
+
+			switch (entrada) {
 			case 1:
 				System.out.println("\nSELECCIONÓ LA OPCIÓN DE CREAR RUTA");
 				pUsuario.menuCiudades();
@@ -283,7 +283,7 @@ public class Principal {
 			case 6:
 				salirDelSistema(pUsuario);
 			}
-				
-		} while(entrada != 6);
+
+		} while (entrada != 6);
 	}
 }

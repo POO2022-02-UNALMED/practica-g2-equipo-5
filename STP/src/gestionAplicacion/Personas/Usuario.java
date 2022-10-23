@@ -13,10 +13,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-import baseDatos.Deserializador;
 
 public class Usuario extends Persona  implements Serializable{
-	private static final long serialVersionUID = 1L;
+	
 	private ArrayList<Viaje> viaje = new ArrayList<Viaje>();
 	private ArrayList<Mercancia> mercancia = new ArrayList<Mercancia>();
 	private ArrayList<Facturacion> facturacion = new ArrayList<Facturacion>();
@@ -42,7 +41,6 @@ public class Usuario extends Persona  implements Serializable{
 	public Usuario(String nombre, String documento, String edad) {
 		super(nombre, documento, null, edad);
 		Usuario.user.add(this);
-		Deserializador.deserializar(this);
 	}
 	
 //Getters and setters
