@@ -138,7 +138,7 @@ public class Usuario extends Persona{
 					    mercBon(user, merc);
 					    }
 				
-				
+				 
 				else if (opcion == 3) {
 					
 					System.exit(0);
