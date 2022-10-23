@@ -1,7 +1,12 @@
 package uiMain;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 import gestionAplicacion.Destinos.Conexion;
@@ -213,7 +218,22 @@ public class Principal {
 		if (cantidadViajes%5==0 || cantidadMercancia%5==0) {
 			System.out.println("puede obtener la bonificacion.");
 		}else {
-			System.out.println("no puede obtener la bonificacion debido a que hasta el momento cuenta con "+cantidadViajes+" viajes, y "+cantidadMercancia+" envios de mercancia.");
+			
+			int contadorViajes = 5;
+			while(cantidadViajes<contadorViajes) {
+				contadorViajes+=5;
+			}
+			int viajesFaltantes=contadorViajes-cantidadViajes;
+			
+			int contadorMercancia = 5;
+			while(cantidadMercancia<contadorMercancia) {
+				contadorMercancia+=5;
+			}
+			int envioMercanciaFaltantes=contadorMercancia-cantidadMercancia;
+			
+			System.out.println("no puede obtener la bonificacion debido a que hasta el momento cuenta con "+cantidadViajes+" viajes, y "+cantidadMercancia+" envios de mercancia."
+					+ ". Le faltan "+viajesFaltantes+" viajes o "+envioMercanciaFaltantes+" envíos de mercancia para obtener bonificación.");
+			
 		}
 		
 		if (cantidadViajes%5==0 || cantidadMercancia%5==0) {
@@ -224,17 +244,99 @@ public class Principal {
 			
 			System.out.println("Ha seleccionado la opcion: " + opcionBonificacion +"");
 			
+			
+			
+			
 			if (opcionBonificacion == 1) { // OPCION VIAJE
+				
 				System.out.println("\nA continuacion por favor cree el nuevo viaje con reduccion del 30% en el precio");
 				crearViaje(usuario);
+				menuGenerarRuta(usuario);
+				
+				Viaje viaje = new Viaje();
+				String fecha = viaje.getFecha();
+				String Valor_dia = null;
+				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+				Date fechaActual = null;
+				try {
+					fechaActual = (Date) df.parse(fecha);
+					} catch (ParseException e) {
+					System.err.println("No se ha podido parsear la fecha.");
+					e.printStackTrace();
+					}
+				 GregorianCalendar fechaCalendario = new GregorianCalendar();
+				 fechaCalendario.setTime(fechaActual);
+				 int diaSemana = fechaCalendario.get(Calendar.DAY_OF_WEEK);
+				 if (diaSemana == 1) {
+				 Valor_dia = "Domingo";
+				 } else if (diaSemana == 2) {
+				 Valor_dia = "Lunes";
+				 } else if (diaSemana == 3) {
+				 Valor_dia = "Martes";
+				 } else if (diaSemana == 4) {
+				 Valor_dia = "Miercoles";
+				 } else if (diaSemana == 5) {
+				 Valor_dia = "Jueves";
+				 } else if (diaSemana == 6) {
+				 Valor_dia = "Viernes";
+				 } else if (diaSemana == 7) {
+				 Valor_dia = "Sabado";
+				 }
+				 String dia = Valor_dia;
+				
+				if (dia=="Jueves") {
+					System.out.println("\nAdicionalmente, por ser día jueves se le reducirá un 10% del precio del viaje");
+					viaje.setIsBonificacion(true);
+				}
 			
 			} else if (opcionBonificacion == 2) { //OPCION BONIFICACION
 				System.out.println("\nA continuacion por favor genere el envio de mercancia con reduccion del 30% en el costo del vehiculo");
 				enviarMercancia(usuario);
+				menuGenerarRuta(usuario);
+				
+				Mercancia mercancia = new Mercancia();
+				String fecha = mercancia.getFecha();
+				String Valor_dia = null;
+				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+				Date fechaActual = null;
+				try {
+					fechaActual = (Date) df.parse(fecha);
+					} catch (ParseException e) {
+					System.err.println("No se ha podido parsear la fecha.");
+					e.printStackTrace();
+					}
+				 GregorianCalendar fechaCalendario = new GregorianCalendar();
+				 fechaCalendario.setTime(fechaActual);
+				 int diaSemana = fechaCalendario.get(Calendar.DAY_OF_WEEK);
+				 if (diaSemana == 1) {
+				 Valor_dia = "Domingo";
+				 } else if (diaSemana == 2) {
+				 Valor_dia = "Lunes";
+				 } else if (diaSemana == 3) {
+				 Valor_dia = "Martes";
+				 } else if (diaSemana == 4) {
+				 Valor_dia = "Miercoles";
+				 } else if (diaSemana == 5) {
+				 Valor_dia = "Jueves";
+				 } else if (diaSemana == 6) {
+				 Valor_dia = "Viernes";
+				 } else if (diaSemana == 7) {
+				 Valor_dia = "Sabado";
+				 }
+				 String dia = Valor_dia;
+				
+				if (dia=="Jueves") {
+					System.out.println("\nAdicionalmente, por ser día jueves se le reducirá un 10% del costo del vehiculo");
+					mercancia.setIsBonificacion(true);
+				}
+
+			}else { //OPCION NO VALIDA
+				System.out.println("\nPor favor seleccione una opción válida.");
 			}
 			
 		}
 	}
+	
 	
 	private static void salirDelSistema(Usuario usuario) {
 		System.out.println("Muchas gracias por usar STP, vuelva pronto");
