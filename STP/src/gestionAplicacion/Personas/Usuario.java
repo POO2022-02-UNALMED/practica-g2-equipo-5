@@ -345,6 +345,14 @@ public class Usuario extends Persona{
 		return s;
 		
 	}
+	public ArrayList<ArrayList<Conexion>> validarRutas(ArrayList<ArrayList<Conexion>> rutas){
+		rutas.sort((l1,l2) -> l1.size()-l2.size());
+		ArrayList<ArrayList<Conexion>> l2 = 
+				(rutas.get(0).size() > 1)
+				?new ArrayList<ArrayList<Conexion>>(rutas.subList(0, 3))
+				:new ArrayList<ArrayList<Conexion>>(rutas.subList(0, 1));
+		return l2;
+	}
 	
 
 	/**
@@ -371,6 +379,7 @@ public class Usuario extends Persona{
 			cop.add(i);
 			rutas(i.ciudadB,b,cop,res,todas);
 		}
+		res = validarRutas(res);
 		return res;
 	}
 	
