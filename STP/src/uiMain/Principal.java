@@ -5,6 +5,7 @@ import java.util.Scanner;
 import gestionAplicacion.Personas.*;
 import gestionAplicacion.Vehiculos.*;
 import gestionAplicacion.Planeacion.*;
+import baseDatos.Serializador;
 
 public class Principal {
 
@@ -173,7 +174,7 @@ public class Principal {
 
 	private static void salirDelSistema(Usuario usuario) {
 		System.out.println("Muchas gracias por usar STP, vuelva pronto");
-		//Serializador.serializar(usuario);
+		Serializador.serializador(usuario);
 		System.exit(0);
 	}
 
@@ -250,7 +251,6 @@ public class Principal {
 			switch (entrada) {
 			case 1:
 				System.out.println("\nSELECCIONÓ LA OPCIÓN DE CREAR RUTA");
-				pUsuario.menuCiudades();
 				break;
 			case 2:
 				System.out.println("\nSELECCIONÓ LA OPCIÓN DE CREAR VIAJE");

@@ -2,14 +2,11 @@ package gestionAplicacion.Planeacion;
 
 import java.util.ArrayList;
 
-import gestionAplicacion.Destinos.Ciudad;
 import gestionAplicacion.Personas.Conductor;
 import gestionAplicacion.Personas.Usuario;
 import gestionAplicacion.Vehiculos.VehiculoPasajeros;
 
 public class Viaje {
-	private Ciudad cDestino;
-	private Ciudad cOrigen;
 	private Ruta ruta;
 	private int nPasajeros=0;
 	private ArrayList<Usuario> pasajeros = new ArrayList<Usuario>();
@@ -25,22 +22,6 @@ public class Viaje {
 	}
 	public void setIsBonificacion(boolean isBonificacion) {
 		this.isBonificacion= isBonificacion;
-	}
-	
-	public Ciudad getcDestino() {
-		return cDestino;
-	}
-
-	public void setcDestino(Ciudad cDestino) {
-		this.cDestino = cDestino;
-	}
-
-	public Ciudad getcOrigen() {
-		return cOrigen;
-	}
-
-	public void setcOrigen(Ciudad cOrigen) {
-		this.cOrigen = cOrigen;
 	}
 
 	public Ruta getRuta() {
