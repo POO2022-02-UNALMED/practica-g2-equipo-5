@@ -221,7 +221,7 @@ public class Principal {
 
 		System.out.println("\nLISTA DE USUARIOS");
 		ArrayList<Usuario> usuarios = Usuario.getUser();
-		int indU = 0;
+		int indU = 1;
 		for (Usuario usuario : usuarios) {
 			System.out.println(indU + ". " + usuario.getNombre() + ", CC " + usuario.getDocumento() + ", "
 					+ usuario.getEdad() + " años de edad");
@@ -230,6 +230,7 @@ public class Principal {
 
 		System.out.print("\n-> Seleccione un usuario de la lista anterior: ");
 		int indEntrada = scan.nextInt();
+		indEntrada--;
 		Usuario pUsuario = usuarios.get(indEntrada);
 
 		int entrada;
