@@ -14,7 +14,7 @@ public class Mercancia {
 	private Conductor conductor;
 	private Facturacion factura;
 	private String fecha;
-	private boolean isBonificacion;
+	private boolean isBonificacion = false;
 	
 
 	public Mercancia(Usuario usuario, Ruta ruta, ArrayList<Producto> productos, VehiculoCarga vehiculo,

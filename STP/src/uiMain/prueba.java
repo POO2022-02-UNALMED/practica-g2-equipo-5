@@ -19,12 +19,21 @@ public class prueba {
 		System.out.println("\n Ciudad de origen: " + merc.getRuta().getRuta().get(0));
 		System.out.println("Ciudad de destino: " + merc.getRuta().getRuta().get(-1));
 		System.out.println("Distancia: " + merc.getRuta().getDistancia());
-		System.out.println("\nEn este envío cuentas con una bonificación del 30%");
-		System.out.println("Precio: " + merc.getRuta().getPrecio() + "COP");
 		
-		double precio = merc.getRuta().getPrecio();
-		double des = (precio * 30)/100;
-		double precBon = precio - des;
+		double precBon;
+		System.out.println("Precio: " + merc.getRuta().getPrecio() + "COP");
+		if(merc.getIsBonificacion() == false) {
+			System.out.println("\nEn este envío cuentas con una bonificación del 30%");
+			double precio = merc.getRuta().getPrecio();
+			double des = (precio * 30)/100;
+			precBon = precio - des;
+		}
+		else {
+			System.out.println("\nEn este envío cuentas con una bonificación del 45%");
+			double precio = merc.getRuta().getPrecio();
+			double des = (precio * 45)/100;
+			precBon = precio - des;
+		}
 		System.out.println("Precio con bonificación : " + precBon + "COP");
 		
 		System.out.println("-------------------------------------------");
@@ -64,14 +73,23 @@ public class prueba {
 		System.out.println("\n Ciudad de origen: " + viaje.getRuta().getRuta().get(0));
 		System.out.println("Ciudad de destino: " + viaje.getRuta().getRuta().get(-1));
 		System.out.println("Distancia: " + viaje.getRuta().getDistancia());
-		System.out.println("\nEn este viaje cuentas con una bonificación del 30%");
+		
 		System.out.println("Precio: " + viaje.getRuta().getPrecio() + "COP");
 		
-		double precio = viaje.getRuta().getPrecio();
-		double des = (precio * 30)/100;
-		double precBon = precio - des;
-		System.out.println("Precio con bonificación : " + precBon + "COP");
-		
+		double precBon;
+		System.out.println("Precio: " + viaje.getRuta().getPrecio() + "COP");
+		if(viaje.getIsBonificacion() == false) {
+			System.out.println("\nEn este viaje cuentas con una bonificación del 30%");
+			double precio = viaje.getRuta().getPrecio();
+			double des = (precio * 30)/100;
+			precBon = precio - des;
+		}
+		else {
+			System.out.println("\nEn este viaje cuentas con una bonificación del 45%");
+			double precio = viaje.getRuta().getPrecio();
+			double des = (precio * 45)/100;
+			precBon = precio - des;
+		}
 		System.out.println("-------------------------------------------");
 		System.out.println("Gracias por confiar en nostros. STP.");
 		System.out.println("-------------------------------------------");

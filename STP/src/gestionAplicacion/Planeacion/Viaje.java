@@ -13,7 +13,7 @@ public class Viaje {
 	private ArrayList<Conductor> conductor = new ArrayList<Conductor>();
 	private String fecha;
 	private VehiculoPasajeros vehiculo;
-	private boolean isBonificacion;
+	private boolean isBonificacion = false;
 	
 
 	//Getters and setters
