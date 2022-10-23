@@ -1,6 +1,7 @@
 package gestionAplicacion.Personas;
+import java.io.Serializable;
 
-public abstract class Persona {
+public abstract class Persona implements Serializable{
     private String nombre;
     private String documento;
     private String direccion;

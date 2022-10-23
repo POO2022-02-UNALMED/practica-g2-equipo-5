@@ -8,13 +8,12 @@ import gestionAplicacion.Vehiculos.VehiculoPasajeros;
 
 import gestionAplicacion.Destinos.*;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
 
-public class Usuario extends Persona  implements Serializable{
+public class Usuario extends Persona{
 	
 	private ArrayList<Viaje> viaje = new ArrayList<Viaje>();
 	private ArrayList<Mercancia> mercancia = new ArrayList<Mercancia>();
