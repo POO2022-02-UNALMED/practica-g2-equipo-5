@@ -103,13 +103,10 @@ public class Usuario extends Persona  implements Serializable{
 	public void agregarFacturacion(Facturacion facturacion) {
 		this.facturacion.add(facturacion);
 	}
-
-
-	// Funcionalidad Crear Viaje
 	
 	
 	/**************FUNCIONALIDAD FACTURACION*****************/
-		
+	
 			
 		public Facturacion generarFacturacion(Viaje viaje, Usuario user) {
 			
@@ -218,8 +215,8 @@ public class Usuario extends Persona  implements Serializable{
 				+ "*************************************************\n");
 		
 	}
-	
-	
+
+
 	public void mercBon(Usuario user, Mercancia merc) {
 		System.out.println("-------------------------------------------");
 		System.out.println("SISTEMA DE TRANSPORTE PERSONALIZADO");
@@ -233,19 +230,28 @@ public class Usuario extends Persona  implements Serializable{
 		System.out.println("\n Ciudad de origen: " + merc.getRuta().getRuta().get(0));
 		System.out.println("Ciudad de destino: " + merc.getRuta().getRuta().get(-1));
 		System.out.println("Distancia: " + merc.getRuta().getDistancia());
-		System.out.println("\nEn este envío cuentas con una bonificación del 30%");
+
+		double precBon;
 		System.out.println("Precio: " + merc.getRuta().getPrecio() + "COP");
-		
-		double precio = merc.getRuta().getPrecio();
-		double des = (precio * 30)/100;
-		double precBon = precio - des;
+		if(merc.getIsBonificacion() == false) {
+			System.out.println("\nEn este envío cuentas con una bonificación del 30%");
+			double precio = merc.getRuta().getPrecio();
+			double des = (precio * 30)/100;
+			precBon = precio - des;
+		}
+		else {
+			System.out.println("\nEn este envío cuentas con una bonificación del 45%");
+			double precio = merc.getRuta().getPrecio();
+			double des = (precio * 45)/100;
+			precBon = precio - des;
+		}
 		System.out.println("Precio con bonificación : " + precBon + "COP");
-		
+
 		System.out.println("-------------------------------------------");
 		System.out.println("Gracias por confiar en nostros. STP.");
 		System.out.println("-------------------------------------------");
 	}
-	
+
 	public void merc(Usuario user, Mercancia merc) {
 		System.out.println("-------------------------------------------");
 		System.out.println("SISTEMA DE TRANSPORTE PERSONALIZADO");
@@ -264,7 +270,7 @@ public class Usuario extends Persona  implements Serializable{
 		System.out.println("Gracias por confiar en nostros. STP.");
 		System.out.println("-------------------------------------------");
 	}
-	
+
 	public void ViajBon(Usuario user, Viaje viaje) {
 		System.out.println("-------------------------------------------");
 		System.out.println("SISTEMA DE TRANSPORTE PERSONALIZADO");
@@ -278,14 +284,43 @@ public class Usuario extends Persona  implements Serializable{
 		System.out.println("\n Ciudad de origen: " + viaje.getRuta().getRuta().get(0));
 		System.out.println("Ciudad de destino: " + viaje.getRuta().getRuta().get(-1));
 		System.out.println("Distancia: " + viaje.getRuta().getDistancia());
-		System.out.println("\nEn este viaje cuentas con una bonificación del 30%");
+
 		System.out.println("Precio: " + viaje.getRuta().getPrecio() + "COP");
-		
-		double precio = viaje.getRuta().getPrecio();
-		double des = (precio * 30)/100;
-		double precBon = precio - des;
-		System.out.println("Precio con bonificación : " + precBon + "COP");
-		
+
+		double precBon;
+		System.out.println("Precio: " + viaje.getRuta().getPrecio() + "COP");
+		if(viaje.getIsBonificacion() == false) {
+			System.out.println("\nEn este viaje cuentas con una bonificación del 30%");
+			double precio = viaje.getRuta().getPrecio();
+			double des = (precio * 30)/100;
+			precBon = precio - des;
+		}
+		else {
+			System.out.println("\nEn este viaje cuentas con una bonificación del 45%");
+			double precio = viaje.getRuta().getPrecio();
+			double des = (precio * 45)/100;
+			precBon = precio - des;
+		}
+		System.out.println("-------------------------------------------");
+		System.out.println("Gracias por confiar en nostros. STP.");
+		System.out.println("-------------------------------------------");
+	}
+
+	public void Viaj(Usuario user, Viaje viaje) {
+		System.out.println("-------------------------------------------");
+		System.out.println("SISTEMA DE TRANSPORTE PERSONALIZADO");
+		System.out.println("-------------------------------------------");
+		System.out.println("Nombre :" + user.getNombre());
+		System.out.println("Documento: " + user.getDocumento());
+		System.out.println("Lista de acompañantes: ");
+		for(Usuario prod : viaje.getPasajeros()) {
+			System.out.println("- " + prod.getNombre() + ", " + prod.getEdad() + " años.");
+		}
+		System.out.println("\n Ciudad de origen: " + viaje.getRuta().getRuta().get(0));
+		System.out.println("Ciudad de destino: " + viaje.getRuta().getRuta().get(-1));
+		System.out.println("Distancia: " + viaje.getRuta().getDistancia());
+		System.out.println("Precio: " + viaje.getRuta().getPrecio() + "COP");
+
 		System.out.println("-------------------------------------------");
 		System.out.println("Gracias por confiar en nostros. STP.");
 		System.out.println("-------------------------------------------");
