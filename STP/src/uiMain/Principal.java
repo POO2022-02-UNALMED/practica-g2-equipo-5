@@ -56,10 +56,7 @@ public class Principal {
 
 		Viaje viaje = new Viaje();
 
-		ArrayList<Ruta> rutas = usuario.getRuta();
-		int ultIndex = rutas.size();
-		ultIndex--;
-		Ruta ruta = rutas.get(ultIndex);
+		Ruta ruta = usuario.getRuta();
 
 		Scanner scan = new Scanner(System.in);
 		System.out.print("-> Ingrese numero de pasajeros: ");
@@ -150,10 +147,7 @@ public class Principal {
 
 		mercancia.agregarUsuario(user);
 
-		ArrayList<Ruta> rutas = user.getRuta();
-		int ultIndex = rutas.size();
-		ultIndex--;
-		mercancia.setRuta(rutas.get(ultIndex));
+		Ruta ruta = user.getRuta();
 
 		Scanner scan = new Scanner(System.in);
 
@@ -298,7 +292,7 @@ public class Principal {
 			case 1:
 				
 				System.out.println("\nSELECCIONÓ LA OPCIÓN DE CREAR RUTA");
-				menuGenerarRuta(Guz);
+				menuGenerarRuta(pUsuario);
 				break;
 			case 2:
 				System.out.println("\nSELECCIONÓ LA OPCIÓN DE CREAR VIAJE");
