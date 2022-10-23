@@ -121,21 +121,21 @@ public class Usuario extends Persona{
 				
 				if (opcion == 1) {
 					
-					System.out.println(Viaj());
+					Viaj(user, viaje);
 					
 				}      else if (viaje.getIsBonificacion()) {	
 						
-						System.out.println(ViajBon(user));
+						ViajBon(user, viaje);
 						}
 				
 				
 				else if(opcion == 2) {
 					
-					System.out.println(merc(user));
+					merc(user, merc);
 					
-				}      else if (getIsBonificacion()) {
+				}      else if (viaje.getIsBonificacion()) {
 					
-					    System.out.prinln(mercBon(user));
+					    mercBon(user, merc);
 					    }
 				
 				
@@ -149,7 +149,6 @@ public class Usuario extends Persona{
 			} while (opcion <= 3);
 			
 		}
-		
 
 	public void mercBon(Usuario user, Mercancia merc) {
 		System.out.println("-------------------------------------------");
