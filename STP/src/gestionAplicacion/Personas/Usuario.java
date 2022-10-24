@@ -393,7 +393,7 @@ public class Usuario extends Persona{
 			en++;
 		}
 		
-		System.out.println("Ingrese el número de la ruta a tomar");
+		System.out.println("->Ingrese el número de la ruta a tomar: ");
 		int numRuta = sc.nextInt();
 		numRuta--;
 		
