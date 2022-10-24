@@ -96,7 +96,6 @@ public class Principal {
 		ArrayList<ArrayList<Conexion>> ru = usuario.rutas(ciudades[origen-1], ciudades[destino-1], b);
 		System.out.println("----------------------Rutas disponibles----------------------");
 		usuario.recorrerRutas(ru);
-		sc.close();
 	}
 
 	/* Funcionalidad Crear Viaje */
