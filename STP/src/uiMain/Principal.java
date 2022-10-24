@@ -18,6 +18,58 @@ import baseDatos.Serializador;
 
 public class Principal {
 	
+	/* Funcionalidad Facturación */
+	public static void generarFactura(Usuario usuario){
+		Scanner in = new Scanner(System.in);
+		System.out.println("1. Mercancia");
+		System.out.println("2. Viaje");
+		System.out.print("De la anterior lista, seleccine la opción de la cuál desea conocer su factura: ");
+		int vEntrada = in.nextInt();
+
+		switch (vEntrada){
+			case 1:
+				ArrayList<Mercancia> envios = usuario.getMercancia();
+				int indMer = 1;
+				for (Mercancia merc : envios){
+					ArrayList<Conexion> ruta = merc.getRuta().getRuta();
+					System.out.println(indMer + ". Origen: " + ruta.get(0) + ". Destino: " + ruta.get(-1));
+					indMer++;
+				}
+				System.out.print("De la lista anterior, seleccione un envio: ");
+				int selec = in.nextInt();
+				Mercancia mercSeleccionada = envios.get(selec);
+
+				if(selec % 5 == 0){
+					usuario.mercBon(mercSeleccionada);
+				}
+				else{
+					usuario.merc(mercSeleccionada);
+				}
+			case 2:
+				ArrayList<Viaje> viajes = usuario.getViaje();
+				int indV = 1;
+				for(Viaje viaje : viajes){
+					ArrayList<Conexion> ruta = viaje.getRuta().getRuta();
+					System.out.println(indV + ". Origen: " + ruta.get(0) + ". Destino: " + ruta.get(-1));
+					indV++;
+				}
+				System.out.print("De la lista anterior, seleccione un viaje: ");
+				int selec2 = in.nextInt();
+				Viaje vSeleccionado = viajes.get(selec2);
+
+				if(selec % 5 == 0){
+					usuario.viajBon(vSeleccionado);
+				}
+				else{
+					usuario.viaje(vSeleccionado);
+				}
+		}
+
+	}
+	
+
+
+	
 	/* Funcionalidad Generar Ruta */
 	
 	public static void menuGenerarRuta(Usuario usuario) {

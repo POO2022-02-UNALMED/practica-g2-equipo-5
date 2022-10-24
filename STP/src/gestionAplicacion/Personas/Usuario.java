@@ -1,7 +1,6 @@
 package gestionAplicacion.Personas;
 
 
-
 import gestionAplicacion.Planeacion.*;
 import gestionAplicacion.Vehiculos.VehiculoCarga;
 import gestionAplicacion.Vehiculos.VehiculoPasajeros;
@@ -104,58 +103,14 @@ public class Usuario extends Persona{
 	}
 	
 	
-	/**************FUNCIONALIDAD FACTURACION*****************/
 	
-			
-		public Facturacion generarFacturacion(Viaje viaje, Usuario user) {
-			
-			int opcion;
-			
-			do {
-				
-				Scanner snc = new Scanner (System.in);
-				System.out.println("1. Conocer la factura del viaje");
-				System.out.println("2. Conocer la factura de mercancia");
-				System.out.println("3. Salir");
-				opcion = snc.nextInt();
-				
-				if (opcion == 1) {
-					
-					Viaj(user, viaje);
-					
-				}      else if (viaje.getIsBonificacion()) {	
-						
-						ViajBon(user, viaje);
-						}
-				
-				
-				else if(opcion == 2) {
-					
-					merc(user, merc);
-					
-				}      else if (viaje.getIsBonificacion()) {
-					
-					    mercBon(user, merc);
-					    }
-				
-				 
-				else if (opcion == 3) {
-					
-					System.exit(0);
-					
-					
-				}
-							
-			} while (opcion <= 3);
-			
-		}
 
-	public void mercBon(Usuario user, Mercancia merc) {
+	public void mercBon(Mercancia merc) {
 		System.out.println("-------------------------------------------");
 		System.out.println("SISTEMA DE TRANSPORTE PERSONALIZADO");
 		System.out.println("-------------------------------------------");
-		System.out.println("Nombre :" + user.getNombre());
-		System.out.println("Documento: " + user.getDocumento());
+		System.out.println("Nombre :" + this.getNombre());
+		System.out.println("Documento: " + this.getDocumento());
 		System.out.println("Lista de productos: ");
 		for(Producto prod : merc.getProductos()) {
 			System.out.println("- " + prod.getTipo() + ", " + prod.getPeso() + " kg.");
@@ -163,7 +118,7 @@ public class Usuario extends Persona{
 		System.out.println("\n Ciudad de origen: " + merc.getRuta().getRuta().get(0));
 		System.out.println("Ciudad de destino: " + merc.getRuta().getRuta().get(-1));
 		System.out.println("Distancia: " + merc.getRuta().getDistancia());
-
+		
 		double precBon;
 		System.out.println("Precio: " + merc.getRuta().getPrecio() + "COP");
 		if(merc.getIsBonificacion() == false) {
@@ -179,18 +134,18 @@ public class Usuario extends Persona{
 			precBon = precio - des;
 		}
 		System.out.println("Precio con bonificación : " + precBon + "COP");
-
+		
 		System.out.println("-------------------------------------------");
 		System.out.println("Gracias por confiar en nostros. STP.");
 		System.out.println("-------------------------------------------");
 	}
-
-	public void merc(Usuario user, Mercancia merc) {
+	
+	public void merc(Mercancia merc) {
 		System.out.println("-------------------------------------------");
 		System.out.println("SISTEMA DE TRANSPORTE PERSONALIZADO");
 		System.out.println("-------------------------------------------");
-		System.out.println("Nombre :" + user.getNombre());
-		System.out.println("Documento: " + user.getDocumento());
+		System.out.println("Nombre :" + this.getNombre());
+		System.out.println("Documento: " + this.getDocumento());
 		System.out.println("Lista de productos: ");
 		for(Producto prod : merc.getProductos()) {
 			System.out.println("- " + prod.getTipo() + ", " + prod.getPeso() + " kg.");
@@ -203,13 +158,13 @@ public class Usuario extends Persona{
 		System.out.println("Gracias por confiar en nostros. STP.");
 		System.out.println("-------------------------------------------");
 	}
-
-	public void ViajBon(Usuario user, Viaje viaje) {
+	
+	public void ViajBon(Viaje viaje) {
 		System.out.println("-------------------------------------------");
 		System.out.println("SISTEMA DE TRANSPORTE PERSONALIZADO");
 		System.out.println("-------------------------------------------");
-		System.out.println("Nombre :" + user.getNombre());
-		System.out.println("Documento: " + user.getDocumento());
+		System.out.println("Nombre :" + this.getNombre());
+		System.out.println("Documento: " + this.getDocumento());
 		System.out.println("Lista de acompañantes: ");
 		for(Usuario prod : viaje.getPasajeros()) {
 			System.out.println("- " + prod.getNombre() + ", " + prod.getEdad() + " años.");
@@ -217,12 +172,12 @@ public class Usuario extends Persona{
 		System.out.println("\n Ciudad de origen: " + viaje.getRuta().getRuta().get(0));
 		System.out.println("Ciudad de destino: " + viaje.getRuta().getRuta().get(-1));
 		System.out.println("Distancia: " + viaje.getRuta().getDistancia());
-
+		
 		System.out.println("Precio: " + viaje.getRuta().getPrecio() + "COP");
-
+		
 		double precBon;
 		System.out.println("Precio: " + viaje.getRuta().getPrecio() + "COP");
-		if(!viaje.getIsBonificacion()) {
+		if(viaje.getIsBonificacion() == false) {
 			System.out.println("\nEn este viaje cuentas con una bonificación del 30%");
 			double precio = viaje.getRuta().getPrecio();
 			double des = (precio * 30)/100;
@@ -238,13 +193,13 @@ public class Usuario extends Persona{
 		System.out.println("Gracias por confiar en nostros. STP.");
 		System.out.println("-------------------------------------------");
 	}
-
-	public void Viaj(Usuario user, Viaje viaje) {
+	
+	public void Viaj(Viaje viaje) {
 		System.out.println("-------------------------------------------");
 		System.out.println("SISTEMA DE TRANSPORTE PERSONALIZADO");
 		System.out.println("-------------------------------------------");
-		System.out.println("Nombre :" + user.getNombre());
-		System.out.println("Documento: " + user.getDocumento());
+		System.out.println("Nombre :" + this.getNombre());
+		System.out.println("Documento: " + this.getDocumento());
 		System.out.println("Lista de acompañantes: ");
 		for(Usuario prod : viaje.getPasajeros()) {
 			System.out.println("- " + prod.getNombre() + ", " + prod.getEdad() + " años.");
@@ -253,7 +208,7 @@ public class Usuario extends Persona{
 		System.out.println("Ciudad de destino: " + viaje.getRuta().getRuta().get(-1));
 		System.out.println("Distancia: " + viaje.getRuta().getDistancia());
 		System.out.println("Precio: " + viaje.getRuta().getPrecio() + "COP");
-
+		
 		System.out.println("-------------------------------------------");
 		System.out.println("Gracias por confiar en nostros. STP.");
 		System.out.println("-------------------------------------------");
