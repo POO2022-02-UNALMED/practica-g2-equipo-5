@@ -7,6 +7,7 @@ import gestionAplicacion.Personas.Usuario;
 import gestionAplicacion.Vehiculos.VehiculoPasajeros;
 
 public class Viaje {
+	private Usuario uPrincipal; 
 	private Ruta ruta;
 	private int nPasajeros=0;
 	private ArrayList<Usuario> pasajeros = new ArrayList<Usuario>();
@@ -15,11 +16,32 @@ public class Viaje {
 	private VehiculoPasajeros vehiculo;
 	private boolean isBonificacion = false;
 	
+	
+	public Viaje(Ruta ruta) {
+		this.ruta = ruta;
+	}
+	
+	public Viaje() {
+		
+	}
 
 	//Getters and setters
+	
 	public boolean getIsBonificacion() {
 		return isBonificacion;
 	}
+	public Usuario getuPrincipal() {
+		return uPrincipal;
+	}
+
+	public void setuPrincipal(Usuario uPrincipal) {
+		this.uPrincipal = uPrincipal;
+	}
+
+	public void setBonificacion(boolean isBonificacion) {
+		this.isBonificacion = isBonificacion;
+	}
+
 	public void setIsBonificacion(boolean isBonificacion) {
 		this.isBonificacion= isBonificacion;
 	}

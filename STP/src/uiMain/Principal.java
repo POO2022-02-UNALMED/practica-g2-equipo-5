@@ -30,15 +30,18 @@ public class Principal {
 			case 1:
 				ArrayList<Mercancia> envios = usuario.getMercancia();
 				int indMer = 1;
-				for (Mercancia merc : envios){
+				for(Mercancia merc : envios){
 					ArrayList<Conexion> ruta = merc.getRuta().getRuta();
-					System.out.println(indMer + ". Origen: " + ruta.get(0) + ". Destino: " + ruta.get(-1));
+					int tRuta = ruta.size();
+					tRuta--;
+					System.out.println(indMer + ". Origen: " + ruta.get(0).ciudadA + ". Destino: " + ruta.get(tRuta).ciudadB);
 					indMer++;
 				}
 				System.out.print("-> De la lista anterior, seleccione un envio: ");
 				int selec = in.nextInt();
+				selec--;
 				Mercancia mercSeleccionada = envios.get(selec);
-
+				selec++;
 				if(selec % 5 == 0){
 					usuario.mercBon(mercSeleccionada);
 				}
@@ -50,13 +53,16 @@ public class Principal {
 				int indV = 1;
 				for(Viaje viaje : viajes){
 					ArrayList<Conexion> ruta = viaje.getRuta().getRuta();
-					System.out.println(indV + ". Origen: " + ruta.get(0) + ". Destino: " + ruta.get(-1));
+					int tRuta = ruta.size();
+					tRuta--;
+					System.out.println(indV + ". Origen: " + ruta.get(0).ciudadA + ". Destino: " + ruta.get(tRuta).ciudadB);
 					indV++;
 				}
 				System.out.print("-> De la lista anterior, seleccione un viaje: ");
 				int selec2 = in.nextInt();
+				selec2--;
 				Viaje vSeleccionado = viajes.get(selec2);
-
+				selec2++;
 				if(selec2 % 5 == 0){
 					usuario.viajBon(vSeleccionado);
 				}
@@ -104,7 +110,8 @@ public class Principal {
 		Viaje viaje = new Viaje();
 
 		Ruta ruta = usuario.getRuta();
-
+		viaje.setRuta(ruta);
+		
 		Scanner scan = new Scanner(System.in);
 		System.out.print("-> Ingrese numero de pasajeros: ");
 		int nPasajeros = scan.nextInt();
@@ -195,7 +202,8 @@ public class Principal {
 		mercancia.agregarUsuario(user);
 
 		Ruta ruta = user.getRuta();
-
+		mercancia.setRuta(ruta);
+		
 		Scanner scan = new Scanner(System.in);
 
 		int nProductos;
@@ -251,7 +259,6 @@ public class Principal {
 		mercancia.setFecha(fecha);
 
 		System.out.println("\nFelicidades, ha completado con éxito su envio.");
-		scan.close();
 		user.agregarMercancia(mercancia);
 	}
 	
@@ -431,10 +438,19 @@ public class Principal {
 		
 		Usuario Guz = Deserializador.deserializador(ub);
 		Guz = (Guz.getNombre()==null)?new Usuario("Jaime Alberto Guzmán", "123456789", "20"):Guz;
-		Guz.agregarMercancia(new Mercancia());
-		Guz.agregarViaje(new Viaje());
-		Guz.agregarFacturacion(new Facturacion());
-
+		
+		ArrayList<Conexion> ruta1 = new ArrayList<Conexion>();
+		ruta1.add(Conexion.A);
+		Ruta ruta = new Ruta(ruta1, 115000, 150, "4 horas");
+		
+		Guz.agregarMercancia(new Mercancia(ruta));
+		Guz.agregarMercancia(new Mercancia(ruta));
+		Guz.agregarMercancia(new Mercancia(ruta));
+		Guz.agregarMercancia(new Mercancia(ruta));
+		Guz.agregarViaje(new Viaje(ruta));
+		Guz.agregarViaje(new Viaje(ruta));
+		Guz.agregarViaje(new Viaje(ruta));
+		
 		Scanner scan = new Scanner(System.in);
 		System.out.println("-------------------------------------------");
 		System.out.println("  ____            _____           ____  \n" + " / ___|          |_   _|         |  _ \\ \n"
@@ -493,6 +509,7 @@ public class Principal {
 				break;
 			case 5:
 				System.out.println("\nSELECCIONÓ LA OPCIÓN DE VER FACTURA");
+				generarFactura(pUsuario);
 				break;
 			case 6:
 				salirDelSistema(pUsuario);

@@ -90,11 +90,13 @@ public class Usuario extends Persona{
 
 	public void agregarViaje(Viaje viaje) {
 		this.viaje.add(viaje);
+		viaje.setuPrincipal(this);
 
 	}
 
 	public void agregarMercancia(Mercancia mercancia) {
 		this.mercancia.add(mercancia);
+		mercancia.setUsuario(this);
 
 	}
 
@@ -115,21 +117,24 @@ public class Usuario extends Persona{
 		for(Producto prod : merc.getProductos()) {
 			System.out.println("- " + prod.getTipo() + ", " + prod.getPeso() + " kg.");
 		}
-		System.out.println("\n Ciudad de origen: " + merc.getRuta().getRuta().get(0));
-		System.out.println("Ciudad de destino: " + merc.getRuta().getRuta().get(-1));
-		System.out.println("Distancia: " + merc.getRuta().getDistancia());
+		
+		Conexion rutaGenerada = merc.getRuta().getRuta().get(0);
+		double precio = rutaGenerada.precio;
+		precio += merc.getVehiculo().getPrecio();
+		precio += merc.getConductor().getPrecio();
+		System.out.println("\n Ciudad de origen: " + rutaGenerada.ciudadA);
+		System.out.println("Ciudad de destino: " + rutaGenerada.ciudadB);
+		System.out.println("Distancia: " + rutaGenerada.distancia);
+		System.out.println("Precio: " + precio + "COP");
 		
 		double precBon;
-		System.out.println("Precio: " + merc.getRuta().getPrecio() + "COP");
 		if(merc.getIsBonificacion() == false) {
 			System.out.println("\nEn este envío cuentas con una bonificación del 30%");
-			double precio = merc.getRuta().getPrecio();
 			double des = (precio * 30)/100;
 			precBon = precio - des;
 		}
 		else {
 			System.out.println("\nEn este envío cuentas con una bonificación del 45%");
-			double precio = merc.getRuta().getPrecio();
 			double des = (precio * 45)/100;
 			precBon = precio - des;
 		}
@@ -150,10 +155,15 @@ public class Usuario extends Persona{
 		for(Producto prod : merc.getProductos()) {
 			System.out.println("- " + prod.getTipo() + ", " + prod.getPeso() + " kg.");
 		}
-		System.out.println("\n Ciudad de origen: " + merc.getRuta().getRuta().get(0));
-		System.out.println("Ciudad de destino: " + merc.getRuta().getRuta().get(-1));
-		System.out.println("Distancia: " + merc.getRuta().getDistancia());
-		System.out.println("Precio: " + merc.getRuta().getPrecio() + "COP");
+		Conexion rutaGenerada = merc.getRuta().getRuta().get(0);
+		double precio = rutaGenerada.precio;
+		precio += merc.getVehiculo().getPrecio();
+		precio += merc.getConductor().getPrecio();
+		System.out.println("\n Ciudad de origen: " + rutaGenerada.ciudadA);
+		System.out.println("Ciudad de destino: " + rutaGenerada.ciudadB);
+		System.out.println("Distancia: " + rutaGenerada.distancia);
+		System.out.println("Precio: " + precio + "COP");
+		
 		System.out.println("-------------------------------------------");
 		System.out.println("Gracias por confiar en nostros. STP.");
 		System.out.println("-------------------------------------------");
@@ -169,23 +179,29 @@ public class Usuario extends Persona{
 		for(Usuario prod : viaje.getPasajeros()) {
 			System.out.println("- " + prod.getNombre() + ", " + prod.getEdad() + " años.");
 		}
-		System.out.println("\n Ciudad de origen: " + viaje.getRuta().getRuta().get(0));
-		System.out.println("Ciudad de destino: " + viaje.getRuta().getRuta().get(-1));
-		System.out.println("Distancia: " + viaje.getRuta().getDistancia());
+		Conexion rutaGenerada = viaje.getRuta().getRuta().get(0);
+		double precio = rutaGenerada.precio;
+		precio += viaje.getVehiculo().getPrecio();
+		double precioConductores = 0;
+		for (Conductor cond : viaje.getConductor()) {
+			precioConductores += cond.getPrecio();
+		}
+		precio += precioConductores;
 		
-		System.out.println("Precio: " + viaje.getRuta().getPrecio() + "COP");
+		System.out.println("\n Ciudad de origen: " + rutaGenerada.ciudadA);
+		System.out.println("Ciudad de destino: " + rutaGenerada.ciudadB);
+		System.out.println("Distancia: " + rutaGenerada.distancia);
+		System.out.println("Precio: " + precio + "COP");
 		
 		double precBon;
 		System.out.println("Precio: " + viaje.getRuta().getPrecio() + "COP");
 		if(viaje.getIsBonificacion() == false) {
 			System.out.println("\nEn este viaje cuentas con una bonificación del 30%");
-			double precio = viaje.getRuta().getPrecio();
 			double des = (precio * 30)/100;
 			precBon = precio - des;
 		}
 		else {
 			System.out.println("\nEn este viaje cuentas con una bonificación del 45%");
-			double precio = viaje.getRuta().getPrecio();
 			double des = (precio * 45)/100;
 			precBon = precio - des;
 		}
@@ -204,10 +220,18 @@ public class Usuario extends Persona{
 		for(Usuario prod : viaje.getPasajeros()) {
 			System.out.println("- " + prod.getNombre() + ", " + prod.getEdad() + " años.");
 		}
-		System.out.println("\n Ciudad de origen: " + viaje.getRuta().getRuta().get(0));
-		System.out.println("Ciudad de destino: " + viaje.getRuta().getRuta().get(-1));
-		System.out.println("Distancia: " + viaje.getRuta().getDistancia());
-		System.out.println("Precio: " + viaje.getRuta().getPrecio() + "COP");
+		Conexion rutaGenerada = viaje.getRuta().getRuta().get(0);
+		double precio = rutaGenerada.precio;
+		precio += viaje.getVehiculo().getPrecio();
+		double precioConductores = 0;
+		for (Conductor cond : viaje.getConductor()) {
+			precioConductores += cond.getPrecio();
+		}
+		precio += precioConductores;
+		System.out.println("\n Ciudad de origen: " + rutaGenerada.ciudadA);
+		System.out.println("Ciudad de destino: " + rutaGenerada.ciudadB);
+		System.out.println("Distancia: " + rutaGenerada.distancia);
+		System.out.println("Precio: " + precio + "COP");
 		
 		System.out.println("-------------------------------------------");
 		System.out.println("Gracias por confiar en nostros. STP.");

@@ -16,16 +16,13 @@ public class Mercancia {
 	private String fecha;
 	private boolean isBonificacion = false;
 	
-
-	public Mercancia(Usuario usuario, Ruta ruta, ArrayList<Producto> productos, VehiculoCarga vehiculo,
-					 Conductor conductor, String fecha) {
-		super();
-		this.usuario = usuario;
+	
+	
+	public String toString() {
+		return "Envio de: " + this.getUsuario();
+	}
+	public Mercancia(Ruta ruta) { 
 		this.ruta = ruta;
-		this.productos = productos;
-		this.vehiculo = vehiculo;
-		this.conductor = conductor;
-		this.fecha = fecha;
 	}
 	public Mercancia() {
 	}
