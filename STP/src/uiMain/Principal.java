@@ -274,13 +274,13 @@ public class Principal {
 		}else {
 			
 			int contadorViajes = 5;
-			while(cantidadViajes<contadorViajes) {
+			while(cantidadViajes>contadorViajes) {
 				contadorViajes+=5;
 			}
 			int viajesFaltantes=contadorViajes-cantidadViajes;
 			
 			int contadorMercancia = 5;
-			while(cantidadMercancia<contadorMercancia) {
+			while(cantidadMercancia>contadorMercancia) {
 				contadorMercancia+=5;
 			}
 			int envioMercanciaFaltantes=contadorMercancia-cantidadMercancia;
@@ -296,7 +296,7 @@ public class Principal {
 					+ "\n2. Envio de mercancia.");
 			int opcionBonificacion = input.nextInt();
 			
-			System.out.println("Ha seleccionado la opcion: " + opcionBonificacion +"");
+			System.out.println("\n\nHa seleccionado la opcion: " + opcionBonificacion );
 			
 			
 			
@@ -304,8 +304,9 @@ public class Principal {
 			if (opcionBonificacion == 1) { // OPCION VIAJE
 				
 				System.out.println("\nA continuacion por favor cree el nuevo viaje con reduccion del 30% en el precio");
-				crearViaje(usuario);
 				menuGenerarRuta(usuario);
+				crearViaje(usuario);
+				
 				
 				Viaje viaje = new Viaje();
 				String fecha = viaje.getFecha();
@@ -345,8 +346,9 @@ public class Principal {
 			
 			} else if (opcionBonificacion == 2) { //OPCION BONIFICACION
 				System.out.println("\nA continuacion por favor genere el envio de mercancia con reduccion del 30% en el costo del vehiculo");
-				enviarMercancia(usuario);
 				menuGenerarRuta(usuario);
+				enviarMercancia(usuario);
+				
 				
 				Mercancia mercancia = new Mercancia();
 				String fecha = mercancia.getFecha();
