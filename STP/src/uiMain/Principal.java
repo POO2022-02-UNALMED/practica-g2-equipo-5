@@ -23,7 +23,7 @@ public class Principal {
 		Scanner in = new Scanner(System.in);
 		System.out.println("1. Mercancia");
 		System.out.println("2. Viaje");
-		System.out.print("De la anterior lista, seleccine la opción de la cuál desea conocer su factura: ");
+		System.out.print("-> De la anterior lista, seleccine la opción de la cuál desea conocer su factura: ");
 		int vEntrada = in.nextInt();
 
 		switch (vEntrada){
@@ -35,7 +35,7 @@ public class Principal {
 					System.out.println(indMer + ". Origen: " + ruta.get(0) + ". Destino: " + ruta.get(-1));
 					indMer++;
 				}
-				System.out.print("De la lista anterior, seleccione un envio: ");
+				System.out.print("-> De la lista anterior, seleccione un envio: ");
 				int selec = in.nextInt();
 				Mercancia mercSeleccionada = envios.get(selec);
 
@@ -53,16 +53,17 @@ public class Principal {
 					System.out.println(indV + ". Origen: " + ruta.get(0) + ". Destino: " + ruta.get(-1));
 					indV++;
 				}
-				System.out.print("De la lista anterior, seleccione un viaje: ");
+				System.out.print("-> De la lista anterior, seleccione un viaje: ");
 				int selec2 = in.nextInt();
 				Viaje vSeleccionado = viajes.get(selec2);
 
-				if(selec % 5 == 0){
+				if(selec2 % 5 == 0){
 					usuario.viajBon(vSeleccionado);
 				}
 				else{
-					usuario.viaje(vSeleccionado);
+					usuario.viaj(vSeleccionado);
 				}
+			in.close();
 		}
 
 	}
@@ -95,6 +96,7 @@ public class Principal {
 		ArrayList<ArrayList<Conexion>> ru = usuario.rutas(ciudades[origen-1], ciudades[destino-1], b);
 		System.out.println("----------------------Rutas disponibles----------------------");
 		usuario.recorrerRutas(ru);
+		sc.close();
 	}
 
 	/* Funcionalidad Crear Viaje */

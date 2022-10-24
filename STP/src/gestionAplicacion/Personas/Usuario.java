@@ -159,7 +159,7 @@ public class Usuario extends Persona{
 		System.out.println("-------------------------------------------");
 	}
 	
-	public void ViajBon(Viaje viaje) {
+	public void viajBon(Viaje viaje) {
 		System.out.println("-------------------------------------------");
 		System.out.println("SISTEMA DE TRANSPORTE PERSONALIZADO");
 		System.out.println("-------------------------------------------");
@@ -194,7 +194,7 @@ public class Usuario extends Persona{
 		System.out.println("-------------------------------------------");
 	}
 	
-	public void Viaj(Viaje viaje) {
+	public void viaj(Viaje viaje) {
 		System.out.println("-------------------------------------------");
 		System.out.println("SISTEMA DE TRANSPORTE PERSONALIZADO");
 		System.out.println("-------------------------------------------");
