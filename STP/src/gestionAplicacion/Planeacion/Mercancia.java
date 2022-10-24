@@ -97,6 +97,5 @@ public class Mercancia {
 	
 	public void agregarUsuario(Usuario usuario) {
 		this.usuario = usuario;
-		usuario.agregarMercancia(this);
 	}
 }
