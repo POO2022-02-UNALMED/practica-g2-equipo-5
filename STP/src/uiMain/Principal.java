@@ -63,7 +63,7 @@ public class Principal {
 				else{
 					usuario.viaj(vSeleccionado);
 				}
-			in.close();
+		
 		}
 
 	}
@@ -184,7 +184,7 @@ public class Principal {
 
 			System.out.println("\nFelicidades, ha completado La creacion de su Viaje, que lo disfrute");
 		}
-		scan.close();
+
 		usuario.agregarViaje(viaje);
 	}
 
