@@ -9,7 +9,8 @@ import gestionAplicacion.Personas.Usuario;
 public class Serializador {
 	
 	public static void serializador(Usuario usuario) {
-		String ub = System.getProperty("user.dir") + "/src/baseDatos/temp/" + "Guzman.txt";
+		String ub = System.getProperty("user.dir") + "/STP/src/baseDatos/temp/" + "Guzman.txt";
+		
 		try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ub))){
 			oos.writeObject(usuario);
 		} catch(IOException e) {}

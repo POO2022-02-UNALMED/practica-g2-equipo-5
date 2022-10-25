@@ -19,6 +19,7 @@ public class Usuario extends Persona{
 	private ArrayList<Facturacion> facturacion = new ArrayList<Facturacion>();
 	private Ruta ruta;
 	private static ArrayList<Usuario> user = new ArrayList<Usuario>();
+	private String errorS = null;
 
 //Usuario hereda de persona
 
@@ -44,12 +45,17 @@ public class Usuario extends Persona{
 		super();
 	}
 	
+	public Usuario(String e) {
+		this.errorS = e;
+	}
 	public String presentacion() {
 		return this.nombre + ". CC " + this.documento + ". " + this.edad + " años de edad";
 	}
 	
 //Getters and setters
-
+	public String getErrorS() {
+		return this.errorS;
+	}
 	public ArrayList<Viaje> getViaje() {
 		return viaje;
 	}
