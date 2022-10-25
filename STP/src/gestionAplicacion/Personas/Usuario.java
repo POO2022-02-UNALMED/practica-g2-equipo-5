@@ -122,9 +122,9 @@ public class Usuario extends Persona{
 		double precio = rutaGenerada.precio;
 		precio += merc.getVehiculo().getPrecio();
 		precio += merc.getConductor().getPrecio();
-		System.out.println("\n Ciudad de origen: " + rutaGenerada.ciudadA);
+		System.out.println("\nCiudad de origen: " + rutaGenerada.ciudadA);
 		System.out.println("Ciudad de destino: " + rutaGenerada.ciudadB);
-		System.out.println("Distancia: " + rutaGenerada.distancia);
+		System.out.println("Distancia: " + rutaGenerada.distancia + " km");
 		System.out.println("Precio: " + precio + "COP");
 		
 		double precBon;
@@ -159,9 +159,9 @@ public class Usuario extends Persona{
 		double precio = rutaGenerada.precio;
 		precio += merc.getVehiculo().getPrecio();
 		precio += merc.getConductor().getPrecio();
-		System.out.println("\n Ciudad de origen: " + rutaGenerada.ciudadA);
+		System.out.println("\nCiudad de origen: " + rutaGenerada.ciudadA);
 		System.out.println("Ciudad de destino: " + rutaGenerada.ciudadB);
-		System.out.println("Distancia: " + rutaGenerada.distancia);
+		System.out.println("Distancia: " + rutaGenerada.distancia + " km");
 		System.out.println("Precio: " + precio + "COP");
 		
 		System.out.println("-------------------------------------------");
@@ -188,9 +188,9 @@ public class Usuario extends Persona{
 		}
 		precio += precioConductores;
 		
-		System.out.println("\n Ciudad de origen: " + rutaGenerada.ciudadA);
+		System.out.println("\nCiudad de origen: " + rutaGenerada.ciudadA);
 		System.out.println("Ciudad de destino: " + rutaGenerada.ciudadB);
-		System.out.println("Distancia: " + rutaGenerada.distancia);
+		System.out.println("Distancia: " + rutaGenerada.distancia + " km");
 		System.out.println("Precio: " + precio + "COP");
 		
 		double precBon;
@@ -228,9 +228,9 @@ public class Usuario extends Persona{
 			precioConductores += cond.getPrecio();
 		}
 		precio += precioConductores;
-		System.out.println("\n Ciudad de origen: " + rutaGenerada.ciudadA);
+		System.out.println("\nCiudad de origen: " + rutaGenerada.ciudadA);
 		System.out.println("Ciudad de destino: " + rutaGenerada.ciudadB);
-		System.out.println("Distancia: " + rutaGenerada.distancia);
+		System.out.println("Distancia: " + rutaGenerada.distancia + " km");
 		System.out.println("Precio: " + precio + "COP");
 		
 		System.out.println("-------------------------------------------");
@@ -417,7 +417,7 @@ public class Usuario extends Persona{
 			en++;
 		}
 		
-		System.out.println("->Ingrese el número de la ruta a tomar: ");
+		System.out.print("-> Ingrese el número de la ruta a tomar: ");
 		int numRuta = sc.nextInt();
 		numRuta--;
 		
