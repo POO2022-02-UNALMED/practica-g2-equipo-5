@@ -3,10 +3,12 @@ import gestionAplicacion.Personas.*;
 import gestionAplicacion.Destinos.*;
 import gestionAplicacion.Vehiculos.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Mercancia {
+public class Mercancia implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private Usuario usuario;
 	private Ruta ruta;
 	private ArrayList<Producto> productos = new ArrayList<Producto>();

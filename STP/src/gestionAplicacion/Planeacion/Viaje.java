@@ -1,12 +1,14 @@
 package gestionAplicacion.Planeacion;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import gestionAplicacion.Personas.Conductor;
 import gestionAplicacion.Personas.Usuario;
 import gestionAplicacion.Vehiculos.VehiculoPasajeros;
 
-public class Viaje {
+public class Viaje implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private Usuario uPrincipal; 
 	private Ruta ruta;
 	private int nPasajeros=0;
