@@ -44,6 +44,10 @@ public class Usuario extends Persona{
 		super();
 	}
 	
+	public String presentacion() {
+		return this.nombre + ". CC " + this.documento + ". " + this.edad + " años de edad";
+	}
+	
 //Getters and setters
 
 	public ArrayList<Viaje> getViaje() {

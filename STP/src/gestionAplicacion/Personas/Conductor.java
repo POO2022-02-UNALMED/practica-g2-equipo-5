@@ -25,6 +25,9 @@ public class Conductor extends Persona {
 		Conductor.conductores.add(this);
 	}
 
+	public String presentacion() {
+		return "Nombre: " + this.nombre + ". Edad: " + this.edad + " años. Experiencia: " + this.experiencia + " años"; 
+	}
 	//getters and setters
 	public Vehiculo getVehiculo() {
 		return vehiculo;

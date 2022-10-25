@@ -2,16 +2,20 @@ package gestionAplicacion.Personas;
 import java.io.Serializable;
 
 public abstract class Persona implements Serializable{
-    private String nombre;
-    private String documento;
-    private String direccion;
-    private String edad;
+    protected String nombre;
+    protected String documento;
+    protected String direccion;
+    protected String edad;
 
     public Persona(String nombre, String documento, String direccion, String edad) {
         this.nombre = nombre;
         this.documento = documento;
         this.direccion = direccion;
         this.edad = edad;
+    }
+    
+    public String presentacion() {
+    	return "Nombre: " + this.nombre + ". Edad: " + this.edad + " años "; 
     }
     public Persona() {
     	super();

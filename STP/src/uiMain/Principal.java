@@ -133,7 +133,7 @@ public class Principal {
 			numConductores = 1;
 		}
 
-		System.out.println("Ahora, se mostrarán los vehiculos que pueden transportar esta cantidad de pasajeros ");
+		System.out.println("\nAhora, se mostrarán los vehiculos que pueden transportar esta cantidad de pasajeros ");
 		
 		nPasajeros++;
 		ArrayList<VehiculoPasajeros> vehiculosPosibles = VehiculoPasajeros.validarCapacidad(numConductores, nPasajeros);
@@ -155,8 +155,7 @@ public class Principal {
 			System.out.println();
 			int indC = 1;
 			for (Conductor cond : conductores) {
-				System.out.println(indC + ". " + cond.getNombre() + ", " + cond.getEdad() + " años. "
-						+ cond.getExperiencia() + " años de experiencia");
+				System.out.println(indC + ". " + cond.presentacion());
 				indC++;
 			}
 
@@ -250,8 +249,7 @@ public class Principal {
 		ArrayList<Conductor> conductores = Conductor.getConductores();
 		int indC = 1;
 		for (Conductor cond : conductores) {
-			System.out.println(indC + ". " + cond.getNombre() + ", " + cond.getEdad() + " años. "
-					+ cond.getExperiencia() + " años de experiencia");
+			System.out.println(indC + ". " + cond.presentacion());
 			indC++;
 		}
 
@@ -467,8 +465,7 @@ public class Principal {
 		ArrayList<Usuario> usuarios = Usuario.getUser();
 		int indU = 1;
 		for (Usuario usuario : usuarios) {
-			System.out.println(indU + ". " + usuario.getNombre() + ", CC " + usuario.getDocumento() + ", "
-					+ usuario.getEdad() + " años de edad");
+			System.out.println(indU + ". " + usuario.presentacion());
 			indU++;
 		}
 
@@ -477,7 +474,8 @@ public class Principal {
 		indEntrada--;
 		Usuario pUsuario = usuarios.get(indEntrada);
 		
-		System.out.println("-> BIENVENIDO " + pUsuario.getNombre() + " <- ");
+		System.out.println("\n-> BIENVENIDO <- "
+				+ "\n" + pUsuario.getNombre() );
 		int entrada;
 		do {
 			System.out.println("\n-------------------------------------------");
