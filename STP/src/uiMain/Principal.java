@@ -439,9 +439,6 @@ public class Principal {
 		String ub = System.getProperty("user.dir") + "/STP/src/baseDatos/temp/" + "Guzman.txt";
 
 		Usuario Guz = Deserializador.deserializador(ub);
-		System.out.println("442 "+Guz.getErrorS());
-		System.out.println("443 "+Guz.getNombre());
-		System.out.println(Guz.getUser());
 		Guz = (Guz.getErrorS() == "error") ? new Usuario("Jaime Alberto Guzmán", "123456789", "20") : Guz;
 
 		ArrayList<Conexion> ruta1 = new ArrayList<Conexion>();
