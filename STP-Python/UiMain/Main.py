@@ -2,14 +2,10 @@ import os
 import tkinter as tk
 import tkinter as tk
 from tkinter import IntVar, messagebox as MessageBox
-from Conductor import Conductor
-from VehiculoCarga import VehiculoCarga
-from Mercancia import Mercancia
-from Producto import Producto
-from Ruta import Ruta
-from Usuario import Usuario
-from VehiculoPasajero import VehiculoPasajeros
-from Viaje import Viaje
+from gestionAplicacion.Personas import *
+from gestionAplicacion.Destinos import *
+from gestionAplicacion.Operatividad import *
+from gestionAplicacion.Vehiculos import *
 from GenerarRuta import *
 from EnviarMercancia import *
 from CrearViaje import *
