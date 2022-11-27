@@ -21,6 +21,7 @@ from Conexion import *
 
 #Usuario ------------------------------------------------------------------------------
 GUZ = Usuario("Jaime Alberto Guzman", "123456789", 20)
+GUZ.agregarMercancia(Mercancia())
 
 MAN = Conductor("Manuela Rivera", "5151531", 23, 10, 1000000)
 MAR = Conductor("Mariana Rodriguez", "555454", 40, 15, 10000)
@@ -323,10 +324,8 @@ def entrarMenu():
 
 
     def generarBonificacion():
-        if GUZ.getRuta() == None:
-            raise ExceptionRuta
-        else:
-            GenerarBonificacion(ventanaPrincipal, GUZ)
+        GenerarBonificacion(ventanaPrincipal, GUZ)
+
     mProcesosConsulta.add_command(label="BONIFICACION", font=("Inter", 11), command=generarBonificacion)
 
     

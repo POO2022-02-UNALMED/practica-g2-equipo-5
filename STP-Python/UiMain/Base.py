@@ -20,9 +20,9 @@ class Base:
         #Barra inferior
         infFrame = Frame(self.fr, width=790, height=30)
         infFrame.pack()
-        #Botones
         
+        #Botones
         bGuardarEM = Button(infFrame, text="GUARDAR", bg="#000028", fg="white", font=("Inter", 11))
-        bGuardarEM.place(width=250, height=30, x = 0, y = 0)
+        bGuardarEM.place(width=400, height=30, x = 0, y = 0)
         bVolverM = Button(infFrame, text="CANCELAR", bg="#000028", fg="white", font=("Inter", 11), command=cancelar)
-        bVolverM.place(width=250, height=30, x = 250, y = 0)
+        bVolverM.place(width=400, height=30, x = 400, y = 0)

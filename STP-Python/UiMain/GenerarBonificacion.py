@@ -9,13 +9,14 @@ from Base import *
 from CrearViaje import *
 from GenerarRuta import *
 from EnviarMercancia import *
+from ErrorAplicacion import *
 
 #-----BONIFICACION--------
 class GenerarBonificacion(Base):
     def __init__(self, master, usuario):
         super().__init__(master, "GENERAR BONIFICACIÓN")
         self.usuario = usuario
-        self.generarBonificacion(usuario)
+        self.generarBonificacion()
 
 
 
@@ -35,8 +36,12 @@ class GenerarBonificacion(Base):
 
             else:
                 messagebox.showinfo(message="A continuacion por favor realize el nuevo envío con reduccion del 30% en el precio", title="Cuenta con bonificación")
-                GenerarRuta(self.master, self.usuario)
-                EnviarMercancia(self.master, self.usuario)
+                
+                if (self.usuario.getRuta()==None):
+                    self.fr.destroy()
+                    raise ExceptionRuta
+                else:
+                    EnviarMercancia(self.fr, self.usuario)
 
                 mercancias = self.usuario.getMercancia()
                 tamañoM = len(mercancias)
@@ -87,8 +92,11 @@ class GenerarBonificacion(Base):
             else:
                 messagebox.showinfo(message="A continuacion por favor cree el nuevo viaje con reduccion del 30% en el precio", title="Cuenta con bonificación")
 
-                GenerarRuta(self.master,self.usuario)
-                CrearViaje(self.master,self.usuario)
+                if (self.usuario.getRuta()==None):
+                    self.fr.destroy()
+                    raise ExceptionRuta
+                else:
+                    CrearViaje(self.fr, self.usuario)
 
                 viajes = self.usuario.getViaje()
                 tamañoViajes = len(viajes)
@@ -135,17 +143,15 @@ class GenerarBonificacion(Base):
         #cenFrame = tk.Frame(frame, width=1090, height=785)
         #cenFrame.pack()
 
-        frameTittle = tk.LabelFrame(self.cenFrame, width=780, height=70, bg="#23d2aa")
-        frameTittle.place(x=10, y=10)
-        Tittle = tk.Label(frameTittle, text="GENERAR BONIFICACION", fg="#000028", font=("Inter", 15), bg="#23d2aa")
-        Tittle.place(x = 5, y = 5, width=800, height=50)
+        Tittle = tk.Label(self.cenFrame, text="GENERAR BONIFICACION", fg="#000028", font=("Inter", 11), bg="#23d2aa")
+        Tittle.place(x = 5, y = 5, width=790, height=30)
 
-        frameExplicacion = tk.LabelFrame(self.cenFrame, width=780, height=70, bg="#23d2aa")
-        frameExplicacion.place(x=10, y=85)
-        explicacion1 = "Cada 4 viajes, obtiene un 5to viaje con 30% de descuento y cada 4 envíos de mercancia, en el 5to obtiene 30% de descuento."
-        explicacion2="\n\nPara qué servicio desea obtener la bonificación:"
+        frameExplicacion = tk.Frame(self.cenFrame, bg="#23d2aa")
+        frameExplicacion.place(x=10, y=85, width=780, height=80)
+        explicacion1 = "\nCada 4 viajes, obtiene un 5to viaje con 30% de descuento\nCada 4 envíos de mercancia, en el 5to obtiene 30% de descuento."
+        explicacion2="\n\nPara qué servicio desea obtener la bonificación:\n"
         subtitulo = tk.Label(frameExplicacion, text=explicacion1+explicacion2 , fg="#000028", font=("Inter", 10), bg="#23d2aa")
-        subtitulo.place(x = 0, y = 0)
+        subtitulo.pack(expand=True)
 
         frameOpciones = tk.LabelFrame(self.cenFrame, width=480, height=138)
         frameOpciones.place(x=160, y=200)
