@@ -16,9 +16,9 @@ class GenerarFactura(Base):
         self.generarFactura()
 
 #Caso - Mercancia
-    def selecMercancia(usuario):
+
+    def selecMercancia():
         Mercancia = Mercancia
-        Viaje = Viaje
         
         if Mercancia == Mercancia:
             envios = usuario.getMercancias()
@@ -35,10 +35,13 @@ class GenerarFactura(Base):
             
             else:
                 usuario.mercancia(envios[sEnvio])
+                self.fr.destroy()
 
 
 #Caso - Viaje
-    def selectVaije(usuario):
+    def selectVaije():
+        Viaje = Viaje
+
         if Viaje == Viaje:
             viajes = usuario.getViajes()
             indV = 0
@@ -54,6 +57,8 @@ class GenerarFactura(Base):
             
                 else:
                     usuario.viaje(viajes[-1])
+                    self.fr.destroy()
+
 
 
 
@@ -64,9 +69,8 @@ Tittle.place(x = 0, y = 5, width=800, height=50)
 
 frameExplain = tk.LabelFrame(ventPrin, width=780, height=70, bg="#23d2aa")
 frameExplain.place(x=10, y=80)
-explain1 = "En esta seccion se muestra la factura de su viaje o del envio de su mercancia, por favor"
-explain2="\n\n indique cual factura desea conocer"
-subtitulo = tk.Label(frameExplain, text=explain1+explain2 , fg="#000028", font=("Inter", 14), bg="#23d2aa")
+explain1 = "           En esta seccion se muestra la factura de su viaje o del envio de su mercancia, por favor\nindique cual factura desea conocer."
+subtitulo = tk.Label(frameExplain, text=explain1 , fg="#000028", font=("Inter", 13), bg="#23d2aa")
 subtitulo.place(x = 0, y = 0)
 
 frameOpciones = tk.LabelFrame(ventPrin, width=480, height=138)
@@ -86,5 +90,7 @@ botonViaje = tk.Button(frameOpciones, text="Viaje", bg="#000028", fg="white", fo
 botonViaje.grid(row=0, column=2, columnspan=1, pady=8, padx=8)
 botonMercancia = tk.Button(frameOpciones, text="Mercancia", bg="#000028", fg="white", font=("Inter", 11))
 botonMercancia.grid(row=1, column=2, columnspan=1, pady=8, padx=8)
+
+#self.fr.mainloop()
 
 ventPrin.mainloop()
