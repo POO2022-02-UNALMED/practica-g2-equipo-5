@@ -322,7 +322,14 @@ def entrarMenu():
     mProcesosConsulta.add_command(label="ENVIAR MERCANCIA", font=("Inter", 11), command=enviarMercancia)
 
 
-    mProcesosConsulta.add_command(label="BONIFICACION", font=("Inter", 11))
+    def generarBonificacion():
+        if GUZ.getRuta() == None:
+            raise ExceptionRuta
+        else:
+            GenerarBonificacion(ventanaPrincipal, GUZ)
+    mProcesosConsulta.add_command(label="BONIFICACION", font=("Inter", 11), command=generarBonificacion)
+
+    
     mProcesosConsulta.add_command(label="FACTURA", font=("Inter", 11))
     #---------------------------------------------------
 
