@@ -2,10 +2,14 @@ import os
 import tkinter as tk
 import tkinter as tk
 from tkinter import IntVar, messagebox as MessageBox
-from gestionAplicacion.Personas import *
-from gestionAplicacion.Destinos import *
-from gestionAplicacion.Operatividad import *
-from gestionAplicacion.Vehiculos import *
+from Conductor import Conductor
+from VehiculoCarga import VehiculoCarga
+from Mercancia import Mercancia
+from Producto import Producto
+from Ruta import Ruta
+from Usuario import Usuario
+from VehiculoPasajero import VehiculoPasajeros
+from Viaje import Viaje
 from GenerarRuta import *
 from EnviarMercancia import *
 from CrearViaje import *
@@ -16,6 +20,7 @@ from GenerarBonificacion import *
 
 #Usuario ------------------------------------------------------------------------------
 GUZ = Usuario("Jaime Alberto Guzman", "123456789", 20)
+GUZ.setRuta(Ruta("MEDELLÍN, BOGOTÁ", 650000, 800, 150))
 
 MAN = Conductor("Manuela Rivera", "5151531", 23, 10, 1000000)
 MAR = Conductor("Mariana Rodriguez", "555454", 40, 15, 10000)
@@ -61,7 +66,7 @@ def ventInicio():
     root = tk.Tk()
     root.title("SISTEMA DE TRANSPORTE PERSONALIZADO")
     root.config(bg="white")
-    root.geometry("1100x845")
+    root.geometry("800x500")
 
     barMenu = tk.Menu(root)
     root.config(menu=barMenu)
@@ -72,11 +77,11 @@ def ventInicio():
 
     def descripcion():
         ventanaEmergente = tk.Frame(root, bg="#000028")
-        ventanaEmergente.place(width=800, height=300, x=150, y=5)
+        ventanaEmergente.place(relwidth=.8, relheight=.3, relx=.1)
         des = tk.Label(ventanaEmergente, text="Descripción", font=("Inter", 11), bg= "#000028", fg="white")
-        des.place(width=790, x=5, y=5, height=235)
-        cerrar = tk.Button(ventanaEmergente, text="CERRAR", font=("Inter", 11), command=lambda: ventanaEmergente.destroy())
-        cerrar.place(x=5, y=245, width=790, height=50)
+        des.pack(expand=True)
+        cerrar = tk.Button(ventanaEmergente, text="CERRAR", font=("Inter", 11), command=lambda: ventanaEmergente.destroy(), width=70)
+        cerrar.pack(pady=(10,10), padx=(10,10))
 
 
     mInicio.add_command(label="DESCRIPCIÓN", font=("Inter", 11), command=descripcion)
@@ -94,34 +99,34 @@ def ventInicio():
 
     #Pantalla - Inicio
     pantallaInicio = tk.Frame(root, bg="white")
-    pantallaInicio.place(x = 5, y = 5, width=1090, height=835)
+    pantallaInicio.place(x = 5, y = 5, width=800, height=500)
 
     #Bienvenida al sistema
     P3 = tk.Frame(pantallaInicio, bg="white")
-    P3.place(x=0, y=0, width=490, height=300)
+    P3.place(x=25, y=10, relwidth=.45, relheight=.45)
     messageBienvenida = tk.Label(P3, font=("Inter", 15) ,text=stringBienvenida, bg= "#23d2aa", fg="#000028")
-    messageBienvenida.place(x = 0, y = 0, width=486.5, height=297.5)
+    messageBienvenida.place(relheight=1, relwidth=1)
 
     #Fotos del sistema y entrada
     P4 = tk.Frame(pantallaInicio, bg="white")
-    P4.place(x=0, y=300, width=490, height=535)
+    P4.place(x=25, y=250, relwidth=.45, relheight=.45)
 
-    r = os.getcwd()+'/STP-Python/Fotos/Logo.png'
+    r = os.getcwd()+'/STP/Fotos/Logo.png'
     logo= tk.PhotoImage(file=r)
     fotoSistema = tk.Frame(P4)
-    fotoSistema.place(width=486.5, height=470, x = 0, y = 2.5)
+    fotoSistema.place(relwidth=1, relheight=.8)
     lab1 = tk.Label(fotoSistema, image=logo).pack(expand=True)
 
     def entrarSistema():
         root.destroy()
         entrarMenu()
         
-    botonSistema = tk.Button(P4, text="INGRESO AL SISTEMA", font=("Inter", 11), bg="#000028", fg="white", command=entrarSistema)
-    botonSistema.place(width=486.5, height=57, x=0, y=477.5)
+    botonSistema = tk.Button(P4, text="INGRESO AL SISTEMA", font=("Inter", 10), bg="#000028", fg="white", command=entrarSistema)
+    botonSistema.place(relwidth=1, relheight=.15, rely=.85)
 
     # Hoja de vida de los desarrolladores
     P5 = tk.Frame(pantallaInicio)
-    P5.place(x=492.5, y=0, width=600, height=298.5) 
+    P5.place(x=410, y=10, relwidth=.45, relheight=.45) 
     P5Label = tk.Label(P5, bg= "#000028", fg="white")
     P5Label.place(relwidth=1, relheight=1)
 
@@ -135,26 +140,26 @@ def ventInicio():
     ind.set(0)
 
     arrayDescription = [d1, d2, d3, d4, d5]
-    P5Label.config(text=arrayDescription[ind.get()], font=("Inter", 13))
+    P5Label.config(text=arrayDescription[ind.get()], font=("Inter", 10))
 
     #Imágenes de los desarrolladores
     P6 = tk.Frame(pantallaInicio)
-    P6.place(x=492.5, y=302.5, width=600, height=535)
+    P6.place(x=410, y=250, relwidth=.45, relheight=.45)
 
     #Frame Diego
     frameDiego = tk.Frame(P6)
-    frameDiego.place(x=0, y=0, width=600, height=535)
+    frameDiego.place(relwidth=1, relheight=1)
 
-    imgD1 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/Fotos/Diego/D1.png')
+    imgD1 = tk.PhotoImage(file=os.getcwd()+'/STP/Fotos/Diego/D1.png')
     imgD1 = imgD1.subsample(1,1)
 
-    imgD2 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/Fotos/Diego/D2.png')
+    imgD2 = tk.PhotoImage(file=os.getcwd()+'/STP/Fotos/Diego/D2.png')
     imgD2 = imgD2.subsample(1,1)
 
-    imgD3 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/Fotos/Diego/D3.png')
+    imgD3 = tk.PhotoImage(file=os.getcwd()+'/STP/Fotos/Diego/D3.png')
     imgD3 = imgD3.subsample(1,1)
 
-    imgD4 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/Fotos/Diego/D4.png')
+    imgD4 = tk.PhotoImage(file=os.getcwd()+'/STP/Fotos/Diego/D4.png')
     imgD4 = imgD4.subsample(1,1)
 
     lab1 = tk.Label(frameDiego, image=imgD1).grid(row=0, column=0)
@@ -163,18 +168,18 @@ def ventInicio():
     lab4 = tk.Label(frameDiego, image=imgD4).grid(row=1, column=1)
 
     #Frame Angel
-    frameAngel = tk.Frame(P6, width=600, height=535)
+    frameAngel = tk.Frame(P6, width=360, height=225)
 
-    imgAN1= tk.PhotoImage(file=os.getcwd()+'/STP-Python/Fotos/Angel/A1.png')
+    imgAN1= tk.PhotoImage(file=os.getcwd()+'/STP/Fotos/Angel/A1.png')
     imgAN1 = imgAN1.subsample(1,1)
 
-    imgAN2 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/Fotos/Angel/A2.png')
+    imgAN2 = tk.PhotoImage(file=os.getcwd()+'/STP/Fotos/Angel/A2.png')
     imgAN2 = imgAN2.subsample(1,1)
 
-    imgAN3 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/Fotos/Angel/A3.png')
+    imgAN3 = tk.PhotoImage(file=os.getcwd()+'/STP/Fotos/Angel/A3.png')
     imgAN3 = imgAN3.subsample(1,1)
 
-    imgAN4 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/Fotos/Angel/A4.png')
+    imgAN4 = tk.PhotoImage(file=os.getcwd()+'/STP/Fotos/Angel/A4.png')
     imgAN4 = imgAN4.subsample(1,1)
 
     lab10 = tk.Label(frameAngel, image=imgAN1).grid(row=0, column=0)
@@ -183,18 +188,18 @@ def ventInicio():
     lab40 = tk.Label(frameAngel, image=imgAN4).grid(row=1, column=1)
 
     #Frame Ana
-    frameAna = tk.Frame(P6, width=600, height=535)
+    frameAna = tk.Frame(P6, width=360, height=225)
 
-    imgANA1 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/Fotos/Ana/AN1.png')
+    imgANA1 = tk.PhotoImage(file=os.getcwd()+'/STP/Fotos/Ana/AN1.png')
     imgANA1 = imgANA1.subsample(1,1)
 
-    imgANA2 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/Fotos/Ana/AN2.png')
+    imgANA2 = tk.PhotoImage(file=os.getcwd()+'/STP/Fotos/Ana/AN2.png')
     imgANA2 = imgANA2.subsample(1,1)
 
-    imgANA3 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/Fotos/Ana/AN3.png')
+    imgANA3 = tk.PhotoImage(file=os.getcwd()+'/STP/Fotos/Ana/AN3.png')
     imgANA3 = imgANA3.subsample(1,1)
 
-    imgANA4 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/Fotos/Ana/AN4.png')
+    imgANA4 = tk.PhotoImage(file=os.getcwd()+'/STP/Fotos/Ana/AN4.png')
     imgANA4 = imgANA4.subsample(1,1)
 
     lab10 = tk.Label(frameAna, image=imgANA1).grid(row=0, column=0)
@@ -203,18 +208,18 @@ def ventInicio():
     lab40 = tk.Label(frameAna, image=imgANA4).grid(row=1, column=1)
 
     #Frame Alejo
-    frameAL = tk.Frame(P6, width=600, height=535)
+    frameAL = tk.Frame(P6, width=360, height=225)
 
-    imgAL1 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/Fotos/Alejo/A1.png')
+    imgAL1 = tk.PhotoImage(file=os.getcwd()+'/STP/Fotos/Alejo/A1.png')
     imgAL1 = imgAL1.subsample(1,1)
 
-    imgAL2 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/Fotos/Alejo/A2.png')
+    imgAL2 = tk.PhotoImage(file=os.getcwd()+'/STP/Fotos/Alejo/A2.png')
     imgAL2 = imgAL2.subsample(1,1)
 
-    imgAL3 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/Fotos/Alejo/A3.png')
+    imgAL3 = tk.PhotoImage(file=os.getcwd()+'/STP/Fotos/Alejo/A3.png')
     imgAL3 = imgAL3.subsample(1,1)
 
-    imgAL4 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/Fotos/Alejo/A4.png')
+    imgAL4 = tk.PhotoImage(file=os.getcwd()+'/STP/Fotos/Alejo/A4.png')
     imgAL4 = imgAL4.subsample(1,1)
 
     lab10 = tk.Label(frameAL, image=imgAL1).grid(row=0, column=0)
@@ -223,18 +228,18 @@ def ventInicio():
     lab40 = tk.Label(frameAL, image=imgAL4).grid(row=1, column=1)
 
     #Frame Andrés
-    frameAND = tk.Frame(P6, width=600, height=535)
+    frameAND = tk.Frame(P6, width=360, height=225)
 
-    imgAND1 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/Fotos/Andres/A1.png')
+    imgAND1 = tk.PhotoImage(file=os.getcwd()+'/STP/Fotos/Andres/A1.png')
     imgAND1 = imgAND1.subsample(1,1)
 
-    imgAND2 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/Fotos/Andres/A2.png')
+    imgAND2 = tk.PhotoImage(file=os.getcwd()+'/STP/Fotos/Andres/A2.png')
     imgAND2 = imgAND2.subsample(1,1)
 
-    imgAND3 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/Fotos/Andres/A3.png')
+    imgAND3 = tk.PhotoImage(file=os.getcwd()+'/STP/Fotos/Andres/A3.png')
     imgAND3 = imgAND3.subsample(1,1)
 
-    imgAND4 = tk.PhotoImage(file=os.getcwd()+'/STP-Python/Fotos/Andres/A4.png')
+    imgAND4 = tk.PhotoImage(file=os.getcwd()+'/STP/Fotos/Andres/A4.png')
     imgAND4 = imgAND4.subsample(1,1)
 
     lab10 = tk.Label(frameAND, image=imgAND1).grid(row=0, column=0)
@@ -248,20 +253,20 @@ def ventInicio():
         if ind.get() == 4:
             arrayFotos[ind.get()].place(x=0, y=0, width=0, height=0)
             ind.set(0)
-            P5Label.config(text=arrayDescription[ind.get()], font=("Inter", 13))
-            arrayFotos[ind.get()].place(x=0, y=0, width=600, height=535)
+            P5Label.config(text=arrayDescription[ind.get()], font=("Inter", 10))
+            arrayFotos[ind.get()].place(width=360, height=225)
         else:
             arrayFotos[ind.get()].place(x=0, y=0, width=0, height=0)
             ind.set(ind.get()+1)
-            P5Label.config(text=arrayDescription[ind.get()], font=("Inter", 13))
-            arrayFotos[ind.get()].place(x=0, y=0, width=600, height=535)
+            P5Label.config(text=arrayDescription[ind.get()], font=("Inter", 10))
+            arrayFotos[ind.get()].place(width=360, height=225)
 
     P5Label.bind("<Button>", cambiar)
 
     #Ventana emergente
     ventanaEmergente = tk.Frame(pantallaInicio, bg="#000028")
     labelDescription = tk.Label(ventanaEmergente, text="DESCRIPCIÓN", height=27, font=("Inter", 11), fg="white", bg="#000028")
-    labelDescription.place(x=5, y=5, width=890, height=435)
+    labelDescription.place(width=890, height=435)
     #------------------------------------------------------------------------------------------------------------------------------
     root.resizable(width=False, height=False)
     root.mainloop()
@@ -269,7 +274,7 @@ def ventInicio():
 def entrarMenu():
     ventanaPrincipal = tk.Tk()
     ventanaPrincipal.title("SISTEMA DE TRANSPORTE PERSONALIZADO")
-    ventanaPrincipal.geometry("1090x835")
+    ventanaPrincipal.geometry("800x500")
     
     #------------------------------------------------------------------------------------------------------
 

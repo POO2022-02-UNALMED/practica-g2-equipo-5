@@ -64,45 +64,43 @@ class CrearViaje(Base):
 
         #Frame Central
 
-        self.frameTittle = tk.LabelFrame(self.cenFrame, width=1070, height=80, bg="#23d2aa")
-        self.frameTittle.place(x=10, y=10)
-        self.Tittle = tk.Label(self.frameTittle, text="CREAR VIAJE", fg="#000028", font=("Inter", 15), bg="#23d2aa")
-        self.Tittle.place(x = 0, y = 0, width=1070, height=70)
+        self.Tittle = tk.Label(self.cenFrame, text="CREAR VIAJE", fg="#000028", font=("Inter", 10), bg="#23d2aa")
+        self.Tittle.place(x = 5, y = 5, width=790, height=30)
 
-        self.frameRuta = tk.LabelFrame(self.cenFrame, text="RUTA", width=530, height=150, font=("Inter", 10))
-        self.frameRuta.place(x=10, y=100)
-        self.cOrigen = tk.Label(self.frameRuta, text="CIUDAD DE ORIGEN", font=("Inter", 11)).place(relwidth=.4, relx=.1, rely=.2)
-        self.cDestino = tk.Label(self.frameRuta, text="CIUDAD DE DESTINO", font=("Inter", 11)).place(relwidth=.4, relx=.1, rely=.6)
-        self.oEntry = tk.Entry(self.frameRuta, state="disabled", textvariable=tk.StringVar(self.frameRuta, value=self.cOrigenString), justify="center", font=("Inter", 11))
+        self.frameRuta = tk.LabelFrame(self.cenFrame, text="RUTA", width=390, height=100, font=("Inter", 8))
+        self.frameRuta.place(x=10, y=40)
+        self.cOrigen = tk.Label(self.frameRuta, text="CIUDAD DE ORIGEN", font=("Inter", 8)).place(relwidth=.4, relx=.1, rely=.2)
+        self.cDestino = tk.Label(self.frameRuta, text="CIUDAD DE DESTINO", font=("Inter", 8)).place(relwidth=.4, relx=.1, rely=.6)
+        self.oEntry = tk.Entry(self.frameRuta, state="disabled", textvariable=tk.StringVar(self.frameRuta, value=self.cOrigenString), justify="center", font=("Inter", 8))
         self.oEntry.place(relwidth=.4, relx=.5, rely=.2)
-        self.dEntry = tk.Entry(self.frameRuta, state="disabled", textvariable=tk.StringVar(self.frameRuta, value=self.cDestinoString), justify="center", font=("Inter", 11))
+        self.dEntry = tk.Entry(self.frameRuta, state="disabled", textvariable=tk.StringVar(self.frameRuta, value=self.cDestinoString), justify="center", font=("Inter", 8))
         self.dEntry.place(relwidth=.4, relx=.5, rely=.6)
 
-        self.frameAcompañantes = tk.LabelFrame(self.cenFrame, text="ACOMPAÑANTES", width=530, height=525, font=("Inter", 10))
-        self.frameAcompañantes.place(x=10, y=255)
+        self.frameAcompañantes = tk.LabelFrame(self.cenFrame, text="ACOMPAÑANTES", width=390, height=320, font=("Inter", 8))
+        self.frameAcompañantes.place(x=10, y=145)
 
         #Variables 
         self.linea = 0.0
         self.Name = tk.StringVar()
         self.edad = tk.StringVar()
 
-        self.nombre = tk.Label(self.frameAcompañantes, text="NOMBRE", font=("Inter", 11)).place(relwidth=.4, relx=.1, rely=.05)
+        self.nombre = tk.Label(self.frameAcompañantes, text="NOMBRE", font=("Inter", 8)).place(relwidth=.4, relx=.1, rely=.05)
         self.eNombre = tk.Entry(self.frameAcompañantes, textvariable=self.Name)
         self.eNombre.place(relwidth=.4, relx=.5, rely=.05)
-        self.edadKG = tk.Label(self.frameAcompañantes, text="EDAD", font=("Inter", 11)).place(relwidth=.4, relx=.1, rely=.15)
+        self.edadKG = tk.Label(self.frameAcompañantes, text="EDAD", font=("Inter", 8)).place(relwidth=.4, relx=.1, rely=.15)
         self.eEdad = tk.Entry(self.frameAcompañantes, textvariable=self.edad)
         self.eEdad.place(relwidth=.4, relx=.5, rely=.15)
-        self.bGuardarP = tk.Button(self.frameAcompañantes, text="AGREGAR PASAJERO", bg="#000028", fg="white", font=("Inter", 11), command=lambda: agregar(self.linea))
+        self.bGuardarP = tk.Button(self.frameAcompañantes, text="AGREGAR PASAJERO", bg="#000028", fg="white", font=("Inter", 8), command=lambda: agregar(self.linea))
         self.bGuardarP.place(relwidth=.8, relx=.1, rely=.25)
-        self.lAcompañantes = tk.Text(self.frameAcompañantes, font=("Inter", 11))
+        self.lAcompañantes = tk.Text(self.frameAcompañantes, font=("Inter", 8))
         self.lAcompañantes.place(relwidth=.8, relx=.1, rely=.35, relheight=.52)
-        self.bValidar = tk.Button(self.frameAcompañantes, text="VALIDAR CAPACIDAD", bg="#000028", fg="white", font=("Inter", 11), command=lambda:validar()).place(relwidth=.8, rely=.9, relx=.1)
+        self.bValidar = tk.Button(self.frameAcompañantes, text="VALIDAR CAPACIDAD", bg="#000028", fg="white", font=("Inter", 8), command=lambda:validar()).place(relwidth=.8, rely=.9, relx=.1)
 
         self.vPosibles = VehiculoPasajeros.getVehiculos()
 
-        self.frameVehiculo= tk.LabelFrame(self.cenFrame, text="VEHICULO", width=530, height=218, font=("Inter", 10))
-        self.frameVehiculo.place(x=550, y=100)
-        self.etiqueta = tk.Label(self.frameVehiculo, text="SELECCIONE UN VEHICULO", font=("Inter", 11)).place(relwidth=.8, relx=.1, rely=.3)
+        self.frameVehiculo= tk.LabelFrame(self.cenFrame, text="VEHICULO", width=380, height=138, font=("Inter", 8))
+        self.frameVehiculo.place(x=410, y=40)
+        self.etiqueta = tk.Label(self.frameVehiculo, text="SELECCIONE UN VEHICULO", font=("Inter", 8)).place(relwidth=.8, relx=.1, rely=.3)
         if (self.usuario.getRuta().getDistancia())<=1000:
             self.desplegableVehiculos = tk.ttk.Combobox(self.frameVehiculo ,state="readonly", values=list(map(lambda x: x.presentacion(), self.vPosibles)))
             self.desplegableVehiculos.place(relwidth=.8, relx=.1, rely=.5)
@@ -111,10 +109,10 @@ class CrearViaje(Base):
             self.desplegableVehiculos.place(relwidth=.8, relx=.1, rely=.5)
 
         self.lConductores = Conductor.getConductores()
-        self.frameConductor= tk.LabelFrame(self.cenFrame, text="CONDUCTOR", width=530, height=222, font=("Inter", 10))
-        self.frameConductor.place(x=550, y=328)
+        self.frameConductor= tk.LabelFrame(self.cenFrame, text="CONDUCTOR", width=380, height=138, font=("Inter", 8))
+        self.frameConductor.place(x=410, y=183)
         if (self.usuario.getRuta().getDistancia())<=1000:
-            self.etiqueta = tk.Label(self.frameConductor, text="SELECCIONE UN CONDUCTOR", font=("Inter", 11)).place(relwidth=.8, relx=.1, rely=.3)
+            self.etiqueta = tk.Label(self.frameConductor, text="SELECCIONE UN CONDUCTOR", font=("Inter", 8)).place(relwidth=.8, relx=.1, rely=.3)
             self.desplegableConductor1 = tk.ttk.Combobox(self.frameConductor ,state="readonly", values=list(map(lambda x: x.presentacion(), self.lConductores)))
             self.desplegableConductor1.place(relwidth=.8, relx=.1, rely=.5)
         else:
@@ -125,9 +123,9 @@ class CrearViaje(Base):
             self.desplegableConductor2.place(relwidth=.8, relx=.1, rely=.6)
 
 
-        self.frameFecha= tk.Frame(self.cenFrame, width=530, height=218)
-        self.frameFecha.place(x=550, y=560)
-        self.fechas = FieldFrame(self.frameFecha, ["DIA", "MES", "AÑO"], "SELECCIONE LA FECHA DE SU VIAJE")
+        self.frameFecha= tk.Frame(self.cenFrame, width=380, height=138)
+        self.frameFecha.place(x=410, y=326)
+        self.fechas = FieldFrame(self.frameFecha, ["DIA", "MES", "AÑO"], "SELECCIONE LA FECHA DE SU ENVÍO")
 
         self.fr.mainloop()
 
@@ -178,10 +176,10 @@ class CrearViaje(Base):
 
     def footer(self):
         #Barra inferior
-        infFrame = tk.Frame(self.fr, width=1090, height=50)
+        infFrame = tk.Frame(self.fr, width=800, height=30)
         infFrame.pack()
         #Botones
-        bGuardarEM = tk.Button(infFrame, text="GUARDAR", bg="#000028", fg="white", font=("Inter", 11), command=self.guardar)
-        bGuardarEM.place(width=544, height=50, x = 0, y = 0)
-        bVolverM = tk.Button(infFrame, text="CANCELAR", bg="#000028", fg="white", font=("Inter", 11), command=self.cancelar)
-        bVolverM.place(width=544, height=50, x = 544, y = 0)
+        bGuardarEM = tk.Button(infFrame, text="GUARDAR", bg="#000028", fg="white", font=("Inter", 10), command=self.guardar)
+        bGuardarEM.place(width=400, height=30, x = 0, y = 0)
+        bVolverM = tk.Button(infFrame, text="CANCELAR", bg="#000028", fg="white", font=("Inter", 10), command=self.cancelar)
+        bVolverM.place(width=400, height=30, x = 400, y = 0)
