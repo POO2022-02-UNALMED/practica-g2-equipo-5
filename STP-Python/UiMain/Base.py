@@ -11,10 +11,8 @@ class Base:
             self.footer()
    
     def header(self,tittle):
-        frameTittle = LabelFrame(self.cenFrame, width=790, height=30, bg="#23d2aa")
-        frameTittle.place(x=5, y=5)
-        Tittle = Label(frameTittle, text=tittle, fg="#000028", font=("Inter", 15), bg="#23d2aa")
-        Tittle.place(x = 0, y = 0, width=790, height=30)
+        Tittle = Label(self.fr, text=tittle, fg="#000028", font=("Inter", 10), bg="#23d2aa")
+        Tittle.place(x = 5, y = 5, width=790, height=30)
 
     def footer(self):
         def cancelar():

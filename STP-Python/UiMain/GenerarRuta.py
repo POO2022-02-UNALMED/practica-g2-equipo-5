@@ -16,6 +16,7 @@ class GenerarRuta(Base):
         self.usuario = usuario
         self.footer()
         self.genRuta()
+
     def guardar(self):
         r=self.rutas[self.opcion.get()][1]
         ru = Ruta(r[0],r[1],r[2],r[3])
@@ -24,6 +25,7 @@ class GenerarRuta(Base):
 
     def asignar(self,ruta):
         self.usuario.setRuta(ruta)
+
     def limpiar(self):
         for el1 in self.fr2.winfo_children():
             el1.destroy()
@@ -57,21 +59,21 @@ class GenerarRuta(Base):
                     fila+=40
                 self.check2.set(True)
         fc = self.fr
-        self.fr1 = LabelFrame(fc, text="CIUDADES", width=1060, height=150, font=("Inter", 10))
-        self.fr1.place(x=15, y=100)
+        self.fr1 = LabelFrame(fc, text="CIUDADES", width=780, height=100, font=("Inter", 8))
+        self.fr1.place(x=10, y=40)
         self.fr1.grid_propagate(False)
 
-        self.fr2 = LabelFrame(fc, text="RUTAS", width=1060, height=250, font=("Inter", 10))
+        self.fr2 = LabelFrame(fc, text="RUTAS", width=780, height=205, font=("Inter", 8))
         self.fr2.pack_propagate(False)
-        self.fr2.place(x=15, y=250)
+        self.fr2.place(x=10, y=145)
 
-        self.fr3 = LabelFrame(fc, text="RESUMEN", width=1060, height=150, font=("Inter", 10))
-        self.fr3.place(x=15, y=500)
+        self.fr3 = LabelFrame(fc, text="RESUMEN", width=780, height=100, font=("Inter", 8))
+        self.fr3.place(x=10, y=355)
         self.fr3.grid_propagate(False)
 
 
 
-        lb1=Label(self.fr1, text="CIUDAD ORIGEN", font=("Inter", 11))
+        lb1=Label(self.fr1, text="CIUDAD ORIGEN", font=("Inter", 8))
         lb1.place(relx=.02,rely=.25, anchor=W)
         self.c1 = ttk.Combobox(
             self.fr1,
@@ -80,7 +82,7 @@ class GenerarRuta(Base):
             width=50
         )
         self.c1.place(relx=.2,rely=.25, anchor=W)
-        lb2=Label(self.fr1, text="CIUDAD DESTINO", font=("Inter", 11))
+        lb2=Label(self.fr1, text="CIUDAD DESTINO", font=("Inter", 8))
         lb2.place(relx=.02,rely=.75, anchor=W)
         self.c2 = ttk.Combobox(
             self.fr1,
@@ -90,7 +92,7 @@ class GenerarRuta(Base):
         )
         self.c2.place(relx=.2,rely=.75, anchor=W)
 
-        btCiudad = Button(self.fr1,text="ACEPTAR",bg="#000028", fg="white", font=("Inter", 11),command=ru)
+        btCiudad = Button(self.fr1,text="ACEPTAR",bg="#000028", fg="white", font=("Inter", 8),command=ru)
         btCiudad.place(relx=.85,rely=.5, anchor=CENTER)
 
 
@@ -101,11 +103,11 @@ class GenerarRuta(Base):
         infFrame = Frame(self.fr, width=1090, height=50)
         infFrame.pack()
         bLimpiar = Button(infFrame, text="CANCELAR", bg="#000028", fg="white", font=("Inter", 11), command=self.cancelar)
-        bLimpiar.place(width=362, height=50, x = 725, y = 0)
+        bLimpiar.place(width=266, height=30, x = 266, y = 0)
         bGuardarEM = Button(infFrame, text="GUARDAR", bg="#000028", fg="white", font=("Inter", 11),command=self.guardar)
-        bGuardarEM.place(width=362, height=50, x = 0, y = 0)
+        bGuardarEM.place(width=266, height=30, x = 0, y = 0)
         bVolverM = Button(infFrame, text="LIMPIAR", bg="#000028", fg="white", font=("Inter", 11),command=self.limpiar)
-        bVolverM.place(width=362, height=50, x = 363, y = 0)
+        bVolverM.place(width=266, height=30, x = 532, y = 0)
     def rutaAux(self,act,destino,ruta,res,conexiones:Conexion = Conexion):
         if act==destino: 
             res.append(ruta)
