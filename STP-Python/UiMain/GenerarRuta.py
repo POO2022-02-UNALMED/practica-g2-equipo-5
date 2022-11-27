@@ -3,7 +3,7 @@ from Usuario import Usuario
 from tkinter import *
 from tkinter import messagebox, ttk
 from Ruta import *
-
+from ErrorAplicacion import *
 from Base import *
 class GenerarRuta(Base):
     CIUDADES = [
@@ -51,13 +51,16 @@ class GenerarRuta(Base):
         def ru():
             origen = self.c1.get()
             destino = self.c2.get()
-            if not self.check2.get():
-                self.rutas = self.rutas(origen,destino)
-                fila = 0
-                for x in range(len(self.rutas)):
-                    Radiobutton(self.fr2,text=self.rutas[x][0][0],variable = self.opcion,value = x, command=est).place(y=fila)
-                    fila+=40
-                self.check2.set(True)
+            if origen == destino:
+                raise ExceptionCiudad
+            else:
+                if not self.check2.get():
+                    self.rutas = self.rutas(origen,destino)
+                    fila = 0
+                    for x in range(len(self.rutas)):
+                        Radiobutton(self.fr2,text=self.rutas[x][0][0],variable = self.opcion,value = x, command=est).place(y=fila)
+                        fila+=40
+                    self.check2.set(True)
         fc = self.fr
         self.fr1 = LabelFrame(fc, text="CIUDADES", width=780, height=100, font=("Inter", 8))
         self.fr1.place(x=10, y=40)
