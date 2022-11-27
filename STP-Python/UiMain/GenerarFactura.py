@@ -1,6 +1,7 @@
 from Base import*
 import tkinter as tk
 import tkinter
+from tkinter import IntVar, messagebox as MessageBox
 
 ventPrin = Tk()
 ventPrin.geometry("800x500")
@@ -31,9 +32,11 @@ class GenerarFactura(Base):
                 sEnvio = (int(input("Seleccione un envío: ")))-1
                     
             if sEnvio % 5 == 0:
+                mens="Actualmente cuenta con una bonificacion en su envio de mercancia, verá el dscuento reflejado al final de su factura"
                 usuario.mercanciaBonificado(envios[sEnvio])
+                messagebox.showinfo(message=mens, title="Factura Bonificada")
             
-            else:
+            else: 
                 usuario.mercancia(envios[sEnvio])
                 self.fr.destroy()
 
