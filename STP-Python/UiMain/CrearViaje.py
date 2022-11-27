@@ -57,9 +57,8 @@ class CrearViaje(Base):
         self.viaje.setUsuario(self.usuario)
         
         #Ruta
-        self.rutaSeleccionada = self.usuario.getRuta()
-        self.cOrigenString = self.rutaSeleccionada.getRuta()[0]
-        self.cDestinoString = self.rutaSeleccionada.getRuta()[-1]
+        self.cOrigenString = self.usuario.getRuta().getRuta()[0].value[0]
+        self.cDestinoString = self.usuario.getRuta().getRuta()[-1].value[1]
         #-----------------------------
 
         #Frame Central

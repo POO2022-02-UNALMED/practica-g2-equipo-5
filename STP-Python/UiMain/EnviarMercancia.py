@@ -9,7 +9,7 @@ from Ruta import Ruta
 from Usuario import Usuario
 from GenerarRuta import *
 from FieldFrame import *
-
+from Conexion import *
 import tkinter as tk
 from tkinter import ttk
 from Base import *
@@ -57,9 +57,8 @@ class EnviarMercancia(Base):
         self.mercancia.setUsuario(self.usuario)
         
         #Ruta
-        self.rutaSeleccionada = self.usuario.getRuta()
-        self.cOrigenString = self.rutaSeleccionada.getRuta()[0]
-        self.cDestinoString = self.rutaSeleccionada.getRuta()[-1]
+        self.cOrigenString = self.usuario.getRuta().getRuta()[0].value[0]
+        self.cDestinoString = self.usuario.getRuta().getRuta()[-1].value[1]
         #-----------------------------
 
         #Frame Central
