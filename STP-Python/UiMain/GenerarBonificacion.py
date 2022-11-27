@@ -1,7 +1,7 @@
 import tkinter as tk
 import tkinter as tk
 from tkinter import IntVar, messagebox as MessageBox
-from Usuario import *
+#from usuario import *
 from GenerarRuta import *
 import tkinter
 from tkinter import ttk
@@ -14,36 +14,31 @@ from EnviarMercancia import *
 class GenerarBonificacion(Base):
     def __init__(self, master, usuario):
         super().__init__(master, "GENERAR BONIFICACIÓN")
+        self.usuario = usuario
         self.generarBonificacion(usuario)
 
 
 
-    def generarBonificacion(self, usuario):
+    def generarBonificacion(self):
         
-        """ventanaPrincipal = Tk()
-        ventanaPrincipal.geometry("500x300")
-
-        frame = tk.Frame(ventanaPrincipal, width=1090, height=835)
-        frame.place(x=0, y=0)"""
-
         #------------------
-        cantidadMercancias = len(usuario.getMercancias())
-        cantidadViajes = len(usuario.getViajes())
+        cantidadMercancias = len(self.usuario.getMercancias())
+        cantidadViajes = len(self.usuario.getViajes())
         #-----------------
 
         #Funciones ---------------------------
         def validarMercancia():
             if cantidadMercancias % 5 != 0:
                 Mensaje="-> NO PUEDE OBTENER LA BONIFICACION <- \n\nAhora sólo cuenta con "
-                nEnvios=str(len(usuario.getMercancias()))
+                nEnvios=str(len(self.usuario.getMercancias()))
                 messagebox.showinfo(message=Mensaje+nEnvios+" envios", title="No cuenta con bonificación")
 
             else:
                 messagebox.showinfo(message="A continuacion por favor realize el nuevo envío con reduccion del 30% en el precio", title="Cuenta con bonificación")
-                GenerarRuta(self.master, usuario)
-                EnviarMercancia(self.master, usuario)
+                GenerarRuta(self.master, self.usuario)
+                EnviarMercancia(self.master, self.usuario)
 
-                mercancias = usuario.getMercancia()
+                mercancias = self.usuario.getMercancia()
                 tamañoM = len(mercancias)
                 tamañoM -= 1
 
@@ -86,16 +81,16 @@ class GenerarBonificacion(Base):
         def validarViaje():
             if cantidadViajes % 5 != 0:
                 Mensaje="-> NO PUEDE OBTENER LA BONIFICACION <- \n\nAhora sólo cuenta con "
-                nEnvios=str(len(usuario.getViajes()))
+                nEnvios=str(len(self.usuario.getViajes()))
                 messagebox.showinfo(message=Mensaje+nEnvios+" viajes", title="No cuenta con bonificación")
 
             else:
                 messagebox.showinfo(message="A continuacion por favor cree el nuevo viaje con reduccion del 30% en el precio", title="Cuenta con bonificación")
 
-                GenerarRuta(self.master,usuario)
-                CrearViaje(self.master,usuario)
+                GenerarRuta(self.master,self.usuario)
+                CrearViaje(self.master,self.usuario)
 
-                viajes = usuario.getViaje()
+                viajes = self.usuario.getViaje()
                 tamañoViajes = len(viajes)
                 tamañoViajes-=1
 
@@ -140,20 +135,20 @@ class GenerarBonificacion(Base):
         #cenFrame = tk.Frame(frame, width=1090, height=785)
         #cenFrame.pack()
 
-        frameTittle = tk.LabelFrame(self.cenFrame, width=1070, height=80, bg="#23d2aa")
+        frameTittle = tk.LabelFrame(self.cenFrame, width=780, height=70, bg="#23d2aa")
         frameTittle.place(x=10, y=10)
         Tittle = tk.Label(frameTittle, text="GENERAR BONIFICACION", fg="#000028", font=("Inter", 15), bg="#23d2aa")
-        Tittle.place(x = 0, y = 0, width=1070, height=70)
+        Tittle.place(x = 5, y = 5, width=800, height=50)
 
-        frameExplicacion = tk.LabelFrame(self.cenFrame, width=1070, height=80, bg="#23d2aa")
-        frameExplicacion.place(x=10, y=100)
+        frameExplicacion = tk.LabelFrame(self.cenFrame, width=780, height=70, bg="#23d2aa")
+        frameExplicacion.place(x=10, y=85)
         explicacion1 = "Cada 4 viajes, obtiene un 5to viaje con 30% de descuento y cada 4 envíos de mercancia, en el 5to obtiene 30% de descuento."
-        explicacion2="\n\nPara que servicio desea obtener la bonificación:"
+        explicacion2="\n\nPara qué servicio desea obtener la bonificación:"
         subtitulo = tk.Label(frameExplicacion, text=explicacion1+explicacion2 , fg="#000028", font=("Inter", 10), bg="#23d2aa")
-        subtitulo.place(x = 0, y = 0, width=1070, height=70)
+        subtitulo.place(x = 0, y = 0)
 
-        frameOpciones = tk.LabelFrame(self.cenFrame, width=1070, height=800)
-        frameOpciones.place(x=300, y=250)
+        frameOpciones = tk.LabelFrame(self.cenFrame, width=480, height=138)
+        frameOpciones.place(x=160, y=200)
         frameOpciones.columnconfigure(0, weight=1)
         frameOpciones.columnconfigure(1, weight=1)
 
@@ -167,7 +162,7 @@ class GenerarBonificacion(Base):
         botonViaje.grid(row=0, column=2, columnspan=1, pady=8, padx=8)
         botonMercancia = tk.Button(frameOpciones, text="Envío de mercancía", bg="#000028", fg="white", font=("Inter", 11), command=validarMercancia)
         botonMercancia.grid(row=1, column=2, columnspan=1, pady=8, padx=8)
-        
+
         #TEXTO
         textoViaje = tkinter.Label(frameOpciones, text="Para seleccionar viajes, oprima aquí: ", font="arial 12")
         textoViaje.grid(row=0, column=0, columnspan=2, pady=8, padx=8)
