@@ -1,18 +1,23 @@
 import os
 import tkinter as tk
 from tkinter import IntVar, messagebox as MessageBox
+from UiMain.GenerarFactura import *
 from gestionAplicacion.Personas.Usuario import Usuario
 from gestionAplicacion.Personas.Conductor import Conductor
 from gestionAplicacion.Vehiculos.VehiculoPasajero import VehiculoPasajeros
+from UiMain.GenerarRuta import *
+from UiMain.GenerarBonificacion import *
+from UiMain.CrearViaje import *
+
 from pickle import *
 from UiMain.GenerarBonificacion import *
 from gestionAplicacion.Destinos.Conexion import *
 
 #Usuario ------------------------------------------------------------------------------
 try:
-    f = open("genRut","rb")
-    GUZ = load(f)
-    f.close()
+    with open("./baseDatos/usuario","rb") as f:
+        GUZ = load(f)
+  
 except Exception as e:
     print(e)
     GUZ = Usuario("Jaime Alberto Guzman", "123456789", 20)
@@ -278,9 +283,11 @@ def entrarMenu():
     mArchivo.add_separator()
 
     def salirSistema():
-        f = open("genRut","wb")
-        dump(f,GUZ)
-        f.close()
+        try:
+            with open("./baseDatos/usuario","wb") as f:
+                dump(GUZ,f)
+        except Exception as e:
+            print(e)
         ventanaPrincipal.destroy()
         ventInicio()
 

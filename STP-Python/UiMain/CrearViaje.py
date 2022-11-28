@@ -1,18 +1,17 @@
 import tkinter as tk
 import tkinter as tk
 from tkinter import IntVar, messagebox as MessageBox
-from Conductor import Conductor
-from Ruta import Ruta
-from Usuario import Usuario
-from VehiculoPasajero import VehiculoPasajeros
-from Viaje import Viaje
-from FieldFrame import *
+from gestionAplicacion.Personas.Conductor import Conductor
+from gestionAplicacion.Personas.Usuario import Usuario
+from gestionAplicacion.Vehiculos.VehiculoPasajero import VehiculoPasajeros
+from gestionAplicacion.Operatividad.Viaje import Viaje
+from .FieldFrame import *
 
 
 import tkinter as tk
 from tkinter import ttk
-from Base import *
-from ErrorAplicacion import *
+from .Base import *
+from .ErrorAplicacion import *
 
 class CrearViaje(Base):
     def __init__(self, master, usuario):

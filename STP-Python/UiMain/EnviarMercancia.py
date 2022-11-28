@@ -1,18 +1,17 @@
 import tkinter as tk
 from tkinter import IntVar, messagebox as MessageBox
-from Conductor import Conductor
-from VehiculoCarga import VehiculoCarga
-from Mercancia import Mercancia
-from Producto import Producto
-from Ruta import Ruta
-from Usuario import Usuario
-from GenerarRuta import *
-from FieldFrame import *
-from Conexion import *
-from tkinter import ttk
-from Base import *
+from gestionAplicacion.Personas.Conductor import *
+from gestionAplicacion.Vehiculos.VehiculoCarga import *
+from gestionAplicacion.Operatividad.Mercancia  import *
+from gestionAplicacion.Operatividad.Producto  import *
 
-from ErrorAplicacion import *
+from .GenerarRuta import *
+from .FieldFrame import *
+from gestionAplicacion.Destinos.Conexion  import *
+from tkinter import ttk
+from .Base import *
+
+from .ErrorAplicacion import *
 
 class EnviarMercancia(Base):
     def __init__(self, master, usuario):
