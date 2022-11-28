@@ -36,7 +36,7 @@ class GenerarFactura(Base):
                 if sEnvio % 5 == 0:
                     mens="Actualmente cuenta con una bonificacion en su envio de mercancia verá el dscuento reflejado al final de su factura"
                     usuario.mercanciaBonificado(envios[sEnvio])
-                    messagebox.showinfo(message=mens, title="Factura Bonificada")
+                    MessageBox.showinfo(message=mens, title="Factura Bonificada")
             
                 else: 
                     usuario.mercancia(envios[sEnvio])
@@ -61,9 +61,10 @@ class GenerarFactura(Base):
             
                 else:
                     usuario.viaje(viajes[-1])
-                    self.fr.destroy()
 
 
+
+#frames
 
 frameTittle = tk.LabelFrame(ventPrin, width=780, height=70, bg="#23d2aa")
 frameTittle.place(x=10, y=10)
@@ -84,10 +85,14 @@ frameOpciones.columnconfigure(1, weight=1)
 frameOpciones.rowconfigure(0, weight=1)
 frameOpciones.rowconfigure(1, weight=1)
 
+#texto
+
 textoViaje = tkinter.Label(frameOpciones, text="Conocer factura de viajes: ", font="arial 12")
 textoViaje.grid(row=0, column=0, columnspan=2, pady=8, padx=8)
 textoMercancia = tkinter.Label(frameOpciones, text="Conocer factura de mercancia: ", font="arial 12")
 textoMercancia.grid(row=1, column=0, columnspan=2, pady=8, padx=8)
+
+#Botones 
 
 botonViaje = tk.Button(frameOpciones, text="Viaje", bg="#000028", fg="white", font=("Inter", 11))
 botonViaje.grid(row=0, column=2, columnspan=1, pady=8, padx=8)
