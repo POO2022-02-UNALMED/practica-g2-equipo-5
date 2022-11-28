@@ -1,5 +1,5 @@
 
-from Persona import Persona
+from .Persona import Persona
 
 class Usuario(Persona):
     user=[]

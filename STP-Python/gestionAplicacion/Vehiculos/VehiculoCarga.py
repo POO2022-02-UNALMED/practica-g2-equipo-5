@@ -1,4 +1,4 @@
-from Vehiculo import Vehiculo
+from .Vehiculo import Vehiculo
 
 class VehiculoCarga(Vehiculo):
     vehiculos = []
