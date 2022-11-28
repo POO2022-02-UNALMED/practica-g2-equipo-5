@@ -16,44 +16,45 @@ class GenerarFactura(Base):
         self.usuario = usuario
         self.generarFactura()
 
+    def generarFactura(self):
+
 #Caso - Mercancia
 
-    def selecMercancia():
-        Mercancia = Mercancia
-        
-        if Mercancia == Mercancia:
-            envios = usuario.getMercancias()
-            indE = 0
+        def selecMercancia(usuario):
+            Mercancia = Mercancia
             
-            for envio in envios:
-                cDestino = (envio.getRuta().getRuta())[-1]
-                print(f'{indE}. {cDestino}, Distancia: {envio.getRuta().getDistancia()}')
-                indE += 1
-                sEnvio = (int(input("Seleccione un envío: ")))-1
+            if Mercancia == Mercancia:
+                envios = usuario.getMercancias()
+                indE = 0
+                
+                for envio in envios:
+                    cDestino = (envio.getRuta().getRuta())[-1]
+                    print(f'{indE}. {cDestino}, Distancia: {envio.getRuta().getDistancia()}')
+                    indE += 1
+                    sEnvio = (int(input("Seleccione un envío: ")))-1
                     
-            if sEnvio % 5 == 0:
-                mens="Actualmente cuenta con una bonificacion en su envio de mercancia, verá el dscuento reflejado al final de su factura"
-                usuario.mercanciaBonificado(envios[sEnvio])
-                messagebox.showinfo(message=mens, title="Factura Bonificada")
+                if sEnvio % 5 == 0:
+                    mens="Actualmente cuenta con una bonificacion en su envio de mercancia verá el dscuento reflejado al final de su factura"
+                    usuario.mercanciaBonificado(envios[sEnvio])
+                    messagebox.showinfo(message=mens, title="Factura Bonificada")
             
-            else: 
-                usuario.mercancia(envios[sEnvio])
-                self.fr.destroy()
+                else: 
+                    usuario.mercancia(envios[sEnvio])
 
 
 #Caso - Viaje
-    def selectVaije():
-        Viaje = Viaje
-
-        if Viaje == Viaje:
-            viajes = usuario.getViajes()
-            indV = 0
+        def selectVaije(usuario):
+            Viaje = Viaje
+            
+            if Viaje == Viaje:
+                viajes = usuario.getViajes()
+                indV = 0
                 
-            for viaje in viajes:
-                cDestino = (viaje.getRuta().getRuta())[-1]
-                print(f'{indV}. {cDestino}, Distancia: {viaje.getRuta().getDistancia()}')
-                indV += 1
-                sViaje = (int(input('Seleccione un viaje: ')))-1
+                for viaje in viajes:
+                    cDestino = (viaje.getRuta().getRuta())[-1]
+                    print(f'{indV}. {cDestino}, Distancia: {viaje.getRuta().getDistancia()}')
+                    indV += 1
+                    sViaje = (int(input('Seleccione un viaje: ')))-1
                 
                 if sViaje % 5 == 0:
                     usuario.viajeBonificado(viajes[-1])
@@ -61,7 +62,6 @@ class GenerarFactura(Base):
                 else:
                     usuario.viaje(viajes[-1])
                     self.fr.destroy()
-
 
 
 
@@ -93,6 +93,7 @@ botonViaje = tk.Button(frameOpciones, text="Viaje", bg="#000028", fg="white", fo
 botonViaje.grid(row=0, column=2, columnspan=1, pady=8, padx=8)
 botonMercancia = tk.Button(frameOpciones, text="Mercancia", bg="#000028", fg="white", font=("Inter", 11))
 botonMercancia.grid(row=1, column=2, columnspan=1, pady=8, padx=8)
+
 
 #self.fr.mainloop()
 
