@@ -46,7 +46,7 @@ class GenerarRuta(Base):
         def est():
             if not self.check1.get():
                 btDet = Button(self.fr2,text="DETALLE",bg="#000028", fg="white", font=("Inter", 11),command=verDetalle)
-                btDet.place(relx=.5,rely=.7,anchor = CENTER)
+                btDet.place(relx=.5,rely=.75,anchor = CENTER)
 
                 self.check1.set(True)
         def ru():
@@ -56,7 +56,8 @@ class GenerarRuta(Base):
                 raise ExceptionCiudad
             else:
                 if not self.check2.get():
-                    self.rutas = self.rutas(origen,destino)
+                    print()
+                    self.rutas = self.rutasGen(origen,destino)
                     fila = 0
                     for x in range(len(self.rutas)):
                         Radiobutton(self.fr2,text=self.rutas[x][0][0],variable = self.opcion,value = x, command=est).place(y=fila)
@@ -122,7 +123,7 @@ class GenerarRuta(Base):
                 if i not in cop:
                     cop.append(i)
                     self.rutaAux(i.ciudadB,destino,cop,res)
-    def rutas(self,origen:str,destino:str,conexiones:Conexion = Conexion):
+    def rutasGen(self,origen:str,destino:str,conexiones:Conexion = Conexion):
         res = []
         ruta = []
         aux = [x for x in list(conexiones) if x.ciudadA == origen]
