@@ -157,6 +157,6 @@ class GenerarRuta(Base):
             distancia = self.suma(ruta,'D')
             precio = self.suma(ruta,'P')
             tiempo = self.suma(ruta,'T')
-            l.append([[recorrido,f"DISTANCIA: {distancia} km\nPRECIO: ${precio}\nTIEMPO: {self.hm(tiempo)}"],[ruta,distancia,tiempo,precio]])
+            l.append([[recorrido,f"DISTANCIA: {distancia} km\nPRECIO: ${precio}\nTIEMPO: {self.hm(tiempo)}"],[ruta,precio,distancia,tiempo]])
             
         return l
