@@ -1,26 +1,21 @@
 import os
 import tkinter as tk
-import tkinter as tk
 from tkinter import IntVar, messagebox as MessageBox
-from gestionAplicacion.Operatividad.Mercancia import Mercancia
-from gestionAplicacion.Operatividad.Producto import Producto
-from gestionAplicacion.Destinos.Ruta import Ruta
 from gestionAplicacion.Personas.Usuario import Usuario
-
 from gestionAplicacion.Personas.Conductor import Conductor
 from gestionAplicacion.Vehiculos.VehiculoPasajero import VehiculoPasajeros
-from gestionAplicacion.Operatividad.Viaje import Viaje
-from UiMain.GenerarRuta import *
-from UiMain.EnviarMercancia import *
-from UiMain.CrearViaje import *
 from pickle import *
-import tkinter as tk
-from tkinter import ttk
 from UiMain.GenerarBonificacion import *
 from gestionAplicacion.Destinos.Conexion import *
 
 #Usuario ------------------------------------------------------------------------------
-GUZ = Usuario("Jaime Alberto Guzman", "123456789", 20)
+try:
+    f = open("genRut","rb")
+    GUZ = load(f)
+    f.close()
+except Exception as e:
+    print(e)
+    GUZ = Usuario("Jaime Alberto Guzman", "123456789", 20)
 
 MAN = Conductor("Manuela Rivera", "5151531", 23, 10, 1000000)
 ANG = Conductor("Angel", "10011020", "38", 15, 40000)
@@ -51,17 +46,7 @@ def ventInicio():
     #----------------------------------------------------------------------------------------------------------------
      
     #----------------------------------------------------------------------------------------------------------------
-    def guardarUsr():
-        f = open("genRut","wb")
-        dump(f,GUZ)
-        f.close()
-    def leerUsr():
-        try:
-            f = open("genRut","rb")
-            GUZ = load(f)
-            f.close()
-        except Exception as e:
-            print(e)
+
     root = tk.Tk()
     root.title("SISTEMA DE TRANSPORTE PERSONALIZADO")
     root.config(bg="white")
@@ -87,6 +72,7 @@ def ventInicio():
     mInicio.add_separator()
 
     def salir():
+ 
         root.destroy()
 
     mInicio.add_command(label="SALIR", font=("Inter", 11), command=salir)
@@ -292,6 +278,9 @@ def entrarMenu():
     mArchivo.add_separator()
 
     def salirSistema():
+        f = open("genRut","wb")
+        dump(f,GUZ)
+        f.close()
         ventanaPrincipal.destroy()
         ventInicio()
 
