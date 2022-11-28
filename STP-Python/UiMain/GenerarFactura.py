@@ -1,6 +1,6 @@
 import tkinter as tk
-from Base import *
-from Usuario import *
+from .Base import *
+from gestionAplicacion.Personas.Usuario import *
 from tkinter import ttk
 
 

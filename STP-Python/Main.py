@@ -17,9 +17,9 @@ from gestionAplicacion.Destinos.Conexion import *
 try:
     with open("./baseDatos/usuario","rb") as f:
         GUZ = load(f)
-  
+    print("sesión recuperada de db")
 except Exception as e:
-    print(e)
+    print("no hay sesión de usuario guardada")
     GUZ = Usuario("Jaime Alberto Guzman", "123456789", 20)
 
 MAN = Conductor("Manuela Rivera", "5151531", 23, 10, 1000000)
