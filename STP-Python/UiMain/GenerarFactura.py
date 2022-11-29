@@ -1,13 +1,7 @@
-from Base import*
 import tkinter as tk
-import tkinter
-from tkinter import IntVar, messagebox as MessageBox
-
-ventPrin = Tk()
-ventPrin.geometry("800x500")
-
-frame = tk.Frame(ventPrin, width=1090, height=835)
-frame.place(x=0, y=0)
+from Base import *
+from Usuario import *
+from tkinter import ttk
 
 
 class GenerarFactura(Base):
@@ -17,89 +11,96 @@ class GenerarFactura(Base):
         self.generarFactura()
 
     def generarFactura(self):
+        #Frame central
+        self.Tittle = tk.Label(self.cenFrame, text="GENERAR FACTURA", fg="#000028", font=("Inter", 10), bg="#23d2aa")
+        self.Tittle.place(x = 5, y = 5, width=790, height=30)
 
-#Caso - Mercancia
+        self.contenedor = tk.Frame(self.cenFrame, bg="#23d2aa")
+        self.contenedor.place(x = 5, y = 50, width=790, height=100)
 
-        def selecMercancia(usuario):
-            Mercancia = Mercancia
+
+        self.list = tk.Frame(self.cenFrame)
+        self.list.place(x = 10, y = 165, width=780, height=295)
+        self.desplegable = tk.ttk.Combobox(self.list ,state="readonly", values=[])
+        self.desplegable.place(relwidth=.8, relx=.1, rely=.0)
+
+        self.mercancias = []
+        self.viajes = []
+        self.valor = ""
+        def viaje():
+            self.viajes = self.usuario.getViajes()
+            self.desplegable = tk.ttk.Combobox(self.list ,state="readonly", values=list(map(lambda x: x.presentacion(), self.viajes)))
+            self.desplegable.place(relwidth=.8, relx=.1, rely=.0) 
+            self.valor = "Viaje"
+
+        def envio():
+            self.mercancias = self.usuario.getMercancias()
+            self.desplegable = tk.ttk.Combobox(self.list ,state="readonly", values=list(map(lambda x: x.presentacion(), self.mercancias)))
+            self.desplegable.place(relwidth=.8, relx=.1, rely=.0)
+            self.valor = "Envio"
+
+        self.factura1 = tk.Label(self.list, text="", font=("Inter", 10))
+        self.factura1.place(relheight=.7, relx=.1, rely=.2 ,relwidth=.4)
+        self.factura2 = tk.Label(self.list, text="", font=("Inter", 10))
+        self.factura2.place(relheight=.7, relx=.5, rely=.2 ,relwidth=.4)
+
+        self.text = tk.Label(self.contenedor, text="Para que servicio desea conocer su factura:", fg="#000028", font=("Inter", 10), bg="#23d2aa")
+        self.text.place(x = 10, y = 0, width=780, height=40)
+        self.contBotones = tk.Frame(self.contenedor, bg="#23d2aa")
+        self.contBotones.place(x = 0, y = 40, width=780, height=60)
+        self.bEnvio = tk.Button(self.contBotones, text="ENVIOS", bg="#000028", fg="white", font=("Inter", 10), command=envio)
+        self.bEnvio.place(relwidth=.2, relheight=.6, relx=.2, rely=.1)
+        self.bViaje = tk.Button(self.contBotones, text="VIAJES", bg="#000028", fg="white", font=("Inter", 10), command=viaje)
+        self.bViaje.place(relwidth=.2, relheight=.6, relx=.6, rely=.1)
+
+       
+    def guardar(self):
+        self.indice = self.desplegable.current()
+        if self.valor == "Viaje":
+            viajeSel = self.viajes[self.indice]
+            a1 = "SISTEMA DE TRANSPORTE PERSONALIZADO\n"
+            a2 = "----------------------------------------\n"
+            a3 = "Usuario: " + str(viajeSel.getUsuario().getNombre()) + "\n"
+            a4 = "Origen: " + str(viajeSel.getRuta().getRuta()[0].value[0]) + "\n"
+            a5 = "Destino: " + str(viajeSel.getRuta().getRuta()[-1].value[1]) + "\n"
+            a6 = "Distancia: " + str(viajeSel.getRuta().getDistancia()) + " km\n"
+            a7 = "Precio: " + str(viajeSel.getRuta().getPrecio()) + "$\n"
+            a8 = "Tiempo: " + str(viajeSel.getRuta().getTiempo()) + " minutos\n"
+            a9 = "----------------------------------------\n"
+            self.factura1.config(text=a1+a2+a3+a4+a5+a6+a7+a8+a9)
+            pasajeros = list(map(lambda x,y: str(x.getNombre())+", "+str(y.getEdad()+" años"), viajeSel.getPasajeros(), viajeSel.getPasajeros()))
+            lPas = "\n".join(pasajeros)
+            b1 = "ACOMPAÑANTES\n"
+            b2 = "----------------------------------------\n"
+            self.factura2.config(text=b1+b2+lPas)
             
-            if Mercancia == Mercancia:
-                envios = usuario.getMercancias()
-                indE = 0
-                
-                for envio in envios:
-                    cDestino = (envio.getRuta().getRuta())[-1]
-                    print(f'{indE}. {cDestino}, Distancia: {envio.getRuta().getDistancia()}')
-                    indE += 1
-                    sEnvio = (int(input("Seleccione un envío: ")))-1
-                    
-                if sEnvio % 5 == 0:
-                    mens="Actualmente cuenta con una bonificacion en su envio de mercancia verá el dscuento reflejado al final de su factura"
-                    usuario.mercanciaBonificado(envios[sEnvio])
-                    MessageBox.showinfo(message=mens, title="Factura Bonificada")
-            
-                else: 
-                    usuario.mercancia(envios[sEnvio])
+        elif self.valor == "Envio":
+            mercanciaSel = self.mercancias[self.indice]
+            a1 = "SISTEMA DE TRANSPORTE PERSONALIZADO\n"
+            a2 = "----------------------------------------\n"
+            a3 = "Usuario: " + str(mercanciaSel.getUsuario().getNombre()) + "\n"
+            a4 = "Origen: " + str(mercanciaSel.getRuta().getRuta()[0].value[0]) + "\n"
+            a5 = "Destino: " + str(mercanciaSel.getRuta().getRuta()[-1].value[1]) + "\n"
+            a6 = "Distancia: " + str(mercanciaSel.getRuta().getDistancia()) + " km\n"
+            a7 = "Precio: " + str(mercanciaSel.getRuta().getPrecio()) + "$\n"
+            a8 = "Tiempo: " + str(mercanciaSel.getRuta().getTiempo()) + " minutos\n"
+            a9 = "----------------------------------------\n"
+            self.factura1.config(text=a1+a2+a3+a4+a5+a6+a7+a8+a9)
+            productos = list(map(lambda x,y: str(x.getTipo())+", "+str(y.getPeso())+" KG", mercanciaSel.getProductos(), mercanciaSel.getProductos()))
+            lPas = "\n".join(productos)
+            b1 = "PRODUCTOS\n"
+            b2 = "----------------------------------------\n"
+            self.factura2.config(text=b1+b2+lPas)
 
+    def cancelar(self):
+        self.fr.destroy()
 
-#Caso - Viaje
-        def selectVaije(usuario):
-            Viaje = Viaje
-            
-            if Viaje == Viaje:
-                viajes = usuario.getViajes()
-                indV = 0
-                
-                for viaje in viajes:
-                    cDestino = (viaje.getRuta().getRuta())[-1]
-                    print(f'{indV}. {cDestino}, Distancia: {viaje.getRuta().getDistancia()}')
-                    indV += 1
-                    sViaje = (int(input('Seleccione un viaje: ')))-1
-                
-                if sViaje % 5 == 0:
-                    usuario.viajeBonificado(viajes[-1])
-            
-                else:
-                    usuario.viaje(viajes[-1])
-
-
-
-#frames
-
-frameTittle = tk.LabelFrame(ventPrin, width=780, height=70, bg="#23d2aa")
-frameTittle.place(x=10, y=10)
-Tittle = tk.Label(frameTittle, text="GENERAR FACTURA", fg="#000028", font=("Inter", 15), bg="#23d2aa")
-Tittle.place(x = 0, y = 5, width=800, height=50)
-
-frameExplain = tk.LabelFrame(ventPrin, width=780, height=70, bg="#23d2aa")
-frameExplain.place(x=10, y=80)
-explain1 = "           En esta seccion se muestra la factura de su viaje o del envio de su mercancia, por favor\nindique cual factura desea conocer."
-subtitulo = tk.Label(frameExplain, text=explain1 , fg="#000028", font=("Inter", 13), bg="#23d2aa")
-subtitulo.place(x = 0, y = 0)
-
-frameOpciones = tk.LabelFrame(ventPrin, width=480, height=138)
-frameOpciones.place(x=235, y=200)
-frameOpciones.columnconfigure(0, weight=1)
-frameOpciones.columnconfigure(1, weight=1)
-
-frameOpciones.rowconfigure(0, weight=1)
-frameOpciones.rowconfigure(1, weight=1)
-
-#texto
-
-textoViaje = tkinter.Label(frameOpciones, text="Conocer factura de viajes: ", font="arial 12")
-textoViaje.grid(row=0, column=0, columnspan=2, pady=8, padx=8)
-textoMercancia = tkinter.Label(frameOpciones, text="Conocer factura de mercancia: ", font="arial 12")
-textoMercancia.grid(row=1, column=0, columnspan=2, pady=8, padx=8)
-
-#Botones 
-
-botonViaje = tk.Button(frameOpciones, text="Viaje", bg="#000028", fg="white", font=("Inter", 11))
-botonViaje.grid(row=0, column=2, columnspan=1, pady=8, padx=8)
-botonMercancia = tk.Button(frameOpciones, text="Mercancia", bg="#000028", fg="white", font=("Inter", 11))
-botonMercancia.grid(row=1, column=2, columnspan=1, pady=8, padx=8)
-
-
-#self.fr.mainloop()
-
-ventPrin.mainloop()
+    def footer(self):
+        #Barra inferior
+        infFrame = tk.Frame(self.fr, width=800, height=30)
+        infFrame.pack()
+        #Botones
+        bGuardarEM = tk.Button(infFrame, text="MOSTRAR", bg="#000028", fg="white", font=("Inter", 10), command=self.guardar)
+        bGuardarEM.place(width=400, height=30, x = 0, y = 0)
+        bVolverM = tk.Button(infFrame, text="CANCELAR", bg="#000028", fg="white", font=("Inter", 10), command=self.cancelar)
+        bVolverM.place(width=400, height=30, x = 400, y = 0)
