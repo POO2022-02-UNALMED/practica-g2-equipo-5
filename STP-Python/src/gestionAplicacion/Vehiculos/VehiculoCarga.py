@@ -1,5 +1,7 @@
 from .Vehiculo import Vehiculo
-
+#--------------------------------------------------------------------------
+#son los vehiculos que se usan en la funcionalidad de enviar mercancia
+#--------------------------------------------------------------------------
 class VehiculoCarga(Vehiculo):
     vehiculos = []
 

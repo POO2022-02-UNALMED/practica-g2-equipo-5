@@ -1,6 +1,9 @@
 
 from .Persona import Persona
-
+#---------------------------------------------------------------
+#usuario
+#es el usuario que maneja la interfaz
+#---------------------------------------------------------------
 class Usuario(Persona):
     user=[]
 
