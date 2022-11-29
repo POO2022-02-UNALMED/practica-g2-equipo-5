@@ -1,5 +1,6 @@
 import tkinter as tk
 from .Base import *
+from .ErrorAplicacion import *
 from gestionAplicacion.Personas.Usuario import *
 from tkinter import ttk
 
@@ -56,41 +57,56 @@ class GenerarFactura(Base):
        
     def guardar(self):
         self.indice = self.desplegable.current()
-        if self.valor == "Viaje":
-            viajeSel = self.viajes[self.indice]
-            a1 = "SISTEMA DE TRANSPORTE PERSONALIZADO\n"
-            a2 = "----------------------------------------\n"
-            a3 = "Usuario: " + str(viajeSel.getUsuario().getNombre()) + "\n"
-            a4 = "Origen: " + str(viajeSel.getRuta().getRuta()[0].value[0]) + "\n"
-            a5 = "Destino: " + str(viajeSel.getRuta().getRuta()[-1].value[1]) + "\n"
-            a6 = "Distancia: " + str(viajeSel.getRuta().getDistancia()) + " km\n"
-            a7 = "Precio: " + str(viajeSel.getRuta().getPrecio()) + "$\n"
-            a8 = "Tiempo: " + str(viajeSel.getRuta().getTiempo()) + " minutos\n"
-            a9 = "----------------------------------------\n"
-            self.factura1.config(text=a1+a2+a3+a4+a5+a6+a7+a8+a9)
-            pasajeros = list(map(lambda x,y: str(x.getNombre())+", "+str(y.getEdad()+" años"), viajeSel.getPasajeros(), viajeSel.getPasajeros()))
-            lPas = "\n".join(pasajeros)
-            b1 = "ACOMPAÑANTES\n"
-            b2 = "----------------------------------------\n"
-            self.factura2.config(text=b1+b2+lPas)
-            
-        elif self.valor == "Envio":
-            mercanciaSel = self.mercancias[self.indice]
-            a1 = "SISTEMA DE TRANSPORTE PERSONALIZADO\n"
-            a2 = "----------------------------------------\n"
-            a3 = "Usuario: " + str(mercanciaSel.getUsuario().getNombre()) + "\n"
-            a4 = "Origen: " + str(mercanciaSel.getRuta().getRuta()[0].value[0]) + "\n"
-            a5 = "Destino: " + str(mercanciaSel.getRuta().getRuta()[-1].value[1]) + "\n"
-            a6 = "Distancia: " + str(mercanciaSel.getRuta().getDistancia()) + " km\n"
-            a7 = "Precio: " + str(mercanciaSel.getRuta().getPrecio()) + "$\n"
-            a8 = "Tiempo: " + str(mercanciaSel.getRuta().getTiempo()) + " minutos\n"
-            a9 = "----------------------------------------\n"
-            self.factura1.config(text=a1+a2+a3+a4+a5+a6+a7+a8+a9)
-            productos = list(map(lambda x,y: str(x.getTipo())+", "+str(y.getPeso())+" KG", mercanciaSel.getProductos(), mercanciaSel.getProductos()))
-            lPas = "\n".join(productos)
-            b1 = "PRODUCTOS\n"
-            b2 = "----------------------------------------\n"
-            self.factura2.config(text=b1+b2+lPas)
+        if self.indice == -1:
+            raise ExceptionFactura
+        else:
+            if self.valor == "Viaje":
+                viajeSel = self.viajes[self.indice]
+                a1 = "SISTEMA DE TRANSPORTE PERSONALIZADO\n"
+                a2 = "----------------------------------------\n"
+                a3 = "Usuario: " + str(viajeSel.getUsuario().getNombre()) + "\n"
+                a4 = "Origen: " + str(viajeSel.getRuta().getRuta()[0].value[0]) + "\n"
+                a5 = "Destino: " + str(viajeSel.getRuta().getRuta()[-1].value[1]) + "\n"
+                a6 = "Distancia: " + str(viajeSel.getRuta().getDistancia()) + " km\n"
+                precio = viajeSel.getRuta().getPrecio() + viajeSel.getVehiculo().getPrecio() + viajeSel.getConductores()[-1].getPrecio()
+                a7 = "Precio: " + str(precio) + "$\n"
+                a8 = "Tiempo: " + str(viajeSel.getRuta().getTiempo()) + " minutos\n"
+                a9 = "Vehiculo: " + str(viajeSel.getVehiculo().presentacion()) + "\n"
+                if len(viajeSel.getConductores()) == 2:
+                    a10 = "Conductor 1: " + str(viajeSel.getConductores()[0].getNombre()) + "\n"
+                    a11 = "Conductor 2: " + str(viajeSel.getConductores()[-1].getNombre()) + "\n"
+                    a12 = "----------------------------------------\n"
+                    self.factura1.config(text=a1+a2+a3+a4+a5+a6+a7+a8+a9+a10+a11+a12)
+                else:
+                    a10 = "Conductor: " + str(viajeSel.getConductores()[0].getNombre()) + "\n"
+                    a11 = "----------------------------------------\n"
+                    self.factura1.config(text=a1+a2+a3+a4+a5+a6+a7+a8+a9+a10+a11)
+                pasajeros = list(map(lambda x,y: str(x.getNombre())+", "+str(y.getEdad()+" años"), viajeSel.getPasajeros(), viajeSel.getPasajeros()))
+                lPas = "\n".join(pasajeros)
+                b1 = "ACOMPAÑANTES\n"
+                b2 = "----------------------------------------\n"
+                self.factura2.config(text=b1+b2+lPas)
+                
+            elif self.valor == "Envio":
+                mercanciaSel = self.mercancias[self.indice]
+                a1 = "SISTEMA DE TRANSPORTE PERSONALIZADO\n"
+                a2 = "----------------------------------------\n"
+                a3 = "Usuario: " + str(mercanciaSel.getUsuario().getNombre()) + "\n"
+                a4 = "Origen: " + str(mercanciaSel.getRuta().getRuta()[0].value[0]) + "\n"
+                a5 = "Destino: " + str(mercanciaSel.getRuta().getRuta()[-1].value[1]) + "\n"
+                a6 = "Distancia: " + str(mercanciaSel.getRuta().getDistancia()) + " km\n"
+                precio = mercanciaSel.getRuta().getPrecio() + mercanciaSel.getVehiculo().getPrecio() + mercanciaSel.getConductor().getPrecio()
+                a7 = "Precio: " + str(precio) + "$\n"
+                a8 = "Tiempo: " + str(mercanciaSel.getRuta().getTiempo()) + " minutos\n"
+                a9 = "Vehiculo: " + str(mercanciaSel.getVehiculo().presentacion()) + "\n"
+                a10 = "Conductor: " + str(mercanciaSel.getConductor().getNombre()) + "\n"
+                a11 = "----------------------------------------\n"
+                self.factura1.config(text=a1+a2+a3+a4+a5+a6+a7+a8+a9+a10+a11)
+                productos = list(map(lambda x,y: str(x.getTipo())+", "+str(y.getPeso())+" KG", mercanciaSel.getProductos(), mercanciaSel.getProductos()))
+                lPas = "\n".join(productos)
+                b1 = "PRODUCTOS\n"
+                b2 = "----------------------------------------\n"
+                self.factura2.config(text=b1+b2+lPas)
 
     def cancelar(self):
         self.fr.destroy()

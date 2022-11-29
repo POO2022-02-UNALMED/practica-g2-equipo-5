@@ -43,9 +43,9 @@ class ExceptionFecha(ExceptionClick):
     def __init__(self):
         super().__init__("Excepción de fecha", "Ingresaste una fecha incorrecta. Revisa")
 
-class ExceptionImage(ExceptionClick):
+class ExceptionFactura(ExceptionClick):
     def __init__(self):
-        super().__init__("Excepción de imágen", "No me des click....")
+        super().__init__("Excepción de factura", "No has seleccionado ningún viaje o envío")
 
 class ExceptionRuta(ExceptionClick):
     def __init__(self):
