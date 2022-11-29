@@ -21,6 +21,8 @@ class Vehiculo ():
         return self._placa
     def getModelo(self):
         return self._modelo
+    def getPrecio(self):
+        return self._precio
 
     def setConductor(self, conductor):
         self._conductor = conductor

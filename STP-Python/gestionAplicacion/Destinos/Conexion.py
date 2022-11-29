@@ -1,5 +1,10 @@
 from enum import Enum
 
+#---------------------------------------------------
+# Clase de enumercación
+''' Contiene todas las rutas que maneja la aplicación '''
+#----------------------------------------------------
+
 class Conexion(Enum):
 
     MedBog = ("MEDELLÍN", "BOGOTÁ", 415, 495, 70000)

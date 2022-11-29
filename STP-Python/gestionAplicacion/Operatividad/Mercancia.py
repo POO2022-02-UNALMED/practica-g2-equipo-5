@@ -1,3 +1,10 @@
+
+#---------------------------------------------------
+# Clase Mercancia
+''' Son los envios de mercancia, contiene los atributos que se llenan en
+la funcionalidad enviarMercancia() '''
+#----------------------------------------------------
+
 class Mercancia():
     
     def __init__(self, *args):

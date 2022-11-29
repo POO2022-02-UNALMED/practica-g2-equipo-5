@@ -1,5 +1,10 @@
 from dis import dis
 
+#---------------------------------------------------
+# Clase ruta
+''' Crea las instancias de las rutas seleccionadas por el usuario
+Contiene un array de Conexiones, la distancia, el tiempo y el precio '''
+#----------------------------------------------------
 
 class Ruta():
     

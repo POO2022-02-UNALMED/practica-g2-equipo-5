@@ -1,3 +1,9 @@
+#---------------------------------------------------
+# Clase Producto
+''' Los objetos de esta clase se instancian en la funcionalidad
+enviarMercancia(). Son los productos enviados por el usuario '''
+#----------------------------------------------------
+
 class Producto():
 
     def __init__(self, tipo, peso):

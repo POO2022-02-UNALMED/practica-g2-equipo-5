@@ -1,3 +1,9 @@
+#---------------------------------------------------
+# Clase Viaje
+''' Son los viajes creados por el usuario, sus atributos se llenan en la 
+funcionalidad crearViaje() '''
+#----------------------------------------------------
+
 class Viaje():
     def __init__(self, *args):
         if len(args) == 8:
