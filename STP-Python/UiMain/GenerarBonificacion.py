@@ -1,13 +1,15 @@
 import tkinter as tk
+import tkinter as tk
 from tkinter import IntVar, messagebox as MessageBox
 #from usuario import *
-from .GenerarRuta import *
+from GenerarRuta import *
 import tkinter
 from tkinter import ttk
-from .Base import *
-from .CrearViaje import *
-from .EnviarMercancia import *
-from .ErrorAplicacion import *
+from Base import *
+from CrearViaje import *
+from GenerarRuta import *
+from EnviarMercancia import *
+from ErrorAplicacion import *
 
 #-----BONIFICACION--------
 class GenerarBonificacion(Base):

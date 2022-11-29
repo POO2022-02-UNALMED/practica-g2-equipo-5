@@ -50,3 +50,11 @@ class ExceptionImage(ExceptionClick):
 class ExceptionRuta(ExceptionClick):
     def __init__(self):
         super().__init__("Excepción de ruta", "No has seleccionado ninguna ruta")
+
+class ExceptionVehiculoCarga(ExceptionClick):
+    def __init__(self):
+        super().__init__("Excepción de vehiculo", "El vehiculo seleccionado no puede con la carga que deseas enviar. Selecciona otro")
+
+class ExceptionVehiculoPas(ExceptionClick):
+    def __init__(self):
+        super().__init__("Excepción de vehiculo", "El vehiculo seleccionado no soporta ese número de pasajeros. Selecciona otro")

@@ -1,17 +1,18 @@
 import tkinter as tk
+import tkinter as tk
 from tkinter import IntVar, messagebox as MessageBox
-from gestionAplicacion.Personas.Conductor import *
-from gestionAplicacion.Personas.Usuario import *
-from gestionAplicacion.Destinos.Ruta import *
-from gestionAplicacion.Vehiculos.VehiculoPasajero import *
-from gestionAplicacion.Operatividad.Viaje import *
-from .FieldFrame import *
+from Conductor import Conductor
+from Ruta import Ruta
+from Usuario import Usuario
+from VehiculoPasajero import VehiculoPasajeros
+from Viaje import Viaje
+from FieldFrame import *
 
 
 import tkinter as tk
 from tkinter import ttk
-from .Base import *
-from .ErrorAplicacion import *
+from Base import *
+from ErrorAplicacion import *
 
 class CrearViaje(Base):
     def __init__(self, master, usuario):
@@ -36,24 +37,16 @@ class CrearViaje(Base):
                 raise ExceptionAgregar
 
         def validar():
-            global vPosibles
-            nPas = self.viaje.getPasajeros()
-            if len(nPas) == 0: 
+            self.nPas = len(self.viaje.getPasajeros())
+            if self.nPas == 0: 
                 raise ExceptionValidar
-            else:
-                if float(self.usuario.getRuta().getDistancia()) >= 1000:
-                    nPasajeros = int(len(nPas))+2
-                    vPosibles = VehiculoPasajeros.validarCapacidad(nPasajeros)
-                else:
-                    nPasajeros = int(len(nPas))+1
-                    vPosibles = VehiculoPasajeros.validarCapacidad(nPasajeros)
-                desplegableVehiculos = tk.ttk.Combobox(self.frameVehiculo ,state="readonly", values=list(map(lambda x: x.presentacion(), self.vPosibles)))
-                desplegableVehiculos.place(relwidth=.8, relx=.1, rely=.5)
+            
 
         #-------------------------------------
         #Viaje -----------------
         self.viaje = Viaje()
         self.viaje.setUsuario(self.usuario)
+        self.viaje.setRuta(self.usuario.getRuta())
         
         #Ruta
         self.cOrigenString = self.usuario.getRuta().getRuta()[0].value[0]
@@ -95,7 +88,8 @@ class CrearViaje(Base):
         self.bValidar = tk.Button(self.frameAcompañantes, text="VALIDAR CAPACIDAD", bg="#000028", fg="white", font=("Inter", 8), command=lambda:validar()).place(relwidth=.8, rely=.9, relx=.1)
 
         self.vPosibles = VehiculoPasajeros.getVehiculos()
-
+        
+        self.nPas = 0
         self.frameVehiculo= tk.LabelFrame(self.cenFrame, text="VEHICULO", width=380, height=138, font=("Inter", 8))
         self.frameVehiculo.place(x=410, y=40)
         self.etiqueta = tk.Label(self.frameVehiculo, text="SELECCIONE UN VEHICULO", font=("Inter", 8)).place(relwidth=.8, relx=.1, rely=.3)
@@ -114,7 +108,7 @@ class CrearViaje(Base):
             self.desplegableConductor1 = tk.ttk.Combobox(self.frameConductor ,state="readonly", values=list(map(lambda x: x.presentacion(), self.lConductores)))
             self.desplegableConductor1.place(relwidth=.8, relx=.1, rely=.5)
         else:
-            self.etiqueta = tk.Label(self.frameConductor, text="SELECCIONE DOS CONDUCTORES", font=("Inter", 11)).place(relwidth=.8, relx=.1, rely=.2)
+            self.etiqueta = tk.Label(self.frameConductor, text="SELECCIONE DOS CONDUCTORES", font=("Inter", 8)).place(relwidth=.8, relx=.1, rely=.2)
             self.desplegableConductor1 = tk.ttk.Combobox(self.frameConductor ,state="readonly", values=list(map(lambda x: x.presentacion(), self.lConductores)))
             self.desplegableConductor1.place(relwidth=.8, relx=.1, rely=.4)
             self.desplegableConductor2 = tk.ttk.Combobox(self.frameConductor ,state="readonly", values=list(map(lambda x: x.presentacion(), self.lConductores)))
@@ -140,15 +134,18 @@ class CrearViaje(Base):
                 if self.indC ==-1 or self.indV ==-1 or self.dd == '0' or self.mm == '0' or self.aa == '0':
                     raise ExceptionAceptar
                 else:
-                    if (self.dd < 1 or self.dd > 31) or (self.mm < 1 or self.mm > 13) or (self.aa < 2022):
-                        raise ExceptionFecha
+                    if self.vPosibles[self.indV].getnAsientos() > self.nPas:
+                        if (self.dd < 1 or self.dd > 31) or (self.mm < 1 or self.mm > 13) or (self.aa < 2022):
+                            raise ExceptionFecha
+                        else:
+                            self.viaje.setConductores([self.lConductores[self.indC]])
+                            self.viaje.setVehiculo(self.vPosibles[self.indV])
+                            self.fecha = str(self.aa)+"/"+str(self.mm)+"/"+str(self.dd)
+                            self.viaje.setFecha(self.fecha)
+                            self.usuario.agregarViaje(self.viaje)
+                            self.fr.destroy()
                     else:
-                        self.viaje.setConductores([self.lConductores[self.indC]])
-                        self.viaje.setVehiculo(self.vPosibles[self.indV])
-                        self.fecha = str(self.aa)+"/"+str(self.mm)+"/"+str(self.dd)
-                        self.viaje.setFecha(self.fecha)
-                        self.usuario.agregarViaje(self.viaje)
-                        self.fr.destroy()
+                        raise ExceptionVehiculoPas
             else:
                 self.indC1 = self.desplegableConductor1.current()
                 self.indC2 = self.desplegableConductor2.current()
@@ -159,18 +156,21 @@ class CrearViaje(Base):
                 if self.indC1 ==-1 or self.indC2 ==-1 or self.indV ==-1 or self.dd == '0' or self.mm == '0' or self.aa == '0':
                     raise ExceptionAceptar
                 else:
-                    if (self.dd < 1 or self.dd > 31) or (self.mm < 1 or self.mm > 13) or (self.aa < 2022):
-                        raise ExceptionFecha
-                    else:
-                        if self.lConductores[self.indC1] != self.lConductores[self.indC2]:
-                            self.viaje.setConductores([self.lConductores[self.indC1], self.lConductores[self.indC2]])
-                            self.viaje.setVehiculo(self.vPosibles[self.indV])
-                            self.fecha = str(self.aa)+"/"+str(self.mm)+"/"+str(self.dd)
-                            self.viaje.setFecha(self.fecha)
-                            self.usuario.agregarViaje(self.viaje)
-                            self.fr.destroy()
+                    if self.vPosibles[self.indV].getnAsientos() > self.nPas:
+                        if (self.dd < 1 or self.dd > 31) or (self.mm < 1 or self.mm > 13) or (self.aa < 2022):
+                            raise ExceptionFecha
                         else:
-                            raise ExceptionConductor
+                            if self.lConductores[self.indC1] != self.lConductores[self.indC2]:
+                                self.viaje.setConductores([self.lConductores[self.indC1], self.lConductores[self.indC2]])
+                                self.viaje.setVehiculo(self.vPosibles[self.indV])
+                                self.fecha = str(self.aa)+"/"+str(self.mm)+"/"+str(self.dd)
+                                self.viaje.setFecha(self.fecha)
+                                self.usuario.agregarViaje(self.viaje)
+                                self.fr.destroy()
+                            else:
+                                raise ExceptionConductor
+                    else:
+                        raise ExceptionVehiculoPas
 
     def footer(self):
         #Barra inferior

@@ -1,20 +1,18 @@
 import tkinter as tk
-import tkinter as tk
 from tkinter import IntVar, messagebox as MessageBox
-from gestionAplicacion.Personas.Conductor import Conductor
-from gestionAplicacion.Vehiculos.VehiculoCarga import *
-from gestionAplicacion.Operatividad.Mercancia import *
-from gestionAplicacion.Operatividad.Producto import *
-from gestionAplicacion.Destinos.Ruta import *
-from gestionAplicacion.Personas.Usuario import Usuario
-from .GenerarRuta import *
-from .FieldFrame import *
-from gestionAplicacion.Destinos.Conexion import Conexion
-import tkinter as tk
+from Conductor import Conductor
+from VehiculoCarga import VehiculoCarga
+from Mercancia import Mercancia
+from Producto import Producto
+from Ruta import Ruta
+from Usuario import Usuario
+from GenerarRuta import *
+from FieldFrame import *
+from Conexion import *
 from tkinter import ttk
-from .Base import *
+from Base import *
 
-from .ErrorAplicacion import *
+from ErrorAplicacion import *
 
 class EnviarMercancia(Base):
     def __init__(self, master, usuario):
@@ -41,13 +39,9 @@ class EnviarMercancia(Base):
                 raise ExceptionAgregar
             
         def validar():
-            global vPosibles
             aProductos = self.mercancia.getProductos()
             if len(aProductos) != 0:
-                tPesos = sum(list(map(lambda x: int(x.getPeso()), aProductos)))
-                vPosibles = VehiculoCarga.validarCapacidad(tPesos)
-                desplegableVehiculos = tk.ttk.Combobox(self.frameVehiculo ,state="readonly", values=list(map(lambda x: x.presentacion(), vPosibles)))
-                desplegableVehiculos.place(relwidth=.8, relx=.1, rely=.5)
+                self.tPesos = sum(list(map(lambda x: int(x.getPeso()), aProductos)))
             else:
                 raise ExceptionValidar
         
@@ -55,6 +49,7 @@ class EnviarMercancia(Base):
         #Mercancia -----------------
         self.mercancia = Mercancia()
         self.mercancia.setUsuario(self.usuario)
+        self.mercancia.setRuta(self.usuario.getRuta())
         
         #Ruta
         self.cOrigenString = self.usuario.getRuta().getRuta()[0].value[0]
@@ -96,6 +91,7 @@ class EnviarMercancia(Base):
 
         self.vPosibles = VehiculoCarga.getVehiculos()
 
+        self.tPesos = 0
         self.frameVehiculo= tk.LabelFrame(self.cenFrame, text="VEHICULO", width=380, height=138, font=("Inter", 8))
         self.frameVehiculo.place(x=410, y=40)
         self.etiqueta = tk.Label(self.frameVehiculo, text="SELECCIONE UN VEHICULO", font=("Inter", 8)).place(relwidth=.8, relx=.1, rely=.3)
@@ -126,15 +122,18 @@ class EnviarMercancia(Base):
         if self.indC ==-1 or self.indV ==-1 or self.dd =='0' or self.mm =='0' or self.aa =='0':
             raise ExceptionAceptar
         else:
-            if (self.dd < 1 or self.dd > 31) or (self.mm < 1 or self.mm > 13) or (self.aa < 2022):
-                raise ExceptionFecha
+            if self.vPosibles[self.indV].getCapacidadMaxima() >= self.tPesos:
+                if (self.dd < 1 or self.dd > 31) or (self.mm < 1 or self.mm > 13) or (self.aa < 2022):
+                    raise ExceptionFecha
+                else:
+                    self.mercancia.setConductor(self.lConductores[self.indC])
+                    self.mercancia.setVehiculo(self.vPosibles[self.indV])
+                    self.fecha = str(self.aa)+"/"+str(self.mm)+"/"+str(self.dd)
+                    self.mercancia.setFecha(self.fecha)
+                    self.usuario.agregarMercancia(self.mercancia)
+                    self.fr.destroy()
             else:
-                self.mercancia.setConductor(self.lConductores[self.indC])
-                self.mercancia.setVehiculo(self.vPosibles[self.indV])
-                self.fecha = str(self.aa)+"/"+str(self.mm)+"/"+str(self.dd)
-                self.mercancia.setFecha(self.fecha)
-                self.usuario.agregarMercancia(self.mercancia)
-                self.fr.destroy()
+                raise ExceptionVehiculoCarga
 
     def cancelar(self):
         self.fr.destroy()
