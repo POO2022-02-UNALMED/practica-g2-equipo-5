@@ -18,13 +18,12 @@ import tkinter as tk
 from tkinter import ttk
 from GenerarBonificacion import *
 from Conexion import *
+from GenerarFactura import *
 
 #Usuario ------------------------------------------------------------------------------
 GUZ = Usuario("Jaime Alberto Guzman", "123456789", 20)
-GUZ.agregarMercancia(Mercancia())
 
 MAN = Conductor("Manuela Rivera", "5151531", 23, 10, 1000000)
-MAR = Conductor("Mariana Rodriguez", "555454", 40, 15, 10000)
 ANG = Conductor("Angel", "10011020", "38", 15, 40000)
 ANA = Conductor("Ana", "1015215", "40", 20, 50000)
 ALE = Conductor("Alejandro", "1520022", "51", 10, 30000)
@@ -328,8 +327,9 @@ def entrarMenu():
 
     mProcesosConsulta.add_command(label="BONIFICACION", font=("Inter", 11), command=generarBonificacion)
 
-    
-    mProcesosConsulta.add_command(label="FACTURA", font=("Inter", 11))
+    def generarFactura():
+        GenerarFactura(ventanaPrincipal, GUZ)
+    mProcesosConsulta.add_command(label="FACTURA", font=("Inter", 11), command=generarFactura)
     #---------------------------------------------------
 
     #Ayuda----------------------------------------------
