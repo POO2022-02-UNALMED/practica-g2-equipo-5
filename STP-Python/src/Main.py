@@ -14,7 +14,7 @@ from gestionAplicacion.Destinos.Conexion import *
 
 #Usuario ------------------------------------------------------------------------------
 try:
-    with open("./baseDatos/usuario","rb") as f:
+    with open("./src/baseDatos/usuario","rb") as f:
         GUZ = load(f)
     print("sesión recuperada de db")
 except Exception as e:
@@ -283,7 +283,7 @@ def entrarMenu():
 
     def salirSistema():
         try:
-            with open("./baseDatos/usuario","wb") as f:
+            with open("./src/baseDatos/usuario","wb") as f:
                 dump(GUZ,f)
         except Exception as e:
             print(e)
