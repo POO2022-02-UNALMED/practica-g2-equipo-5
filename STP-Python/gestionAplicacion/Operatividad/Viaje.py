@@ -72,4 +72,9 @@ class Viaje():
     
     def agregarConductor(self, conductor):
         self._conductores.append(conductor)
+
+    def presentacion(self):
+        cA = self.getRuta().getRuta()[0].value[0]
+        cB = self.getRuta().getRuta()[-1].value[1]
+        return "Ruta: " + cA + " - " + cB + ". Fecha: " + self._fecha
     

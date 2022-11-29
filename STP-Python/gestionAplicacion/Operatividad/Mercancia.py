@@ -70,3 +70,8 @@ class Mercancia():
 
     def agregarProducto(self, producto):
         self._productos.append(producto)
+
+    def presentacion(self):
+        cA = self.getRuta().getRuta()[0].value[0]
+        cB = self.getRuta().getRuta()[-1].value[1]
+        return "Ruta: " + cA + " - " + cB + ". Fecha: " + self._fecha
