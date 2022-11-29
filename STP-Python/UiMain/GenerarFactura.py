@@ -69,7 +69,13 @@ class GenerarFactura(Base):
                 a5 = "Destino: " + str(viajeSel.getRuta().getRuta()[-1].value[1]) + "\n"
                 a6 = "Distancia: " + str(viajeSel.getRuta().getDistancia()) + " km\n"
                 precio = viajeSel.getRuta().getPrecio() + viajeSel.getVehiculo().getPrecio() + viajeSel.getConductores()[-1].getPrecio()
-                a7 = "Precio: " + str(precio) + "$\n"
+                if (self.indice+1) % 5 == 0:
+                    if viajeSel.getIsBonificacion() == True:
+                        a7 = "Precio: " + str(precio-(precio*0.45)) + "$, tienes 45% de descuento\n"
+                    else:
+                        a7 = "Precio: " + str(precio-(precio*0.35)) + "$, tienes 35% de descuento\n"
+                else:
+                    a7 = "Precio: " + str(precio) + "$\n"
                 a8 = "Tiempo: " + str(viajeSel.getRuta().getTiempo()) + " minutos\n"
                 a9 = "Vehiculo: " + str(viajeSel.getVehiculo().presentacion()) + "\n"
                 if len(viajeSel.getConductores()) == 2:
@@ -96,7 +102,13 @@ class GenerarFactura(Base):
                 a5 = "Destino: " + str(mercanciaSel.getRuta().getRuta()[-1].value[1]) + "\n"
                 a6 = "Distancia: " + str(mercanciaSel.getRuta().getDistancia()) + " km\n"
                 precio = mercanciaSel.getRuta().getPrecio() + mercanciaSel.getVehiculo().getPrecio() + mercanciaSel.getConductor().getPrecio()
-                a7 = "Precio: " + str(precio) + "$\n"
+                if (self.indice+1) % 5 == 0:
+                    if mercanciaSel.getIsBonificacion() == True:
+                        a7 = "Precio: " + str(precio-(precio*0.45)) + "$, tienes 45% de descuento\n"
+                    else:
+                        a7 = "Precio: " + str(precio-(precio*0.35)) + "$, tienes 35% de descuento\n"
+                else:
+                    a7 = "Precio: " + str(precio) + "$\n"
                 a8 = "Tiempo: " + str(mercanciaSel.getRuta().getTiempo()) + " minutos\n"
                 a9 = "Vehiculo: " + str(mercanciaSel.getVehiculo().presentacion()) + "\n"
                 a10 = "Conductor: " + str(mercanciaSel.getConductor().getNombre()) + "\n"

@@ -67,7 +67,7 @@ def ventInicio():
     def descripcion():
         ventanaEmergente = tk.Frame(root, bg="#000028")
         ventanaEmergente.place(relwidth=.8, relheight=.3, relx=.1)
-        des = tk.Label(ventanaEmergente, text="Descripción", font=("Inter", 11), bg= "#000028", fg="white")
+        des = tk.Label(ventanaEmergente, text="STP es una aplicación que brinda al ususario\nla posibilidad de planear un viaje o envío al gusto\nSelecciona tu ruta y listo.", font=("Inter", 11), bg= "#000028", fg="white")
         des.pack(expand=True)
         cerrar = tk.Button(ventanaEmergente, text="CERRAR", font=("Inter", 11), command=lambda: ventanaEmergente.destroy(), width=70)
         cerrar.pack(pady=(10,10), padx=(10,10))
