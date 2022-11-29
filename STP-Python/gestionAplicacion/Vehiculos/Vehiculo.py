@@ -1,3 +1,6 @@
+#---------------------------------------------------------------------
+#clase padre vehiculo de carga y vehiculo de pasajero 
+#---------------------------------------------------------------------
 class Vehiculo ():
 
     def __init__(self, conductor, ruta, marca, precio, placa, modelo):

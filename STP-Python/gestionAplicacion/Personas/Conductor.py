@@ -1,5 +1,8 @@
 from .Persona import Persona
-
+#---------------------------------------------------------------------
+# conductor
+# conductor que maneja las instancias de las clases vehiculo
+#---------------------------------------------------------------------
 class Conductor(Persona):
     conductores=[]
     

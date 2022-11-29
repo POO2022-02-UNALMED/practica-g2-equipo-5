@@ -1,5 +1,7 @@
 from .Vehiculo import Vehiculo
-
+#----------------------------------------------------------------------------
+#son los vehiculos que se utilizan en la funcionalidad crear viaje
+#----------------------------------------------------------------------------
 
 class VehiculoPasajeros(Vehiculo):
     vehiculos = []

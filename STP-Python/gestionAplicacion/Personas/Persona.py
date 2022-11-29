@@ -1,5 +1,8 @@
 from abc import ABC
-
+#-----------------------------------------------------------------------
+#persona
+#clase padre que hereda clase conductor y la clase de usuario
+#-----------------------------------------------------------------------
 class Persona(ABC):
     def __init__(self, *args):
         if len(args) == 4:

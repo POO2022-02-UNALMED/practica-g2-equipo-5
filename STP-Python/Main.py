@@ -8,7 +8,6 @@ from gestionAplicacion.Vehiculos.VehiculoPasajero import VehiculoPasajeros
 from UiMain.GenerarRuta import *
 from UiMain.GenerarBonificacion import *
 from UiMain.CrearViaje import *
-
 from pickle import *
 from UiMain.GenerarBonificacion import *
 from gestionAplicacion.Destinos.Conexion import *
